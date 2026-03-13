@@ -477,6 +477,97 @@
     }
   }
 
+  // =========================================
+  // Shop — Watchdog / Notify Buttons
+  // =========================================
+  function setupShopNotify() {
+    var notifyBtns = document.querySelectorAll('.shop__notify-btn');
+
+    notifyBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var product = btn.getAttribute('data-product');
+        var form = document.querySelector('.shop__notify-form[data-notify="' + product + '"]');
+        if (!form) return;
+
+        // Toggle form visibility
+        var isOpen = form.classList.contains('is-open');
+        // Close all other open forms first
+        document.querySelectorAll('.shop__notify-form.is-open').forEach(function (f) {
+          f.classList.remove('is-open');
+        });
+
+        if (!isOpen) {
+          form.classList.add('is-open');
+          var input = form.querySelector('.shop__notify-input');
+          if (input) input.focus();
+        }
+      });
+    });
+
+    // Handle submit buttons
+    var submitBtns = document.querySelectorAll('.shop__notify-submit');
+    submitBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var product = btn.getAttribute('data-product');
+        var form = document.querySelector('.shop__notify-form[data-notify="' + product + '"]');
+        if (!form) return;
+
+        var input = form.querySelector('.shop__notify-input');
+        var email = input ? input.value.trim() : '';
+
+        if (!email || !email.includes('@')) {
+          input.style.borderColor = '#C8352B';
+          input.setAttribute('placeholder', 'Zadejte platný e-mail');
+          setTimeout(function () {
+            input.style.borderColor = '';
+            input.setAttribute('placeholder', 'Váš e-mail');
+          }, 2000);
+          return;
+        }
+
+        // Success feedback
+        form.innerHTML = '<p class="shop__notify-success">✓ Budeme vás informovat na ' + email + '</p>';
+
+        // Store locally (in real app, send to backend)
+        var stored = JSON.parse(localStorage.getItem('nonic-watchdog') || '{}');
+        stored[product] = email;
+        localStorage.setItem('nonic-watchdog', JSON.stringify(stored));
+      });
+    });
+  }
+
+  // =========================================
+  // Dark Mode — Logo Swap
+  // =========================================
+  function setupDarkModeLogo() {
+    var logoImg = document.querySelector('.nav__logo-img');
+    if (!logoImg) return;
+
+    var lightSrc = 'logo.png';
+    var darkSrc = 'logo-white.png';
+
+    function updateLogo() {
+      if (document.body.classList.contains('dark')) {
+        logoImg.src = darkSrc;
+      } else {
+        logoImg.src = lightSrc;
+      }
+    }
+
+    // Update on load
+    updateLogo();
+
+    // Watch for dark mode changes via MutationObserver
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.attributeName === 'class') {
+          updateLogo();
+        }
+      });
+    });
+    observer.observe(document.body, { attributes: true });
+  }
+
   // --- Init ---
   document.addEventListener('DOMContentLoaded', function () {
     setupReveal();
@@ -485,7 +576,9 @@
     setupProductRotation();
     setupActiveNav();
     setupDarkMode();
+    setupDarkModeLogo();
     setupPreviewBar();
     setupEditorMode();
+    setupShopNotify();
   });
 })();

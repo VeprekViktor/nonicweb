@@ -351,75 +351,70 @@
     </div>
     <div class="section__inner">
       <div class="section__label">05 — Obchod</div>
-      <h2 class="section__title section__title--center" data-editable="shop-title">Tři varianty. Jeden standard.</h2>
-      <p class="section__intro" data-editable="shop-intro">Každá varianta, jiný charakter. Vyberte aroma, které vám odpovídá.</p>
+      <h2 class="section__title section__title--center" data-editable="shop-title">Čtyři barvy. Jeden standard.</h2>
+      <p class="section__intro" data-editable="shop-intro">Vyberte si barvu, která vám odpovídá. Brzy dostupné.</p>
       <div class="shop__grid">
-        <div class="shop__card">
+        <div class="shop__card" data-color="red">
           <div class="shop__card-visual">
-            <svg viewBox="0 0 200 280" class="shop__card-svg">
-              <rect x="85" y="20" width="30" height="240" rx="15" fill="none" stroke="#C8352B" stroke-width="1.5"/>
-              <circle cx="100" cy="45" r="5" fill="none" stroke="#C8352B" stroke-width="1"/>
-              <line x1="85" y1="70" x2="115" y2="70" stroke="#C8352B" stroke-width="0.5" opacity="0.4"/>
-            </svg>
+            <img src="product.png" alt="NoNic — Červená" class="shop__card-img shop__card-img--red">
           </div>
           <div class="shop__card-info">
-            <h3 class="shop__card-name">NoNic Original</h3>
-            <p class="shop__card-desc">Základní aromatický profil. Zemitý, teplý, univerzální.</p>
+            <h3 class="shop__card-name" data-editable="shop-name-1">Červená</h3>
             <div class="shop__card-bottom">
-              <span class="shop__card-price">299 Kč</span>
-              <button class="btn btn--primary btn--sm">Do košíku</button>
+              <span class="shop__card-price">?</span>
+              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="red">Upozornit</button>
+            </div>
+            <div class="shop__notify-form" data-notify="red">
+              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail">
+              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="red">Odeslat</button>
             </div>
           </div>
         </div>
-        <div class="shop__card">
+        <div class="shop__card" data-color="blue">
           <div class="shop__card-visual">
-            <svg viewBox="0 0 200 280" class="shop__card-svg">
-              <rect x="85" y="20" width="30" height="240" rx="15" fill="none" stroke="#4A7C59" stroke-width="1.5"/>
-              <circle cx="100" cy="45" r="5" fill="none" stroke="#4A7C59" stroke-width="1"/>
-              <line x1="85" y1="70" x2="115" y2="70" stroke="#4A7C59" stroke-width="0.5" opacity="0.4"/>
-            </svg>
+            <img src="product.png" alt="NoNic — Modrá" class="shop__card-img shop__card-img--blue">
           </div>
           <div class="shop__card-info">
-            <h3 class="shop__card-name">NoNic Fresh</h3>
-            <p class="shop__card-desc">Mentolový profil. Čistý, ostrý, přímočarý.</p>
+            <h3 class="shop__card-name" data-editable="shop-name-2">Modrá</h3>
             <div class="shop__card-bottom">
-              <span class="shop__card-price">299 Kč</span>
-              <button class="btn btn--primary btn--sm">Do košíku</button>
+              <span class="shop__card-price">?</span>
+              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="blue">Upozornit</button>
+            </div>
+            <div class="shop__notify-form" data-notify="blue">
+              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail">
+              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="blue">Odeslat</button>
             </div>
           </div>
         </div>
-        <div class="shop__card">
+        <div class="shop__card" data-color="green">
           <div class="shop__card-visual">
-            <svg viewBox="0 0 200 280" class="shop__card-svg">
-              <rect x="85" y="20" width="30" height="240" rx="15" fill="none" stroke="#2E5E8C" stroke-width="1.5"/>
-              <circle cx="100" cy="45" r="5" fill="none" stroke="#2E5E8C" stroke-width="1"/>
-              <line x1="85" y1="70" x2="115" y2="70" stroke="#2E5E8C" stroke-width="0.5" opacity="0.4"/>
-            </svg>
+            <img src="product.png" alt="NoNic — Zelená" class="shop__card-img shop__card-img--green">
           </div>
           <div class="shop__card-info">
-            <h3 class="shop__card-name">NoNic Calm</h3>
-            <p class="shop__card-desc">Levandulový profil. Tlumený, měkký, klidný.</p>
+            <h3 class="shop__card-name" data-editable="shop-name-3">Zelená</h3>
             <div class="shop__card-bottom">
-              <span class="shop__card-price">299 Kč</span>
-              <button class="btn btn--primary btn--sm">Do košíku</button>
+              <span class="shop__card-price">?</span>
+              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="green">Upozornit</button>
+            </div>
+            <div class="shop__notify-form" data-notify="green">
+              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail">
+              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="green">Odeslat</button>
             </div>
           </div>
         </div>
-        <div class="shop__card shop__card--bundle">
+        <div class="shop__card" data-color="pink">
           <div class="shop__card-visual">
-            <svg viewBox="0 0 200 280" class="shop__card-svg">
-              <rect x="65" y="30" width="30" height="220" rx="15" fill="none" stroke="#C8352B" stroke-width="1" opacity="0.7"/>
-              <rect x="85" y="20" width="30" height="240" rx="15" fill="none" stroke="#4A7C59" stroke-width="1.2"/>
-              <rect x="105" y="30" width="30" height="220" rx="15" fill="none" stroke="#2E5E8C" stroke-width="1" opacity="0.7"/>
-            </svg>
+            <img src="product.png" alt="NoNic — Růžová" class="shop__card-img shop__card-img--pink">
           </div>
           <div class="shop__card-info">
-            <span class="shop__card-badge">Výhodný set</span>
-            <h3 class="shop__card-name">NoNic Discovery</h3>
-            <p class="shop__card-desc">Všechny tři varianty v jednom setu. Kompletní nabídka za zvýhodněnou cenu.</p>
+            <h3 class="shop__card-name" data-editable="shop-name-4">Růžová</h3>
             <div class="shop__card-bottom">
-              <span class="shop__card-price"><s>897 Kč</s> 749 Kč</span>
-              <button class="btn btn--primary btn--sm">Do košíku</button>
+              <span class="shop__card-price">?</span>
+              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="pink">Upozornit</button>
+            </div>
+            <div class="shop__notify-form" data-notify="pink">
+              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail">
+              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="pink">Odeslat</button>
             </div>
           </div>
         </div>
