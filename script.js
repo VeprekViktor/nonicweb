@@ -310,6 +310,38 @@
   }
 
   // =========================================
+  // Dark Mode Toggle
+  // =========================================
+  function setupDarkMode() {
+    var toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+
+    var sunIcon = toggle.querySelector('.theme-icon--sun');
+    var moonIcon = toggle.querySelector('.theme-icon--moon');
+
+    // Load saved preference
+    var saved = localStorage.getItem('nonic-theme');
+    if (saved === 'dark') {
+      document.body.classList.add('dark');
+      if (sunIcon) sunIcon.style.display = 'none';
+      if (moonIcon) moonIcon.style.display = 'block';
+    }
+
+    toggle.addEventListener('click', function () {
+      var isDark = document.body.classList.toggle('dark');
+      localStorage.setItem('nonic-theme', isDark ? 'dark' : 'light');
+
+      if (isDark) {
+        if (sunIcon) sunIcon.style.display = 'none';
+        if (moonIcon) moonIcon.style.display = 'block';
+      } else {
+        if (sunIcon) sunIcon.style.display = 'block';
+        if (moonIcon) moonIcon.style.display = 'none';
+      }
+    });
+  }
+
+  // =========================================
   // Device Preview Switcher
   // =========================================
   function setupPreviewBar() {
@@ -318,19 +350,19 @@
     var sizeLabel = document.getElementById('previewSize');
     if (!bar || !frame) return;
 
-    var buttons = bar.querySelectorAll('.preview-bar__btn');
+    var deviceButtons = bar.querySelectorAll('.preview-bar__btn[data-device]');
     var widths = { desktop: '100%', tablet: '768px', mobile: '390px' };
     var labels = { desktop: '1440px', tablet: '768px', mobile: '390px' };
 
     // Always show preview bar
     document.body.classList.add('has-preview-bar');
 
-    buttons.forEach(function (btn) {
+    deviceButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var device = btn.getAttribute('data-device');
 
         // Update active state
-        buttons.forEach(function (b) { b.classList.remove('is-active'); });
+        deviceButtons.forEach(function (b) { b.classList.remove('is-active'); });
         btn.classList.add('is-active');
 
         if (device === 'desktop') {
@@ -351,14 +383,24 @@
   }
 
   // =========================================
-  // Editor Mode — URL-based activation
+  // Editor Mode — URL key + password
   // =========================================
   function setupEditorMode() {
     var params = new URLSearchParams(window.location.search);
-    var hashEdit = window.location.hash.indexOf('edit') !== -1;
-    var isEdit = params.has('edit') || hashEdit;
+    var isEditorURL = params.has('vepreknonic');
 
-    if (!isEdit) return;
+    if (!isEditorURL) return;
+
+    // Password prompt
+    var password = prompt('Zadej heslo pro editor:');
+    if (password !== '12345678910') {
+      alert('Nesprávné heslo.');
+      // Remove param from URL
+      var cleanUrl = new URL(window.location);
+      cleanUrl.searchParams.delete('vepreknonic');
+      window.history.replaceState({}, '', cleanUrl.toString());
+      return;
+    }
 
     document.body.classList.add('is-editor');
 
@@ -427,9 +469,9 @@
           el.removeAttribute('contenteditable');
           el.classList.remove('is-changed');
         });
-        // Remove ?edit from URL
+        // Remove ?vepreknonic from URL
         var url = new URL(window.location);
-        url.searchParams.delete('edit');
+        url.searchParams.delete('vepreknonic');
         window.history.replaceState({}, '', url.toString());
       });
     }
@@ -442,6 +484,7 @@
     setupSectionCurves();
     setupProductRotation();
     setupActiveNav();
+    setupDarkMode();
     setupPreviewBar();
     setupEditorMode();
   });
