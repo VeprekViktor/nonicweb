@@ -557,7 +557,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .footer__tagline { font-size: 0.875rem; color: var(--c-gray-500); }
 .footer__nav { display: flex; gap: var(--s-lg); flex-wrap: wrap; margin-bottom: var(--s-xl); }
 .footer__nav a { font-size: 0.8125rem; font-weight: 500; color: var(--c-gray-500); transition: color var(--dur) var(--ease); }
-.footer__nav a:hover { color: var(--c-white); }
+.footer__nav a:hover { color: var(--c-footer-text); }
 .footer__bottom { padding-top: var(--s-lg); border-top: 1px solid rgba(255,255,255,0.08); }
 .footer__bottom p { font-size: 0.75rem; color: var(--c-gray-500); }
 
@@ -852,17 +852,26 @@ body.is-editor [data-editable].is-changed {
     --s-xl: 2.5rem;
   }
 
-  /* Hide global curves on mobile for performance */
+  /* Global curves hidden on mobile, section curves visible */
   .global-curves { display: none; }
+  .section__curves-bg { opacity: 0.3; }
 
-  /* Preview bar adjustments on real mobile */
+  /* Preview bar — compact on mobile */
+  .preview-bar { height: 36px; }
   .preview-bar__devices { display: none; }
   .preview-bar__size { display: none; }
   .preview-bar__edit-hint { display: none; }
-  .preview-bar { height: 32px; }
-  body.has-preview-bar { padding-top: 32px; }
-  body.has-preview-bar .nav { top: 32px; }
-  body.has-preview-bar .nav__links { top: 32px; }
+  .preview-bar__separator { display: none; }
+  .preview-bar__label { margin-right: auto; }
+  .preview-bar__theme-btn {
+    width: 36px !important;
+    height: 28px;
+    padding: 0 !important;
+    display: flex !important;
+  }
+  body.has-preview-bar { padding-top: 36px; }
+  body.has-preview-bar .nav { top: 36px; }
+  body.has-preview-bar .nav__links { top: 36px; }
 
   /* --- Navigation --- */
   .nav__inner { padding: 0 var(--s-md); }
@@ -896,14 +905,14 @@ body.is-editor [data-editable].is-changed {
   .section__intro { font-size: 0.9375rem; margin-bottom: var(--s-xl); }
   .section__body { font-size: 0.9375rem; }
 
-  /* Section backgrounds opaque on mobile (no global curves behind) */
+  /* Section backgrounds — semi-transparent so section curves show through */
   .section--story,
-  .section--founders,
   .section--mission,
-  .section--product,
   .section--shop,
-  .section--partners,
-  .section--contact { background-color: var(--c-bg); }
+  .section--partners { background: var(--c-section-bg-light); }
+  .section--founders,
+  .section--product,
+  .section--contact { background: var(--c-section-bg-warm); }
 
   /* --- Hero --- */
   .hero {
@@ -999,6 +1008,18 @@ body.is-editor [data-editable].is-changed {
   .footer__nav { flex-direction: column; gap: var(--s-xs); }
   .footer__nav a { font-size: 0.75rem; }
   .footer__bottom p { font-size: 0.6875rem; }
+
+  /* --- Dark Mode on Mobile --- */
+  body.dark .section__curves-bg { opacity: 0.15; }
+  body.dark .section__curves-bg .curve { stroke-width: 4; }
+  body.dark .product__pillar { background: rgba(40,40,40,0.6); }
+  body.dark .shop__card { background: rgba(30,30,30,0.8); }
+  body.dark .shop__card--bundle { background: #F0EDE8; color: #121212; }
+  body.dark .mission__card { background: rgba(35,35,35,0.8); }
+  body.dark .partners__card { background: rgba(35,35,35,0.8); }
+  body.dark .nav__links { background: #1A1A1A; }
+  body.dark .nav__toggle span { background: var(--c-black); }
+  body.dark .hero { background: transparent; }
 }
 
 /* =========================================
