@@ -309,6 +309,132 @@
     window.addEventListener('scroll', update, { passive: true });
   }
 
+  // =========================================
+  // Device Preview Switcher
+  // =========================================
+  function setupPreviewBar() {
+    var bar = document.getElementById('previewBar');
+    var frame = document.getElementById('previewFrame');
+    var sizeLabel = document.getElementById('previewSize');
+    if (!bar || !frame) return;
+
+    var buttons = bar.querySelectorAll('.preview-bar__btn');
+    var widths = { desktop: '100%', tablet: '768px', mobile: '390px' };
+    var labels = { desktop: '1440px', tablet: '768px', mobile: '390px' };
+
+    // Always show preview bar
+    document.body.classList.add('has-preview-bar');
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var device = btn.getAttribute('data-device');
+
+        // Update active state
+        buttons.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+
+        if (device === 'desktop') {
+          document.body.classList.remove('is-previewing');
+          document.body.removeAttribute('data-device');
+          frame.style.maxWidth = '';
+          sizeLabel.textContent = labels.desktop;
+        } else {
+          document.body.classList.add('is-previewing');
+          document.body.setAttribute('data-device', device);
+          frame.style.maxWidth = widths[device];
+          sizeLabel.textContent = labels[device];
+        }
+      });
+    });
+
+    sizeLabel.textContent = labels.desktop;
+  }
+
+  // =========================================
+  // Editor Mode — URL-based activation
+  // =========================================
+  function setupEditorMode() {
+    var params = new URLSearchParams(window.location.search);
+    var hashEdit = window.location.hash.indexOf('edit') !== -1;
+    var isEdit = params.has('edit') || hashEdit;
+
+    if (!isEdit) return;
+
+    document.body.classList.add('is-editor');
+
+    // Make all data-editable elements contenteditable
+    var editables = document.querySelectorAll('[data-editable]');
+    editables.forEach(function (el) {
+      el.setAttribute('contenteditable', 'true');
+      el.setAttribute('spellcheck', 'false');
+
+      // Track changes
+      var originalHTML = el.innerHTML;
+      el.addEventListener('input', function () {
+        if (el.innerHTML !== originalHTML) {
+          el.classList.add('is-changed');
+        } else {
+          el.classList.remove('is-changed');
+        }
+      });
+
+      // Prevent enter from creating divs — insert <br> instead
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          document.execCommand('insertLineBreak');
+        }
+      });
+    });
+
+    // Save button — exports all editable content as JSON
+    var saveBtn = document.getElementById('editorSave');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        var data = {};
+        editables.forEach(function (el) {
+          var key = el.getAttribute('data-editable');
+          data[key] = el.innerHTML.trim();
+        });
+
+        var json = JSON.stringify(data, null, 2);
+        var blob = new Blob([json], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'nonic-content-' + new Date().toISOString().slice(0, 10) + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+
+        // Visual feedback
+        saveBtn.style.background = '#4A7C59';
+        saveBtn.style.borderColor = '#4A7C59';
+        saveBtn.style.color = '#fff';
+        setTimeout(function () {
+          saveBtn.style.background = '';
+          saveBtn.style.borderColor = '';
+          saveBtn.style.color = '';
+        }, 1500);
+      });
+    }
+
+    // Close button — remove editor mode
+    var closeBtn = document.getElementById('editorClose');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        document.body.classList.remove('is-editor');
+        editables.forEach(function (el) {
+          el.removeAttribute('contenteditable');
+          el.classList.remove('is-changed');
+        });
+        // Remove ?edit from URL
+        var url = new URL(window.location);
+        url.searchParams.delete('edit');
+        window.history.replaceState({}, '', url.toString());
+      });
+    }
+  }
+
   // --- Init ---
   document.addEventListener('DOMContentLoaded', function () {
     setupReveal();
@@ -316,5 +442,7 @@
     setupSectionCurves();
     setupProductRotation();
     setupActiveNav();
+    setupPreviewBar();
+    setupEditorMode();
   });
 })();
