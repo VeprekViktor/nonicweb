@@ -384,7 +384,14 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   font-style: italic;
   line-height: 1.7;
   color: var(--c-black);
-  margin-bottom: var(--s-md);
+  margin: 0 0 var(--s-md) 0;
+  padding: 0;
+  quotes: none;
+}
+
+.mission__quote::before,
+.mission__quote::after {
+  content: none;
 }
 
 .mission__authors {
