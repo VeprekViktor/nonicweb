@@ -1,12 +1,234 @@
 /* =========================================
    NoNic — Brand Website
-   Interactions & Animations v2
+   Interactions, i18n & Animations v3
    ========================================= */
 
 (function () {
   'use strict';
 
-  // --- Navigation ---
+  // =========================================
+  // Translations
+  // =========================================
+  var translations = {
+    cs: {
+      nav_story: 'Příběh', nav_founders: 'Zakladatelé', nav_mission: 'Proč',
+      nav_product: 'Produkt', nav_shop: 'Obchod', nav_partners: 'Spolupráce', nav_contact: 'Kontakt',
+      hero_eyebrow: 'Nová generace alternativy',
+      hero_title: 'Alternativa,<br>která nahrazuje návyk',
+      hero_subtitle: 'Designovaný objekt bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.',
+      hero_btn_product: 'Prozkoumat produkt', hero_btn_story: 'Jak vznikl', hero_scroll: 'Scroll',
+      story_label: '01 — Příběh',
+      story_title: 'Návyk má svou formu.<br>My jsme jí dali novou.',
+      story_body_1: 'Lidé vapují a kouří z různých důvodů. Ale jeden motiv se opakuje — potřeba mít něco v ruce, gesto, návyk. NoNic vznikl jako odpověď na tuhle potřebu. Bez nikotinu, bez elektroniky.',
+      story_body_2: 'Žádná další náhražka. Promyšlený produkt, který dává každodennímu návyku jinou podobu. Jednoduchou, čistou a bez kompromisů.',
+      story_body_3: 'Z pozorování trhu a reálné potřeby vznikla značka s vlastním designovým jazykem a jasným směrem.',
+      founders_label: '02 — Zakladatelé', founders_title: 'Tým za produktem',
+      founders_intro: 'Dva lidé. Jasný koncept. Produkt, který má směr od prvního dne.',
+      founder_1_role: 'Vize & strategie',
+      founder_1_desc: 'Směr značky, obchodní strategie a positioning. Propojuje koncept s trhem a řídí růst projektu.',
+      founder_2_role: 'Produkt & design',
+      founder_2_desc: 'Vizuální identita, produkt a komunikace. Definuje, jak NoNic vypadá, jak se drží a jak mluví.',
+      mission_label: '03 — Proč existujeme',
+      mission_title: 'Trh plný náhražek.<br>Žádná skutečná alternativa.',
+      mission_body_1: 'Vapování, nikotinové sáčky, e-cigarety. Segment roste, ale nabídka se točí v kruhu — jiná forma stejné závislosti. Chyběl produkt, který řeší návyk z druhé strany. Ne chemicky. Formou.',
+      mission_body_2: 'NoNic vznikl z přesvědčení, že většina lidí nehledá další nikotinový produkt. Hledá způsob, jak si zachovat gesto, pocit a každodenní formu — bez toho, co k ní dosud patřilo.',
+      mission_body_3: 'Nejsme proti ničemu. Jsme pro jinou možnost. Promyšlenou, současnou a bez zbytečných příslibů.',
+      mission_quote: 'Nechtěli jsme vytvořit další náhražku. Chtěli jsme vytvořit jinou kategorii.',
+      mission_role: 'Zakladatelé NoNic',
+      product_label: '04 — Produkt',
+      product_title: 'Jeden objekt.<br>Nová kategorie.',
+      product_lead: 'NoNic je kompaktní pero navržené jako alternativa vapování a kouření. Bez nikotinu, bez elektroniky, bez nabíjení. Fyzický produkt, který zachovává formu návyku — a mění jeho obsah.',
+      pillar_1_title: 'Forma, která sedne do ruky',
+      pillar_1_text: 'Gesto. Pohyb. Pocit něčeho mezi prsty. Většina návyků není jen o obsahu — je o formě. NoNic je pero navržené tak, aby přirozeně nahradilo právě tento rozměr. Leží v ruce, funguje intuitivně, nevyžaduje vysvětlování.',
+      pillar_2_title: 'Aromatická kompozice',
+      pillar_2_text: 'Každé pero obsahuje vybranou aromatickou směs. Jemná, přirozená, bez umělých příchutí. Doplňuje formu o senzorický rozměr — tichý, ale zřetelný. Přesně to, co odlišuje NoNic od obyčejného předmětu.',
+      pillar_3_title: 'Diskrétní a bez omezení',
+      pillar_3_text: 'Žádná pára, žádné nabíjení, žádné pohledy. NoNic vypadá jako designový objekt — ne jako e-cigareta. Používejte ho v práci, na cestách, mezi lidmi. Kdykoliv a kdekoliv, bez vysvětlování.',
+      detail_form_label: 'Forma', detail_form_value: 'Kompaktní pero, intuitivní držení',
+      detail_aroma_label: 'Aroma', detail_aroma_value: 'Přírodní aromatická směs',
+      detail_comp_label: 'Složení', detail_comp_value: '0 % nikotinu, 0 % elektroniky',
+      detail_use_label: 'Použití', detail_use_value: 'Bez omezení, bez nabíjení, bez údržby',
+      shop_label: '05 — Obchod', shop_title: 'Čtyři barvy. Jeden standard.',
+      shop_intro: 'Vyberte si barvu, která vám odpovídá. Brzy dostupné.',
+      shop_red: 'Červená', shop_blue: 'Modrá', shop_green: 'Zelená', shop_pink: 'Růžová',
+      shop_notify: 'Upozornit', shop_submit: 'Odeslat', shop_email_placeholder: 'Váš e-mail',
+      partners_label: '06 — Spolupráce',
+      partners_title: 'Otevřeni spolupráci.<br>Připraveni na scale.',
+      partners_body: 'NoNic je hotový koncept — produkt, identita, positioning. Hledáme partnery pro distribuci, růst a vstup na nové trhy.',
+      partners_point_1: 'Definovaná značka a vizuální systém',
+      partners_point_2: 'Hotový produkt připravený k distribuci',
+      partners_point_3: 'Jasný tržní positioning',
+      partners_point_4: 'Škálovatelný obchodní model',
+      partners_card_1_title: 'Investice a distribuce',
+      partners_card_1_text: 'Máte zájem o distribuci, investici nebo strategické partnerství? Pojďme to probrat.',
+      partners_card_1_btn: 'Domluvit schůzku',
+      partners_card_2_title: 'Kolaborace a edice',
+      partners_card_2_text: 'Limitované edice, co-brandingy, kreativní projekty. Jsme otevření.',
+      partners_card_2_btn: 'Napište nám',
+      contact_label: '07 — Kontakt',
+      contact_title: 'Ozvěte se.<br>Odpovídáme.',
+      contact_body: 'Produkt, spolupráce, distribuce — ať je to cokoliv, jsme tady.',
+      form_name: 'Jméno', form_email: 'E-mail', form_interest: 'Zájem o', form_message: 'Zpráva',
+      form_select_default: 'Vyberte...', form_select_product: 'Produkt',
+      form_select_partnership: 'Partnerství', form_select_investment: 'Investice',
+      form_select_creative: 'Kreativní spolupráce', form_select_other: 'Jiné',
+      form_submit: 'Odeslat zprávu', form_sent: 'Odesláno',
+      footer_tagline: 'Alternativa, která nahrazuje návyk',
+      footer_copy: '\u00A9 2025 NoNic. Všechna práva vyhrazena.',
+      notify_success: '\u2713 Budeme vás informovat na ',
+      notify_error: 'Zadejte platný e-mail'
+    },
+    en: {
+      nav_story: 'Story', nav_founders: 'Founders', nav_mission: 'Why',
+      nav_product: 'Product', nav_shop: 'Shop', nav_partners: 'Partners', nav_contact: 'Contact',
+      hero_eyebrow: 'A new generation alternative',
+      hero_title: 'The alternative<br>that replaces the habit',
+      hero_subtitle: 'A designed object with no nicotine, no electronics, no compromises.<br>Different form. Same feeling.',
+      hero_btn_product: 'Explore the product', hero_btn_story: 'How it started', hero_scroll: 'Scroll',
+      story_label: '01 — Story',
+      story_title: 'Habits have a form.<br>We gave them a new one.',
+      story_body_1: 'People vape and smoke for many reasons. But one motive keeps repeating — the need to hold something, a gesture, a habit. NoNic was born as an answer to this need. No nicotine, no electronics.',
+      story_body_2: 'Not another substitute. A thoughtful product that gives everyday habits a new shape. Simple, clean, and without compromise.',
+      story_body_3: 'From market observation and real demand, a brand with its own design language and clear direction was born.',
+      founders_label: '02 — Founders', founders_title: 'The team behind the product',
+      founders_intro: 'Two people. A clear concept. A product with direction from day one.',
+      founder_1_role: 'Vision & Strategy',
+      founder_1_desc: 'Brand direction, business strategy and positioning. Connects the concept with the market and drives growth.',
+      founder_2_role: 'Product & Design',
+      founder_2_desc: 'Visual identity, product and communication. Defines how NoNic looks, feels and speaks.',
+      mission_label: '03 — Why we exist',
+      mission_title: 'A market full of substitutes.<br>No real alternative.',
+      mission_body_1: 'Vaping, nicotine pouches, e-cigarettes. The segment is growing, but the offer goes in circles — a different form of the same addiction. There was no product solving the habit from the other side. Not chemically. Through form.',
+      mission_body_2: 'NoNic was born from the belief that most people are not looking for another nicotine product. They are looking for a way to keep the gesture, the feeling, the everyday form — without what used to come with it.',
+      mission_body_3: 'We are not against anything. We are for a different option. Thoughtful, contemporary, and without empty promises.',
+      mission_quote: 'We didn\u2019t want to create another substitute. We wanted to create a different category.',
+      mission_role: 'NoNic Founders',
+      product_label: '04 — Product',
+      product_title: 'One object.<br>A new category.',
+      product_lead: 'NoNic is a compact pen designed as an alternative to vaping and smoking. No nicotine, no electronics, no charging. A physical product that preserves the form of the habit — and changes its content.',
+      pillar_1_title: 'A form that fits in your hand',
+      pillar_1_text: 'Gesture. Movement. The feeling of something between your fingers. Most habits are not just about content — they are about form. NoNic is a pen designed to naturally replace exactly this dimension. It sits in your hand, works intuitively, needs no explanation.',
+      pillar_2_title: 'Aromatic composition',
+      pillar_2_text: 'Each pen contains a selected aromatic blend. Subtle, natural, no artificial flavors. It adds a sensory dimension to the form — quiet but distinct. Exactly what sets NoNic apart from an ordinary object.',
+      pillar_3_title: 'Discreet and unrestricted',
+      pillar_3_text: 'No vapor, no charging, no stares. NoNic looks like a design object — not an e-cigarette. Use it at work, on the go, among people. Anytime and anywhere, without explanation.',
+      detail_form_label: 'Form', detail_form_value: 'Compact pen, intuitive grip',
+      detail_aroma_label: 'Aroma', detail_aroma_value: 'Natural aromatic blend',
+      detail_comp_label: 'Composition', detail_comp_value: '0% nicotine, 0% electronics',
+      detail_use_label: 'Usage', detail_use_value: 'No limits, no charging, no maintenance',
+      shop_label: '05 — Shop', shop_title: 'Four colors. One standard.',
+      shop_intro: 'Choose the color that suits you. Coming soon.',
+      shop_red: 'Red', shop_blue: 'Blue', shop_green: 'Green', shop_pink: 'Pink',
+      shop_notify: 'Notify me', shop_submit: 'Submit', shop_email_placeholder: 'Your e-mail',
+      partners_label: '06 — Partners',
+      partners_title: 'Open to collaboration.<br>Ready to scale.',
+      partners_body: 'NoNic is a complete concept — product, identity, positioning. We are looking for partners for distribution, growth, and entry into new markets.',
+      partners_point_1: 'Defined brand and visual system',
+      partners_point_2: 'Finished product ready for distribution',
+      partners_point_3: 'Clear market positioning',
+      partners_point_4: 'Scalable business model',
+      partners_card_1_title: 'Investment & Distribution',
+      partners_card_1_text: 'Interested in distribution, investment, or strategic partnership? Let\u2019s talk.',
+      partners_card_1_btn: 'Schedule a meeting',
+      partners_card_2_title: 'Collaborations & Editions',
+      partners_card_2_text: 'Limited editions, co-brandings, creative projects. We are open.',
+      partners_card_2_btn: 'Write to us',
+      contact_label: '07 — Contact',
+      contact_title: 'Get in touch.<br>We respond.',
+      contact_body: 'Product, partnership, distribution — whatever it is, we are here.',
+      form_name: 'Name', form_email: 'E-mail', form_interest: 'Interest', form_message: 'Message',
+      form_select_default: 'Select...', form_select_product: 'Product',
+      form_select_partnership: 'Partnership', form_select_investment: 'Investment',
+      form_select_creative: 'Creative collaboration', form_select_other: 'Other',
+      form_submit: 'Send message', form_sent: 'Sent',
+      footer_tagline: 'The alternative that replaces the habit',
+      footer_copy: '\u00A9 2025 NoNic. All rights reserved.',
+      notify_success: '\u2713 We will notify you at ',
+      notify_error: 'Enter a valid e-mail'
+    }
+  };
+
+  var currentLang = localStorage.getItem('nonic-lang') || 'cs';
+  var currencies = ['CZK', 'EUR', 'USD'];
+  var currentCurrencyIndex = currencies.indexOf(localStorage.getItem('nonic-currency') || 'CZK');
+  if (currentCurrencyIndex < 0) currentCurrencyIndex = 0;
+
+  // =========================================
+  // i18n — Apply translations
+  // =========================================
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('nonic-lang', lang);
+    document.documentElement.lang = lang;
+
+    var t = translations[lang];
+    if (!t) return;
+
+    // data-i18n = textContent
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // data-i18n-html = innerHTML (for <br> tags)
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+    });
+
+    // Update lang label
+    var label = document.getElementById('langLabel');
+    if (label) label.textContent = lang === 'cs' ? 'CZ' : 'EN';
+
+    // Update page title
+    document.title = lang === 'cs'
+      ? 'NoNic — Alternativa, která nahrazuje návyk'
+      : 'NoNic — The alternative that replaces the habit';
+  }
+
+  // =========================================
+  // Language Toggle
+  // =========================================
+  function setupLanguageToggle() {
+    var btn = document.getElementById('langToggle');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      var newLang = currentLang === 'cs' ? 'en' : 'cs';
+      applyLanguage(newLang);
+    });
+
+    // Apply saved language
+    applyLanguage(currentLang);
+  }
+
+  // =========================================
+  // Currency Toggle
+  // =========================================
+  function setupCurrencyToggle() {
+    var btn = document.getElementById('currencyToggle');
+    var label = document.getElementById('currencyLabel');
+    if (!btn || !label) return;
+
+    label.textContent = currencies[currentCurrencyIndex];
+
+    btn.addEventListener('click', function () {
+      currentCurrencyIndex = (currentCurrencyIndex + 1) % currencies.length;
+      var cur = currencies[currentCurrencyIndex];
+      label.textContent = cur;
+      localStorage.setItem('nonic-currency', cur);
+    });
+  }
+
+  // =========================================
+  // Navigation
+  // =========================================
   var nav = document.getElementById('nav');
   var navToggle = document.getElementById('navToggle');
   var navLinks = document.getElementById('navLinks');
@@ -34,7 +256,7 @@
     });
   });
 
-  // --- Smooth scroll ---
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -46,7 +268,9 @@
     });
   });
 
-  // --- Reveal on scroll ---
+  // =========================================
+  // Reveal on scroll
+  // =========================================
   function setupReveal() {
     var revealElements = document.querySelectorAll(
       '.section__label, .section__title, .section__intro, .section__body, ' +
@@ -58,9 +282,7 @@
       '.hero__subtitle, .hero__actions'
     );
 
-    revealElements.forEach(function (el) {
-      el.classList.add('reveal');
-    });
+    revealElements.forEach(function (el) { el.classList.add('reveal'); });
 
     var observer = new IntersectionObserver(
       function (entries) {
@@ -72,11 +294,7 @@
             });
             var index = siblings.indexOf(entry.target);
             var delay = Math.min(index * 80, 400);
-
-            setTimeout(function () {
-              entry.target.classList.add('is-visible');
-            }, delay);
-
+            setTimeout(function () { entry.target.classList.add('is-visible'); }, delay);
             observer.unobserve(entry.target);
           }
         });
@@ -84,101 +302,70 @@
       { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
     );
 
-    revealElements.forEach(function (el) {
-      observer.observe(el);
-    });
+    revealElements.forEach(function (el) { observer.observe(el); });
   }
 
-  // --- Global curves entrance animation ---
+  // =========================================
+  // Global curves entrance animation
+  // =========================================
   function animateCurvesEntrance() {
     var gcPaths = document.querySelectorAll('.gc');
     if (!gcPaths.length) return;
-
     gcPaths.forEach(function (path) {
-      // Measure actual SVG path length for stroke-dasharray draw-in
       var length = path.getTotalLength();
       path.style.strokeDasharray = length;
       path.style.strokeDashoffset = length;
       path.style.setProperty('--path-length', length);
     });
-
-    // Trigger draw-in with a small delay so the browser registers the initial state
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        gcPaths.forEach(function (path) {
-          path.classList.add('is-drawn');
-        });
+        gcPaths.forEach(function (path) { path.classList.add('is-drawn'); });
       });
     });
   }
 
-  // --- Global scroll-reactive curves ---
   function setupGlobalCurves() {
     var globalSvg = document.querySelector('.global-curves__svg');
     if (!globalSvg) return;
-
     var gcPaths = document.querySelectorAll('.gc');
     if (!gcPaths.length) return;
-
-    // Start entrance animation
     animateCurvesEntrance();
-
-    // Get page height for mapping
     var pageHeight = document.documentElement.scrollHeight;
     var viewHeight = window.innerHeight;
-
-    // Each curve gets slight individual parallax offset based on speed class
-    var speeds = {
-      slow: 0.15,
-      medium: 0.25
-    };
-
+    var speeds = { slow: 0.15, medium: 0.25 };
     var time = 0;
 
     function updateCurves() {
       var scrollY = window.scrollY;
       var scrollFraction = scrollY / (pageHeight - viewHeight);
-
-      // Move the entire SVG based on scroll to create parallax
-      // The SVG is taller than viewport, so we translate it upward as user scrolls
       var svgTranslateY = -scrollFraction * (pageHeight * 0.6);
       globalSvg.style.transform = 'translateY(' + svgTranslateY + 'px)';
-
-      // Add per-path micro-offsets for depth + gentle sway
       time += 0.008;
-
       gcPaths.forEach(function (path, i) {
         var isSlow = path.classList.contains('gc--slow');
         var speed = isSlow ? speeds.slow : speeds.medium;
-
-        // Parallax offset per path
         var parallaxY = scrollY * speed * (i % 2 === 0 ? 1 : -1) * 0.05;
-
-        // Gentle horizontal sway
         var swayX = Math.sin(time + i * 0.7) * 6;
         var swayY = Math.cos(time + i * 0.5) * 4;
-
         path.style.transform = 'translate(' + swayX + 'px, ' + (parallaxY + swayY) + 'px)';
       });
-
       requestAnimationFrame(updateCurves);
     }
 
-    // Recalculate page height on resize
     window.addEventListener('resize', function () {
       pageHeight = document.documentElement.scrollHeight;
       viewHeight = window.innerHeight;
     });
-
     requestAnimationFrame(updateCurves);
   }
 
-  // --- Section background curves parallax ---
+  // =========================================
+  // Section background curves
+  // =========================================
   function setupSectionCurves() {
     var sectionBgs = document.querySelectorAll('.section__curves-bg');
-
-    // Trigger draw-in when sections scroll into view
     var sectionsWithCurves = document.querySelectorAll('.section');
+
     var curveObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -188,11 +375,9 @@
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
-    sectionsWithCurves.forEach(function (s) {
-      curveObserver.observe(s);
-    });
+    sectionsWithCurves.forEach(function (s) { curveObserver.observe(s); });
 
     function updateSectionCurves() {
       sectionBgs.forEach(function (bg) {
@@ -202,82 +387,60 @@
           var progress = (vh - rect.top) / (vh + rect.height);
           var offsetY = (progress - 0.5) * 40;
           var svg = bg.querySelector('.section-bg-svg');
-          if (svg) {
-            svg.style.transform = 'translateY(' + offsetY + 'px) scale(1.05)';
-          }
+          if (svg) { svg.style.transform = 'translateY(' + offsetY + 'px) scale(1.05)'; }
         }
       });
     }
-
     window.addEventListener('scroll', updateSectionCurves, { passive: true });
     updateSectionCurves();
   }
 
-  // --- Product scroll rotation ---
+  // =========================================
+  // Product scroll rotation
+  // =========================================
   function setupProductRotation() {
     var productWrap = document.getElementById('storyProduct');
     if (!productWrap) return;
-
     var shadow = productWrap.parentElement.querySelector('.story__product-shadow');
     var scene = productWrap.parentElement;
 
     function updateRotation() {
       var rect = scene.getBoundingClientRect();
       var vh = window.innerHeight;
-
-      // Only animate when in viewport
-      if (rect.top > vh || rect.bottom < 0) {
-        requestAnimationFrame(updateRotation);
-        return;
-      }
-
-      // Progress: 0 = entering bottom, 0.5 = center, 1 = leaving top
+      if (rect.top > vh || rect.bottom < 0) { requestAnimationFrame(updateRotation); return; }
       var progress = (vh - rect.top) / (vh + rect.height);
-
-      // Rotation: tilt Y from -15° to +15° as you scroll through
       var rotateY = (progress - 0.5) * 30;
-
-      // Gentle tilt X based on scroll
       var rotateX = (progress - 0.5) * -8;
-
-      // Slight scale pulse at center
       var distFromCenter = Math.abs(progress - 0.5);
       var scale = 1 + (1 - distFromCenter * 2) * 0.04;
-
-      // Gentle float up/down
       var translateY = Math.sin(progress * Math.PI) * -12;
-
       productWrap.style.transform =
-        'rotateY(' + rotateY + 'deg) ' +
-        'rotateX(' + rotateX + 'deg) ' +
-        'translateY(' + translateY + 'px) ' +
-        'scale(' + scale + ')';
-
-      // Shadow reacts to tilt
+        'rotateY(' + rotateY + 'deg) rotateX(' + rotateX + 'deg) translateY(' + translateY + 'px) scale(' + scale + ')';
       if (shadow) {
         var shadowScale = 1 - Math.abs(rotateY) / 40;
         var shadowX = rotateY * 0.5;
         shadow.style.transform = 'scaleX(' + shadowScale + ') translateX(' + shadowX + 'px)';
         shadow.style.opacity = (0.6 + shadowScale * 0.4).toString();
       }
-
       requestAnimationFrame(updateRotation);
     }
-
     requestAnimationFrame(updateRotation);
   }
 
-  // --- Contact form feedback ---
+  // =========================================
+  // Contact form feedback
+  // =========================================
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = contactForm.querySelector('.btn');
-      btn.textContent = 'Odesláno';
+      var t = translations[currentLang];
+      btn.textContent = t.form_sent;
       btn.style.background = '#4A7C59';
       btn.disabled = true;
       setTimeout(function () {
-        btn.textContent = 'Odeslat zprávu';
+        btn.textContent = t.form_submit;
         btn.style.background = '';
         btn.disabled = false;
         contactForm.reset();
@@ -285,11 +448,12 @@
     });
   }
 
-  // --- Active nav link highlight ---
+  // =========================================
+  // Active nav link highlight
+  // =========================================
   function setupActiveNav() {
     var sections = document.querySelectorAll('.section[id], .hero[id]');
     var navLinksAll = document.querySelectorAll('.nav__link[href^="#"]');
-
     function update() {
       var scrollY = window.scrollY + 120;
       sections.forEach(function (section) {
@@ -299,9 +463,7 @@
         if (scrollY >= top && scrollY < top + height) {
           navLinksAll.forEach(function (link) {
             link.style.color = '';
-            if (link.getAttribute('href') === '#' + id) {
-              link.style.color = '#1A1A1A';
-            }
+            if (link.getAttribute('href') === '#' + id) { link.style.color = 'var(--c-black)'; }
           });
         }
       });
@@ -310,7 +472,7 @@
   }
 
   // =========================================
-  // Dark Mode Toggle
+  // Dark Mode Toggle (now in nav)
   // =========================================
   function setupDarkMode() {
     var toggle = document.getElementById('themeToggle');
@@ -319,7 +481,6 @@
     var sunIcon = toggle.querySelector('.theme-icon--sun');
     var moonIcon = toggle.querySelector('.theme-icon--moon');
 
-    // Load saved preference
     var saved = localStorage.getItem('nonic-theme');
     if (saved === 'dark') {
       document.body.classList.add('dark');
@@ -330,7 +491,6 @@
     toggle.addEventListener('click', function () {
       var isDark = document.body.classList.toggle('dark');
       localStorage.setItem('nonic-theme', isDark ? 'dark' : 'light');
-
       if (isDark) {
         if (sunIcon) sunIcon.style.display = 'none';
         if (moonIcon) moonIcon.style.display = 'block';
@@ -339,6 +499,23 @@
         if (moonIcon) moonIcon.style.display = 'none';
       }
     });
+  }
+
+  // =========================================
+  // Dark Mode — Logo Swap
+  // =========================================
+  function setupDarkModeLogo() {
+    var navLogo = document.querySelector('.nav__logo-img');
+    if (!navLogo) return;
+    function updateLogo() {
+      var isDark = document.body.classList.contains('dark');
+      navLogo.src = isDark ? 'logo-white.png' : 'logo.png';
+    }
+    updateLogo();
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) { if (m.attributeName === 'class') updateLogo(); });
+    });
+    observer.observe(document.body, { attributes: true });
   }
 
   // =========================================
@@ -353,33 +530,27 @@
     var deviceButtons = bar.querySelectorAll('.preview-bar__btn[data-device]');
     var widths = { desktop: '100%', tablet: '768px', mobile: '390px' };
     var labels = { desktop: '1440px', tablet: '768px', mobile: '390px' };
-
-    // Always show preview bar
     document.body.classList.add('has-preview-bar');
 
     deviceButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var device = btn.getAttribute('data-device');
-
-        // Update active state
         deviceButtons.forEach(function (b) { b.classList.remove('is-active'); });
         btn.classList.add('is-active');
-
         if (device === 'desktop') {
           document.body.classList.remove('is-previewing');
           document.body.removeAttribute('data-device');
           frame.style.maxWidth = '';
-          sizeLabel.textContent = labels.desktop;
+          if (sizeLabel) sizeLabel.textContent = labels.desktop;
         } else {
           document.body.classList.add('is-previewing');
           document.body.setAttribute('data-device', device);
           frame.style.maxWidth = widths[device];
-          sizeLabel.textContent = labels[device];
+          if (sizeLabel) sizeLabel.textContent = labels[device];
         }
       });
     });
-
-    sizeLabel.textContent = labels.desktop;
+    if (sizeLabel) sizeLabel.textContent = labels.desktop;
   }
 
   // =========================================
@@ -387,15 +558,11 @@
   // =========================================
   function setupEditorMode() {
     var params = new URLSearchParams(window.location.search);
-    var isEditorURL = params.has('vepreknonic');
+    if (!params.has('vepreknonic')) return;
 
-    if (!isEditorURL) return;
-
-    // Password prompt
     var password = prompt('Zadej heslo pro editor:');
     if (password !== '12345678910') {
       alert('Nesprávné heslo.');
-      // Remove param from URL
       var cleanUrl = new URL(window.location);
       cleanUrl.searchParams.delete('vepreknonic');
       window.history.replaceState({}, '', cleanUrl.toString());
@@ -403,24 +570,15 @@
     }
 
     document.body.classList.add('is-editor');
-
-    // Make all data-editable elements contenteditable
     var editables = document.querySelectorAll('[data-editable]');
+
     editables.forEach(function (el) {
       el.setAttribute('contenteditable', 'true');
       el.setAttribute('spellcheck', 'false');
-
-      // Track changes
       var originalHTML = el.innerHTML;
       el.addEventListener('input', function () {
-        if (el.innerHTML !== originalHTML) {
-          el.classList.add('is-changed');
-        } else {
-          el.classList.remove('is-changed');
-        }
+        el.classList.toggle('is-changed', el.innerHTML !== originalHTML);
       });
-
-      // Prevent enter from creating divs — insert <br> instead
       el.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -429,16 +587,11 @@
       });
     });
 
-    // Save button — exports all editable content as JSON
     var saveBtn = document.getElementById('editorSave');
     if (saveBtn) {
       saveBtn.addEventListener('click', function () {
         var data = {};
-        editables.forEach(function (el) {
-          var key = el.getAttribute('data-editable');
-          data[key] = el.innerHTML.trim();
-        });
-
+        editables.forEach(function (el) { data[el.getAttribute('data-editable')] = el.innerHTML.trim(); });
         var json = JSON.stringify(data, null, 2);
         var blob = new Blob([json], { type: 'application/json' });
         var url = URL.createObjectURL(blob);
@@ -447,29 +600,18 @@
         a.download = 'nonic-content-' + new Date().toISOString().slice(0, 10) + '.json';
         a.click();
         URL.revokeObjectURL(url);
-
-        // Visual feedback
         saveBtn.style.background = '#4A7C59';
         saveBtn.style.borderColor = '#4A7C59';
         saveBtn.style.color = '#fff';
-        setTimeout(function () {
-          saveBtn.style.background = '';
-          saveBtn.style.borderColor = '';
-          saveBtn.style.color = '';
-        }, 1500);
+        setTimeout(function () { saveBtn.style.background = ''; saveBtn.style.borderColor = ''; saveBtn.style.color = ''; }, 1500);
       });
     }
 
-    // Close button — remove editor mode
     var closeBtn = document.getElementById('editorClose');
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
         document.body.classList.remove('is-editor');
-        editables.forEach(function (el) {
-          el.removeAttribute('contenteditable');
-          el.classList.remove('is-changed');
-        });
-        // Remove ?vepreknonic from URL
+        editables.forEach(function (el) { el.removeAttribute('contenteditable'); el.classList.remove('is-changed'); });
         var url = new URL(window.location);
         url.searchParams.delete('vepreknonic');
         window.history.replaceState({}, '', url.toString());
@@ -488,14 +630,8 @@
         var product = btn.getAttribute('data-product');
         var form = document.querySelector('.shop__notify-form[data-notify="' + product + '"]');
         if (!form) return;
-
-        // Toggle form visibility
         var isOpen = form.classList.contains('is-open');
-        // Close all other open forms first
-        document.querySelectorAll('.shop__notify-form.is-open').forEach(function (f) {
-          f.classList.remove('is-open');
-        });
-
+        document.querySelectorAll('.shop__notify-form.is-open').forEach(function (f) { f.classList.remove('is-open'); });
         if (!isOpen) {
           form.classList.add('is-open');
           var input = form.querySelector('.shop__notify-input');
@@ -504,31 +640,23 @@
       });
     });
 
-    // Handle submit buttons
-    var submitBtns = document.querySelectorAll('.shop__notify-submit');
-    submitBtns.forEach(function (btn) {
+    document.querySelectorAll('.shop__notify-submit').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var product = btn.getAttribute('data-product');
         var form = document.querySelector('.shop__notify-form[data-notify="' + product + '"]');
         if (!form) return;
-
         var input = form.querySelector('.shop__notify-input');
         var email = input ? input.value.trim() : '';
+        var t = translations[currentLang];
 
         if (!email || !email.includes('@')) {
           input.style.borderColor = '#C8352B';
-          input.setAttribute('placeholder', 'Zadejte platný e-mail');
-          setTimeout(function () {
-            input.style.borderColor = '';
-            input.setAttribute('placeholder', 'Váš e-mail');
-          }, 2000);
+          input.setAttribute('placeholder', t.notify_error);
+          setTimeout(function () { input.style.borderColor = ''; input.setAttribute('placeholder', t.shop_email_placeholder); }, 2000);
           return;
         }
 
-        // Success feedback
-        form.innerHTML = '<p class="shop__notify-success">✓ Budeme vás informovat na ' + email + '</p>';
-
-        // Store locally (in real app, send to backend)
+        form.innerHTML = '<p class="shop__notify-success">' + t.notify_success + email + '</p>';
         var stored = JSON.parse(localStorage.getItem('nonic-watchdog') || '{}');
         stored[product] = email;
         localStorage.setItem('nonic-watchdog', JSON.stringify(stored));
@@ -537,38 +665,8 @@
   }
 
   // =========================================
-  // Dark Mode — Logo Swap
+  // Init
   // =========================================
-  function setupDarkModeLogo() {
-    var logoImg = document.querySelector('.nav__logo-img');
-    if (!logoImg) return;
-
-    var lightSrc = 'logo.png';
-    var darkSrc = 'logo-white.png';
-
-    function updateLogo() {
-      if (document.body.classList.contains('dark')) {
-        logoImg.src = darkSrc;
-      } else {
-        logoImg.src = lightSrc;
-      }
-    }
-
-    // Update on load
-    updateLogo();
-
-    // Watch for dark mode changes via MutationObserver
-    var observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (m) {
-        if (m.attributeName === 'class') {
-          updateLogo();
-        }
-      });
-    });
-    observer.observe(document.body, { attributes: true });
-  }
-
-  // --- Init ---
   document.addEventListener('DOMContentLoaded', function () {
     setupReveal();
     setupGlobalCurves();
@@ -577,6 +675,8 @@
     setupActiveNav();
     setupDarkMode();
     setupDarkModeLogo();
+    setupLanguageToggle();
+    setupCurrencyToggle();
     setupPreviewBar();
     setupEditorMode();
     setupShopNotify();
