@@ -50,7 +50,7 @@
   function setupReveal() {
     var revealElements = document.querySelectorAll(
       '.section__label, .section__title, .section__intro, .section__body, ' +
-      '.story__visual-frame, .founder, .mission__card, .mission__text, ' +
+      '.story__product-scene, .founder, .mission__card, .mission__text, ' +
       '.product__pillar, .product__detail, ' +
       '.product__hero, .product__lead, ' +
       '.shop__card, .partners__point, .partners__card, ' +
@@ -213,6 +213,60 @@
     updateSectionCurves();
   }
 
+  // --- Product scroll rotation ---
+  function setupProductRotation() {
+    var productWrap = document.getElementById('storyProduct');
+    if (!productWrap) return;
+
+    var shadow = productWrap.parentElement.querySelector('.story__product-shadow');
+    var scene = productWrap.parentElement;
+
+    function updateRotation() {
+      var rect = scene.getBoundingClientRect();
+      var vh = window.innerHeight;
+
+      // Only animate when in viewport
+      if (rect.top > vh || rect.bottom < 0) {
+        requestAnimationFrame(updateRotation);
+        return;
+      }
+
+      // Progress: 0 = entering bottom, 0.5 = center, 1 = leaving top
+      var progress = (vh - rect.top) / (vh + rect.height);
+
+      // Rotation: tilt Y from -15° to +15° as you scroll through
+      var rotateY = (progress - 0.5) * 30;
+
+      // Gentle tilt X based on scroll
+      var rotateX = (progress - 0.5) * -8;
+
+      // Slight scale pulse at center
+      var distFromCenter = Math.abs(progress - 0.5);
+      var scale = 1 + (1 - distFromCenter * 2) * 0.04;
+
+      // Gentle float up/down
+      var translateY = Math.sin(progress * Math.PI) * -12;
+
+      productWrap.style.transform =
+        'rotateY(' + rotateY + 'deg) ' +
+        'rotateX(' + rotateX + 'deg) ' +
+        'translateY(' + translateY + 'px) ' +
+        'scale(' + scale + ')';
+
+      // Shadow reacts to tilt
+      if (shadow) {
+        var shadowScale = 1 - Math.abs(rotateY) / 40;
+        var shadowX = rotateY * 0.5;
+        shadow.style.transform = 'scaleX(' + shadowScale + ') translateX(' + shadowX + 'px)';
+        shadow.style.opacity = (0.6 + shadowScale * 0.4).toString();
+      }
+
+      requestAnimationFrame(updateRotation);
+    }
+
+    requestAnimationFrame(updateRotation);
+  }
+
   // --- Contact form feedback ---
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
@@ -260,6 +314,7 @@
     setupReveal();
     setupGlobalCurves();
     setupSectionCurves();
+    setupProductRotation();
     setupActiveNav();
   });
 })();
