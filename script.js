@@ -556,6 +556,10 @@
   // Device Preview Switcher
   // =========================================
   function setupPreviewBar() {
+    // Preview bar only shows when ?mobile is in URL
+    var params = new URLSearchParams(window.location.search);
+    if (!params.has('mobile')) return;
+
     var bar = document.getElementById('previewBar');
     var frame = document.getElementById('previewFrame');
     var sizeLabel = document.getElementById('previewSize');

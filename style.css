@@ -537,11 +537,11 @@ body.dark .nav__ctrl-btn--theme .theme-icon--moon { display: block !important; }
 .shop__card-visual { padding: var(--s-lg) var(--s-sm); display: flex; justify-content: center; align-items: center; min-height: 200px; }
 .shop__card-svg { width: 80px; height: auto; }
 
-/* Product images in shop cards */
+/* Product images in shop cards — fixed height for consistent sizing */
 .shop__card-img {
-  width: 100%;
-  max-width: 120px;
-  height: auto;
+  width: auto;
+  height: 160px;
+  max-width: 100%;
   object-fit: contain;
   transition: transform var(--dur) var(--ease), filter var(--dur) var(--ease);
 }
@@ -1217,8 +1217,8 @@ body.is-editor [data-editable].is-changed {
 
   /* ===== Shop — 2×2 grid, compact cards ===== */
   .shop__grid { grid-template-columns: 1fr 1fr; gap: var(--s-sm); }
-  .shop__card-visual { min-height: 130px; padding: var(--s-md) var(--s-xs); }
-  .shop__card-img { max-width: 85px; }
+  .shop__card-visual { min-height: 120px; padding: var(--s-md) var(--s-xs); }
+  .shop__card-img { height: 110px; }
   .shop__card-svg { width: 60px; }
   .shop__card-info { padding: 0 var(--s-sm) var(--s-sm); }
   .shop__card-name { font-size: 0.9375rem; }
@@ -1325,8 +1325,8 @@ body.is-editor [data-editable].is-changed {
   .product__detail-value { font-size: 0.8125rem; }
 
   .shop__grid { grid-template-columns: 1fr 1fr; gap: var(--s-md); }
-  .shop__card-visual { min-height: 120px; }
-  .shop__card-img { max-width: 75px; }
+  .shop__card-visual { min-height: 100px; }
+  .shop__card-img { height: 90px; }
   .shop__card-info { padding: 0 var(--s-sm) var(--s-sm); }
   .shop__card-name { font-size: 0.875rem; }
   .shop__card-bottom { flex-direction: column; align-items: flex-start; }
@@ -1354,7 +1354,7 @@ body.is-editor [data-editable].is-changed {
   .nav__links { width: 100%; }
   .section { padding: var(--s-xl) var(--s-sm); }
   .shop__grid { grid-template-columns: 1fr 1fr; }
-  .shop__card-img { max-width: 65px; }
-  .shop__card-visual { min-height: 100px; }
+  .shop__card-img { height: 75px; }
+  .shop__card-visual { min-height: 85px; }
   .footer { padding: var(--s-lg) var(--s-sm) var(--s-sm); }
 }
