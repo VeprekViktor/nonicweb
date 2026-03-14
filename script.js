@@ -325,6 +325,9 @@
   }
 
   function setupGlobalCurves() {
+    // Skip on mobile — global SVG curves are hidden, CSS handles background curves
+    if (window.innerWidth <= 768) return;
+
     var globalSvg = document.querySelector('.global-curves__svg');
     if (!globalSvg) return;
     var gcPaths = document.querySelectorAll('.gc');
@@ -363,6 +366,11 @@
   // Section background curves
   // =========================================
   function setupSectionCurves() {
+    // On mobile (<=768px), section SVG curves are hidden via CSS and replaced
+    // with pure CSS gradient curves. Skip all SVG manipulation on mobile.
+    var isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
+
     var sectionBgs = document.querySelectorAll('.section__curves-bg');
     var sectionsWithCurves = document.querySelectorAll('.section');
 
@@ -399,6 +407,9 @@
   // Product scroll rotation
   // =========================================
   function setupProductRotation() {
+    // Skip 3D rotation on mobile for better performance
+    if (window.innerWidth <= 768) return;
+
     var productWrap = document.getElementById('storyProduct');
     if (!productWrap) return;
     var shadow = productWrap.parentElement.querySelector('.story__product-shadow');

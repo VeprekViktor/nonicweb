@@ -912,6 +912,7 @@ body.is-editor [data-editable].is-changed {
 
 /* =========================================
    Responsive — Mobile (max 768px)
+   COMPLETE MOBILE REDESIGN — CSS-based curves
    ========================================= */
 @media (max-width: 768px) {
   :root {
@@ -920,27 +921,139 @@ body.is-editor [data-editable].is-changed {
     --s-xl: 2.5rem;
   }
 
-  /* Global curves hidden on mobile, section curves visible */
-  .global-curves { display: none; }
-  .section__curves-bg {
-    opacity: 0.5 !important;
-    display: block !important;
-  }
-  .section__curves-bg .curve {
-    stroke-width: 4;
-    opacity: 1;
-  }
-  /* Force curves visible immediately on mobile (no draw-in animation) */
-  .section .section__curves-bg .curve,
-  .section.is-curves-visible .section__curves-bg .curve,
-  .section__curves-bg .curve {
-    stroke-dasharray: 0 !important;
-    stroke-dashoffset: 0 !important;
-    opacity: 1 !important;
-    transition: none !important;
+  /* ===== MOBILE CURVES — Pure CSS approach =====
+     SVG curves don't render properly on mobile.
+     Replace with CSS gradient-based decorative lines. */
+
+  /* Hide broken SVG curves entirely */
+  .global-curves { display: none !important; }
+  .section__curves-bg { display: none !important; }
+
+  /* Mobile background colored lines — fixed position CSS gradients */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      /* Red curve */
+      radial-gradient(ellipse 180% 50% at 0% 15%, transparent 48%, rgba(200,53,43,0.18) 49%, rgba(200,53,43,0.18) 50%, transparent 51%),
+      /* Magenta curve */
+      radial-gradient(ellipse 160% 45% at 100% 30%, transparent 48%, rgba(181,56,126,0.15) 49%, rgba(181,56,126,0.15) 50%, transparent 51%),
+      /* Green curve */
+      radial-gradient(ellipse 200% 55% at 10% 50%, transparent 48%, rgba(74,124,89,0.16) 49%, rgba(74,124,89,0.16) 50%, transparent 51%),
+      /* Blue curve */
+      radial-gradient(ellipse 170% 50% at 90% 65%, transparent 48%, rgba(46,94,140,0.15) 49%, rgba(46,94,140,0.15) 50%, transparent 51%),
+      /* Yellow curve */
+      radial-gradient(ellipse 190% 48% at 5% 80%, transparent 48%, rgba(212,168,67,0.14) 49%, rgba(212,168,67,0.14) 50%, transparent 51%),
+      /* Brown curve */
+      radial-gradient(ellipse 150% 42% at 95% 92%, transparent 48%, rgba(92,61,46,0.12) 49%, rgba(92,61,46,0.12) 50%, transparent 51%);
   }
 
-  /* Preview bar — compact on mobile */
+  /* Section-specific decorative curves via CSS pseudo-elements */
+  .section::before,
+  .section::after {
+    content: '';
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    height: 120px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  .section::before { top: -20px; }
+  .section::after { bottom: -20px; }
+
+  /* Story curves */
+  .section--story::before {
+    background: radial-gradient(ellipse 120% 100% at 30% 100%, transparent 45%, rgba(200,53,43,0.35) 47%, rgba(200,53,43,0.35) 49%, transparent 51%);
+  }
+  .section--story::after {
+    background: radial-gradient(ellipse 130% 100% at 70% 0%, transparent 45%, rgba(74,124,89,0.3) 47%, rgba(74,124,89,0.3) 49%, transparent 51%);
+  }
+
+  /* Founders curves */
+  .section--founders::before {
+    background: radial-gradient(ellipse 140% 100% at 60% 100%, transparent 45%, rgba(181,56,126,0.3) 47%, rgba(181,56,126,0.3) 49%, transparent 51%);
+  }
+  .section--founders::after {
+    background: radial-gradient(ellipse 110% 100% at 25% 0%, transparent 45%, rgba(212,168,67,0.28) 47%, rgba(212,168,67,0.28) 49%, transparent 51%);
+  }
+
+  /* Mission curves */
+  .section--mission::before {
+    background: radial-gradient(ellipse 150% 100% at 40% 100%, transparent 45%, rgba(200,53,43,0.3) 47%, rgba(200,53,43,0.3) 49%, transparent 51%);
+  }
+  .section--mission::after {
+    background: radial-gradient(ellipse 120% 100% at 80% 0%, transparent 45%, rgba(74,124,89,0.28) 47%, rgba(74,124,89,0.28) 49%, transparent 51%);
+  }
+
+  /* Product curves */
+  .section--product::before {
+    background: radial-gradient(ellipse 130% 100% at 50% 100%, transparent 45%, rgba(200,53,43,0.28) 47%, rgba(200,53,43,0.28) 49%, transparent 51%);
+  }
+  .section--product::after {
+    background: radial-gradient(ellipse 160% 100% at 20% 0%, transparent 45%, rgba(74,124,89,0.25) 47%, rgba(74,124,89,0.25) 49%, transparent 51%);
+  }
+
+  /* Shop curves */
+  .section--shop::before {
+    background: radial-gradient(ellipse 140% 100% at 65% 100%, transparent 45%, rgba(181,56,126,0.3) 47%, rgba(181,56,126,0.3) 49%, transparent 51%);
+  }
+  .section--shop::after {
+    background: radial-gradient(ellipse 120% 100% at 35% 0%, transparent 45%, rgba(200,53,43,0.28) 47%, rgba(200,53,43,0.28) 49%, transparent 51%);
+  }
+
+  /* Partners curves */
+  .section--partners::before {
+    background: radial-gradient(ellipse 130% 100% at 45% 100%, transparent 45%, rgba(74,124,89,0.3) 47%, rgba(74,124,89,0.3) 49%, transparent 51%);
+  }
+  .section--partners::after {
+    background: radial-gradient(ellipse 150% 100% at 75% 0%, transparent 45%, rgba(46,94,140,0.28) 47%, rgba(46,94,140,0.28) 49%, transparent 51%);
+  }
+
+  /* Contact — no curves (clean form section) */
+  .section--contact::before,
+  .section--contact::after { display: none; }
+
+  /* Hero gets its own colored accent lines */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%;
+    right: -20%;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 160% 40% at 15% 25%, transparent 48%, rgba(200,53,43,0.12) 49%, rgba(200,53,43,0.12) 50%, transparent 51%),
+      radial-gradient(ellipse 140% 35% at 85% 60%, transparent 48%, rgba(46,94,140,0.1) 49%, rgba(46,94,140,0.1) 50%, transparent 51%),
+      radial-gradient(ellipse 180% 45% at 50% 85%, transparent 48%, rgba(74,124,89,0.1) 49%, rgba(74,124,89,0.1) 50%, transparent 51%);
+  }
+
+  /* ===== Section backgrounds — semi-transparent for curves to show ===== */
+  .section--story,
+  .section--mission,
+  .section--shop,
+  .section--partners {
+    background: rgba(255,255,255,0.72);
+    overflow: hidden;
+  }
+  .section--founders,
+  .section--product,
+  .section--contact {
+    background: rgba(245,240,235,0.72);
+    overflow: hidden;
+  }
+
+  /* ===== Preview bar — compact ===== */
   .preview-bar { height: 36px; }
   .preview-bar__devices { display: none; }
   .preview-bar__size { display: none; }
@@ -951,7 +1064,7 @@ body.is-editor [data-editable].is-changed {
   body.has-preview-bar .nav { top: 36px; }
   body.has-preview-bar .nav__links { top: 36px; }
 
-  /* Nav controls on mobile */
+  /* ===== Nav controls ===== */
   .nav__controls {
     margin-right: 0.5rem;
     gap: 2px;
@@ -963,7 +1076,7 @@ body.is-editor [data-editable].is-changed {
   }
   .nav__ctrl-label { font-size: 0.625rem; }
 
-  /* --- Navigation --- */
+  /* ===== Navigation — mobile drawer ===== */
   .nav__inner { padding: 0 var(--s-md); }
   .nav__logo-img { height: 32px; }
   .nav__links {
@@ -987,63 +1100,61 @@ body.is-editor [data-editable].is-changed {
   .nav__link { font-size: 1rem; }
   .nav__link--cta { margin-top: var(--s-sm); }
 
-  /* --- Sections shared --- */
-  .section { padding: var(--s-2xl) var(--s-md); }
+  /* ===== Sections shared — mobile typography & spacing ===== */
+  .section {
+    padding: var(--s-2xl) var(--s-md);
+    position: relative;
+    overflow: hidden;
+  }
   .section__label { font-size: 0.625rem; margin-bottom: var(--s-lg); }
   .section__title { font-size: clamp(1.5rem, 6vw, 2rem); }
   .section__title--large { font-size: clamp(1.625rem, 6.5vw, 2.25rem); }
   .section__intro { font-size: 0.9375rem; margin-bottom: var(--s-xl); }
   .section__body { font-size: 0.9375rem; }
 
-  /* Section backgrounds — more transparent so section curves show through */
-  .section--story,
-  .section--mission,
-  .section--shop,
-  .section--partners { background: rgba(255,255,255,0.65); }
-  .section--founders,
-  .section--product,
-  .section--contact { background: rgba(245,240,235,0.65); }
-  body.dark .section--story,
-  body.dark .section--mission,
-  body.dark .section--shop,
-  body.dark .section--partners { background: rgba(30,30,30,0.7); }
-  body.dark .section--founders,
-  body.dark .section--product,
-  body.dark .section--contact { background: rgba(26,26,26,0.7); }
-
-  /* --- Hero --- */
+  /* ===== Hero — mobile centered, full screen ===== */
   .hero {
-    min-height: 85vh;
+    min-height: 90vh;
     padding: calc(var(--nav-h) + var(--s-xl)) var(--s-md) var(--s-xl);
+    overflow: hidden;
   }
   .hero__eyebrow { font-size: 0.6875rem; margin-bottom: var(--s-sm); }
   .hero__title { font-size: clamp(2rem, 8vw, 3rem); }
   .hero__subtitle { font-size: 0.9375rem; margin-bottom: var(--s-lg); }
-  .hero__actions { flex-direction: column; align-items: center; gap: 0.75rem; }
-  .hero__actions .btn { width: 100%; max-width: 280px; }
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .hero__actions .btn { width: 100%; text-align: center; }
   .hero__scroll { display: none; }
 
-  /* --- Story --- */
+  /* ===== Story — product visual above, text below ===== */
   .story__grid {
     grid-template-columns: 1fr;
     gap: var(--s-lg);
   }
   .story__visual { order: -1; }
-  .story__product-scene { max-width: 280px; }
-  .story__product-img { max-width: 240px; }
+  .story__product-scene { max-width: 260px; margin: 0 auto; }
+  .story__product-img { max-width: 220px; }
+  .story__text { text-align: left; }
 
-  /* --- Founders --- */
+  /* ===== Founders — side-by-side on mobile ===== */
   .founders__grid {
-    grid-template-columns: 1fr;
-    gap: var(--s-xl);
-    max-width: 360px;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-md);
+    max-width: 100%;
     margin: 0 auto;
   }
-  .founder__photo-wrap { width: 120px; height: 120px; }
-  .founder__name { font-size: 1.125rem; }
-  .founder__desc { font-size: 0.875rem; }
+  .founder { text-align: center; }
+  .founder__photo-wrap { width: 100px; height: 100px; }
+  .founder__name { font-size: 1rem; }
+  .founder__role { font-size: 0.6875rem; }
+  .founder__desc { font-size: 0.8125rem; max-width: none; }
 
-  /* --- Mission --- */
+  /* ===== Mission — stacked, card width full ===== */
   .mission__layout {
     grid-template-columns: 1fr;
     gap: var(--s-lg);
@@ -1055,7 +1166,7 @@ body.is-editor [data-editable].is-changed {
   }
   .mission__quote { font-size: 1rem; }
 
-  /* --- Product --- */
+  /* ===== Product — single column pillars ===== */
   .product__hero { margin-bottom: var(--s-xl); }
   .product__lead { font-size: 1rem; }
   .product__pillars {
@@ -1063,19 +1174,29 @@ body.is-editor [data-editable].is-changed {
     gap: var(--s-md);
     margin-bottom: var(--s-xl);
   }
-  .product__pillar { padding: var(--s-lg); }
-  .product__pillar-icon { width: 40px; height: 40px; margin-bottom: var(--s-sm); }
-  .product__pillar-title { font-size: 1rem; }
+  .product__pillar {
+    padding: var(--s-lg);
+    display: flex;
+    gap: var(--s-md);
+    align-items: flex-start;
+  }
+  .product__pillar-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .product__pillar-title { font-size: 1rem; margin-bottom: 0.375rem; }
   .product__pillar-text { font-size: 0.875rem; }
   .product__details {
     grid-template-columns: 1fr 1fr;
     gap: var(--s-sm);
   }
 
-  /* --- Shop --- */
+  /* ===== Shop — 2×2 grid, compact cards ===== */
   .shop__grid { grid-template-columns: 1fr 1fr; gap: var(--s-sm); }
-  .shop__card-visual { min-height: 140px; padding: var(--s-md) var(--s-xs); }
-  .shop__card-img { max-width: 90px; }
+  .shop__card-visual { min-height: 130px; padding: var(--s-md) var(--s-xs); }
+  .shop__card-img { max-width: 85px; }
   .shop__card-svg { width: 60px; }
   .shop__card-info { padding: 0 var(--s-sm) var(--s-sm); }
   .shop__card-name { font-size: 0.9375rem; }
@@ -1083,7 +1204,7 @@ body.is-editor [data-editable].is-changed {
   .shop__card-price { font-size: 1rem; }
   .shop__notify-input { font-size: 0.75rem; padding: 0.5rem 0.75rem; }
 
-  /* --- Partners --- */
+  /* ===== Partners — stacked ===== */
   .partners__grid {
     grid-template-columns: 1fr;
     gap: var(--s-xl);
@@ -1092,14 +1213,14 @@ body.is-editor [data-editable].is-changed {
   .partners__card h3 { font-size: 1rem; }
   .partners__card p { font-size: 0.875rem; }
 
-  /* --- Contact --- */
+  /* ===== Contact — stacked ===== */
   .contact__grid {
     grid-template-columns: 1fr;
     gap: var(--s-xl);
   }
   .contact__link { font-size: 1rem; }
 
-  /* --- Footer --- */
+  /* ===== Footer — compact ===== */
   .footer { padding: var(--s-xl) var(--s-md) var(--s-md); }
   .footer__logo-img { height: 28px; }
   .footer__tagline { font-size: 0.8125rem; }
@@ -1107,9 +1228,28 @@ body.is-editor [data-editable].is-changed {
   .footer__nav a { font-size: 0.75rem; }
   .footer__bottom p { font-size: 0.6875rem; }
 
-  /* --- Dark Mode on Mobile --- */
-  body.dark .section__curves-bg { opacity: 0.3 !important; }
-  body.dark .section__curves-bg .curve { stroke-width: 4; opacity: 1; }
+  /* ===== Dark Mode on Mobile ===== */
+  body.dark::before {
+    background:
+      radial-gradient(ellipse 180% 50% at 0% 15%, transparent 48%, rgba(200,53,43,0.1) 49%, rgba(200,53,43,0.1) 50%, transparent 51%),
+      radial-gradient(ellipse 160% 45% at 100% 30%, transparent 48%, rgba(181,56,126,0.08) 49%, rgba(181,56,126,0.08) 50%, transparent 51%),
+      radial-gradient(ellipse 200% 55% at 10% 50%, transparent 48%, rgba(74,124,89,0.09) 49%, rgba(74,124,89,0.09) 50%, transparent 51%),
+      radial-gradient(ellipse 170% 50% at 90% 65%, transparent 48%, rgba(46,94,140,0.08) 49%, rgba(46,94,140,0.08) 50%, transparent 51%),
+      radial-gradient(ellipse 190% 48% at 5% 80%, transparent 48%, rgba(212,168,67,0.07) 49%, rgba(212,168,67,0.07) 50%, transparent 51%),
+      radial-gradient(ellipse 150% 42% at 95% 92%, transparent 48%, rgba(92,61,46,0.06) 49%, rgba(92,61,46,0.06) 50%, transparent 51%);
+  }
+  body.dark .section::before,
+  body.dark .section::after {
+    opacity: 0.2;
+  }
+  body.dark .hero::before { opacity: 0.5; }
+  body.dark .section--story,
+  body.dark .section--mission,
+  body.dark .section--shop,
+  body.dark .section--partners { background: rgba(30,30,30,0.78); }
+  body.dark .section--founders,
+  body.dark .section--product,
+  body.dark .section--contact { background: rgba(26,26,26,0.78); }
   body.dark .product__pillar { background: rgba(40,40,40,0.6); }
   body.dark .shop__card { background: rgba(30,30,30,0.8); }
   body.dark .nav__controls .nav__ctrl-btn { color: var(--c-gray-500); }
@@ -1131,7 +1271,7 @@ body.is-editor [data-editable].is-changed {
     --s-lg: 1.25rem;
   }
 
-  .hero { min-height: 80vh; }
+  .hero { min-height: 85vh; }
   .hero__title { font-size: 1.75rem; }
   .hero__subtitle { font-size: 0.875rem; }
 
@@ -1145,6 +1285,11 @@ body.is-editor [data-editable].is-changed {
   .story__product-scene { max-width: 220px; }
   .story__product-img { max-width: 200px; }
 
+  /* Founders stack on very small phones */
+  .founders__grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
   .founder__photo-wrap { width: 100px; height: 100px; }
   .founder__name { font-size: 1rem; }
   .founder__role { font-size: 0.6875rem; }
@@ -1159,10 +1304,10 @@ body.is-editor [data-editable].is-changed {
   .product__detail-value { font-size: 0.8125rem; }
 
   .shop__grid { grid-template-columns: 1fr 1fr; gap: var(--s-md); }
-  .shop__card-visual { min-height: 140px; }
-  .shop__card-img { max-width: 80px; }
-  .shop__card-info { padding: 0 var(--s-md) var(--s-md); }
-  .shop__card-name { font-size: 1rem; }
+  .shop__card-visual { min-height: 120px; }
+  .shop__card-img { max-width: 75px; }
+  .shop__card-info { padding: 0 var(--s-sm) var(--s-sm); }
+  .shop__card-name { font-size: 0.875rem; }
   .shop__card-bottom { flex-direction: column; align-items: flex-start; }
 
   .partners__card { padding: var(--s-md); }
@@ -1170,6 +1315,13 @@ body.is-editor [data-editable].is-changed {
   .form__input { padding: 0.75rem 0.875rem; font-size: 0.875rem; }
 
   .footer__nav { gap: var(--s-xs); }
+
+  /* Adjust section curves on small phones */
+  .section::before,
+  .section::after {
+    height: 80px;
+    opacity: 0.25;
+  }
 }
 
 /* =========================================
@@ -1177,10 +1329,12 @@ body.is-editor [data-editable].is-changed {
    ========================================= */
 @media (max-width: 360px) {
   .hero__title { font-size: 1.5rem; }
+  .hero__actions { max-width: 100%; }
   .hero__actions .btn { max-width: 100%; }
   .nav__links { width: 100%; }
   .section { padding: var(--s-xl) var(--s-sm); }
   .shop__grid { grid-template-columns: 1fr 1fr; }
-  .shop__card-img { max-width: 70px; }
+  .shop__card-img { max-width: 65px; }
+  .shop__card-visual { min-height: 100px; }
   .footer { padding: var(--s-lg) var(--s-sm) var(--s-sm); }
 }
