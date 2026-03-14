@@ -903,6 +903,7 @@ a, button, [role="button"], input[type="submit"], select, .btn, .nav__toggle, .n
 
 /* =========================================
    Splash / Loading Screen
+   Lines sweep in from left → logo appears → lines sweep out right → fade out
    ========================================= */
 .splash {
   position: fixed;
@@ -915,84 +916,104 @@ a, button, [role="button"], input[type="submit"], select, .btn, .nav__toggle, .n
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  overflow: hidden;
 }
 body.dark .splash { background: #1A1A1A; }
 
-.splash.is-done {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.splash.is-fading {
+  animation: splashFadeOut 0.5s 0.1s ease-in forwards;
+}
+@keyframes splashFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
+/* Curve container — slides in from left, then slides out right */
 .splash__curves {
   position: absolute;
-  width: 100%;
+  width: 200%;
   height: 100%;
   top: 0;
   left: 0;
+  animation: splashCurveSweep 2.8s ease-in-out forwards;
+}
+
+@keyframes splashCurveSweep {
+  0%   { transform: translateX(-70%); }
+  30%  { transform: translateX(-25%); }
+  60%  { transform: translateX(-25%); }
+  100% { transform: translateX(70%); }
 }
 
 .splash__curve {
   fill: none;
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 800;
-  stroke-dashoffset: 800;
+  opacity: 0;
+  animation: splashCurveFadeIn 0.4s ease-out forwards;
 }
 .splash__curve--1 {
   stroke: var(--c-red);
-  animation: splashDraw 1.2s 0.1s ease-out forwards;
+  animation-delay: 0.05s;
 }
 .splash__curve--2 {
   stroke: var(--c-green);
-  animation: splashDraw 1.2s 0.25s ease-out forwards;
+  animation-delay: 0.15s;
 }
 .splash__curve--3 {
   stroke: var(--c-blue);
-  animation: splashDraw 1.2s 0.4s ease-out forwards;
+  animation-delay: 0.25s;
 }
 .splash__curve--4 {
   stroke: var(--c-magenta);
-  animation: splashDraw 1.2s 0.55s ease-out forwards;
+  animation-delay: 0.35s;
 }
 
-@keyframes splashDraw {
-  0% { stroke-dashoffset: 800; opacity: 0; }
-  10% { opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 1; }
+@keyframes splashCurveFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 0.7; }
 }
 
+/* Logo — fades in big, holds, then scales down as splash exits */
 .splash__logo {
   position: relative;
   z-index: 1;
   opacity: 0;
-  transform: scale(1.8);
-  animation: splashLogoReveal 1s 1s ease-out forwards;
+  transform: scale(2);
+  animation: splashLogoIn 0.8s 0.6s ease-out forwards,
+             splashLogoOut 0.6s 2.2s ease-in forwards;
 }
 .splash__logo-img {
   height: 60px;
   width: auto;
 }
 
-@keyframes splashLogoReveal {
-  0% { opacity: 0; transform: scale(1.8); }
-  50% { opacity: 1; transform: scale(1.8); }
+@keyframes splashLogoIn {
+  0%   { opacity: 0; transform: scale(2); }
+  40%  { opacity: 1; transform: scale(1.6); }
   100% { opacity: 1; transform: scale(1); }
+}
+@keyframes splashLogoOut {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
 }
 
-/* After splash done, zoom out effect on body */
+/* Content reveal after splash */
 body.splash-exiting .preview-frame {
-  animation: contentZoomIn 0.8s ease-out both;
+  animation: contentReveal 0.6s ease-out both;
 }
-@keyframes contentZoomIn {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes contentReveal {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Hide scroll during splash */
 body.splash-active {
   overflow: hidden;
+}
+/* Hide content until splash is done */
+body.splash-active .preview-frame {
+  opacity: 0;
 }
 
 /* =========================================

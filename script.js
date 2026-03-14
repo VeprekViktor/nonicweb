@@ -709,13 +709,11 @@
     var splash = document.getElementById('splash');
     if (!splash) return;
 
-    // Check if already visited in this session — skip splash
-    if (sessionStorage.getItem('nonic-splash-done')) {
-      splash.remove();
-      return;
-    }
-
+    // Always run splash on every page load
     document.body.classList.add('splash-active');
+
+    // Scroll to top immediately
+    window.scrollTo(0, 0);
 
     // Dark mode logo swap for splash
     var splashLogo = document.getElementById('splashLogo');
@@ -723,19 +721,22 @@
       splashLogo.src = 'logo-white.png';
     }
 
-    // After curves draw + logo reveal (total ~2.5s), start exit
+    // Timeline: curves sweep in/out (2.8s) + logo fades out (at 2.2s)
+    // At 3s, start fading splash and revealing content
     setTimeout(function () {
-      splash.classList.add('is-done');
+      splash.classList.add('is-fading');
       document.body.classList.remove('splash-active');
       document.body.classList.add('splash-exiting');
-      sessionStorage.setItem('nonic-splash-done', '1');
 
-      // Remove splash from DOM after fade-out
+      // Ensure scroll is at top when content appears
+      window.scrollTo(0, 0);
+
+      // Remove splash from DOM after fade-out completes
       setTimeout(function () {
         splash.remove();
         document.body.classList.remove('splash-exiting');
-      }, 700);
-    }, 2800);
+      }, 600);
+    }, 3000);
   }
 
   // =========================================
