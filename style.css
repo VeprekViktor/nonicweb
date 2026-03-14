@@ -234,11 +234,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--s-lg);
 }
-.nav__logo { display: flex; align-items: center; }
+.nav__logo { display: flex; align-items: center; flex-shrink: 0; }
 .nav__logo-img { height: 40px; width: auto; display: block; }
-.nav__links { display: flex; align-items: center; gap: var(--s-lg); }
+.nav__links { display: flex; align-items: center; gap: var(--s-lg); margin-left: auto; }
 .nav__link {
   font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.03em;
   color: var(--c-gray-700); transition: color var(--dur) var(--ease); position: relative;
@@ -262,8 +262,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: auto;
-  margin-right: var(--s-sm);
+  flex-shrink: 0;
 }
 .nav__ctrl-btn {
   display: flex;
