@@ -892,6 +892,110 @@ body.is-editor [data-editable].is-changed {
 }
 
 /* =========================================
+   Custom Cursor
+   ========================================= */
+*, *::before, *::after {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='none' stroke='%23C8352B' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23C8352B'/%3E%3C/svg%3E") 10 10, auto;
+}
+a, button, [role="button"], input[type="submit"], select, .btn, .nav__toggle, .nav__ctrl-btn, .shop__notify-btn {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23C8352B' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23C8352B'/%3E%3Cline x1='12' y1='4' x2='12' y2='7' stroke='%23C8352B' stroke-width='1' stroke-linecap='round'/%3E%3Cline x1='12' y1='17' x2='12' y2='20' stroke='%23C8352B' stroke-width='1' stroke-linecap='round'/%3E%3Cline x1='4' y1='12' x2='7' y2='12' stroke='%23C8352B' stroke-width='1' stroke-linecap='round'/%3E%3Cline x1='17' y1='12' x2='20' y2='12' stroke='%23C8352B' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+/* =========================================
+   Splash / Loading Screen
+   ========================================= */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: var(--c-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+body.dark .splash { background: #1A1A1A; }
+
+.splash.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash__curves {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.splash__curve {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+}
+.splash__curve--1 {
+  stroke: var(--c-red);
+  animation: splashDraw 1.2s 0.1s ease-out forwards;
+}
+.splash__curve--2 {
+  stroke: var(--c-green);
+  animation: splashDraw 1.2s 0.25s ease-out forwards;
+}
+.splash__curve--3 {
+  stroke: var(--c-blue);
+  animation: splashDraw 1.2s 0.4s ease-out forwards;
+}
+.splash__curve--4 {
+  stroke: var(--c-magenta);
+  animation: splashDraw 1.2s 0.55s ease-out forwards;
+}
+
+@keyframes splashDraw {
+  0% { stroke-dashoffset: 800; opacity: 0; }
+  10% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+.splash__logo {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(1.8);
+  animation: splashLogoReveal 1s 1s ease-out forwards;
+}
+.splash__logo-img {
+  height: 60px;
+  width: auto;
+}
+
+@keyframes splashLogoReveal {
+  0% { opacity: 0; transform: scale(1.8); }
+  50% { opacity: 1; transform: scale(1.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* After splash done, zoom out effect on body */
+body.splash-exiting .preview-frame {
+  animation: contentZoomIn 0.8s ease-out both;
+}
+@keyframes contentZoomIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Hide scroll during splash */
+body.splash-active {
+  overflow: hidden;
+}
+
+/* =========================================
    Responsive — Tablet (max 1024px)
    ========================================= */
 @media (max-width: 1024px) {
@@ -919,6 +1023,13 @@ body.is-editor [data-editable].is-changed {
   /* ===== MOBILE CURVES — Pure CSS approach =====
      SVG curves don't render properly on mobile.
      Replace with CSS gradient-based crisp lines + scroll animations. */
+
+  /* Disable custom cursor on touch devices */
+  *, *::before, *::after,
+  a, button, [role="button"], input[type="submit"], select, .btn,
+  .nav__toggle, .nav__ctrl-btn, .shop__notify-btn { cursor: auto !important; }
+  a, button, [role="button"], input[type="submit"], select,
+  .btn, .nav__toggle, .nav__ctrl-btn, .shop__notify-btn { cursor: pointer !important; }
 
   /* Hide broken SVG curves entirely */
   .global-curves { display: none !important; }

@@ -703,16 +703,53 @@
   }
 
   // =========================================
+  // Splash Screen
+  // =========================================
+  function setupSplash() {
+    var splash = document.getElementById('splash');
+    if (!splash) return;
+
+    // Check if already visited in this session — skip splash
+    if (sessionStorage.getItem('nonic-splash-done')) {
+      splash.remove();
+      return;
+    }
+
+    document.body.classList.add('splash-active');
+
+    // Dark mode logo swap for splash
+    var splashLogo = document.getElementById('splashLogo');
+    if (splashLogo && document.body.classList.contains('dark')) {
+      splashLogo.src = 'logo-white.png';
+    }
+
+    // After curves draw + logo reveal (total ~2.5s), start exit
+    setTimeout(function () {
+      splash.classList.add('is-done');
+      document.body.classList.remove('splash-active');
+      document.body.classList.add('splash-exiting');
+      sessionStorage.setItem('nonic-splash-done', '1');
+
+      // Remove splash from DOM after fade-out
+      setTimeout(function () {
+        splash.remove();
+        document.body.classList.remove('splash-exiting');
+      }, 700);
+    }, 2800);
+  }
+
+  // =========================================
   // Init
   // =========================================
   document.addEventListener('DOMContentLoaded', function () {
+    setupDarkMode();
+    setupDarkModeLogo();
+    setupSplash();
     setupReveal();
     setupGlobalCurves();
     setupSectionCurves();
     setupProductRotation();
     setupActiveNav();
-    setupDarkMode();
-    setupDarkModeLogo();
     setupLanguageToggle();
     setupCurrencyToggle();
     setupPreviewBar();
