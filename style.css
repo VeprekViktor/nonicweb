@@ -923,13 +923,19 @@ body.is-editor [data-editable].is-changed {
 
   /* ===== MOBILE CURVES — Pure CSS approach =====
      SVG curves don't render properly on mobile.
-     Replace with CSS gradient-based decorative lines. */
+     Replace with CSS gradient-based thin crisp lines. */
 
   /* Hide broken SVG curves entirely */
   .global-curves { display: none !important; }
   .section__curves-bg { display: none !important; }
 
-  /* Mobile background colored lines — fixed position CSS gradients */
+  /* Entrance animation for mobile curves */
+  @keyframes mobileCurveFadeIn {
+    0% { opacity: 0; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Mobile background colored lines — fixed position, THIN crisp lines spread apart */
   body::before {
     content: '';
     position: fixed;
@@ -939,103 +945,108 @@ body.is-editor [data-editable].is-changed {
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    animation: mobileCurveFadeIn 1.8s ease-out both;
     background:
-      /* Red curve */
-      radial-gradient(ellipse 180% 50% at 0% 15%, transparent 48%, rgba(200,53,43,0.18) 49%, rgba(200,53,43,0.18) 50%, transparent 51%),
-      /* Magenta curve */
-      radial-gradient(ellipse 160% 45% at 100% 30%, transparent 48%, rgba(181,56,126,0.15) 49%, rgba(181,56,126,0.15) 50%, transparent 51%),
-      /* Green curve */
-      radial-gradient(ellipse 200% 55% at 10% 50%, transparent 48%, rgba(74,124,89,0.16) 49%, rgba(74,124,89,0.16) 50%, transparent 51%),
-      /* Blue curve */
-      radial-gradient(ellipse 170% 50% at 90% 65%, transparent 48%, rgba(46,94,140,0.15) 49%, rgba(46,94,140,0.15) 50%, transparent 51%),
-      /* Yellow curve */
-      radial-gradient(ellipse 190% 48% at 5% 80%, transparent 48%, rgba(212,168,67,0.14) 49%, rgba(212,168,67,0.14) 50%, transparent 51%),
-      /* Brown curve */
-      radial-gradient(ellipse 150% 42% at 95% 92%, transparent 48%, rgba(92,61,46,0.12) 49%, rgba(92,61,46,0.12) 50%, transparent 51%);
+      /* Red — top-left arc */
+      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.22) 49.4%, rgba(200,53,43,0.22) 49.8%, transparent 50.2%),
+      /* Magenta — right side mid */
+      radial-gradient(ellipse 200% 60% at 110% 35%, transparent 49%, rgba(181,56,126,0.18) 49.4%, rgba(181,56,126,0.18) 49.8%, transparent 50.2%),
+      /* Green — center-left */
+      radial-gradient(ellipse 250% 75% at -5% 55%, transparent 49%, rgba(74,124,89,0.2) 49.4%, rgba(74,124,89,0.2) 49.8%, transparent 50.2%),
+      /* Blue — right-bottom */
+      radial-gradient(ellipse 210% 65% at 105% 72%, transparent 49%, rgba(46,94,140,0.18) 49.4%, rgba(46,94,140,0.18) 49.8%, transparent 50.2%),
+      /* Yellow — bottom-left */
+      radial-gradient(ellipse 240% 68% at 0% 88%, transparent 49%, rgba(212,168,67,0.16) 49.4%, rgba(212,168,67,0.16) 49.8%, transparent 50.2%);
   }
 
-  /* Section-specific decorative curves via CSS pseudo-elements */
+  /* Section-specific decorative curve arcs via CSS pseudo-elements */
   .section::before,
   .section::after {
     content: '';
     position: absolute;
-    left: -20%;
-    right: -20%;
-    height: 120px;
+    left: -30%;
+    right: -30%;
+    height: 160px;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.35;
   }
 
-  .section::before { top: -20px; }
-  .section::after { bottom: -20px; }
+  .section::before { top: -40px; }
+  .section::after { bottom: -40px; }
 
-  /* Story curves */
+  /* Story curves — red arc top, green arc bottom */
   .section--story::before {
-    background: radial-gradient(ellipse 120% 100% at 30% 100%, transparent 45%, rgba(200,53,43,0.35) 47%, rgba(200,53,43,0.35) 49%, transparent 51%);
+    background: radial-gradient(ellipse 140% 100% at 25% 100%, transparent 49%, rgba(200,53,43,0.3) 49.3%, rgba(200,53,43,0.3) 49.7%, transparent 50%);
   }
   .section--story::after {
-    background: radial-gradient(ellipse 130% 100% at 70% 0%, transparent 45%, rgba(74,124,89,0.3) 47%, rgba(74,124,89,0.3) 49%, transparent 51%);
+    background: radial-gradient(ellipse 160% 100% at 75% 0%, transparent 49%, rgba(74,124,89,0.25) 49.3%, rgba(74,124,89,0.25) 49.7%, transparent 50%);
   }
 
-  /* Founders curves */
-  .section--founders::before {
-    background: radial-gradient(ellipse 140% 100% at 60% 100%, transparent 45%, rgba(181,56,126,0.3) 47%, rgba(181,56,126,0.3) 49%, transparent 51%);
-  }
-  .section--founders::after {
-    background: radial-gradient(ellipse 110% 100% at 25% 0%, transparent 45%, rgba(212,168,67,0.28) 47%, rgba(212,168,67,0.28) 49%, transparent 51%);
-  }
+  /* Founders — NO section curves (prevent overlap with photos) */
+  .section--founders::before,
+  .section--founders::after { display: none; }
 
-  /* Mission curves */
+  /* Mission curves — red arc top, green arc bottom */
   .section--mission::before {
-    background: radial-gradient(ellipse 150% 100% at 40% 100%, transparent 45%, rgba(200,53,43,0.3) 47%, rgba(200,53,43,0.3) 49%, transparent 51%);
+    background: radial-gradient(ellipse 170% 100% at 35% 100%, transparent 49%, rgba(200,53,43,0.25) 49.3%, rgba(200,53,43,0.25) 49.7%, transparent 50%);
   }
   .section--mission::after {
-    background: radial-gradient(ellipse 120% 100% at 80% 0%, transparent 45%, rgba(74,124,89,0.28) 47%, rgba(74,124,89,0.28) 49%, transparent 51%);
+    background: radial-gradient(ellipse 140% 100% at 80% 0%, transparent 49%, rgba(74,124,89,0.22) 49.3%, rgba(74,124,89,0.22) 49.7%, transparent 50%);
   }
 
   /* Product curves */
   .section--product::before {
-    background: radial-gradient(ellipse 130% 100% at 50% 100%, transparent 45%, rgba(200,53,43,0.28) 47%, rgba(200,53,43,0.28) 49%, transparent 51%);
+    background: radial-gradient(ellipse 150% 100% at 50% 100%, transparent 49%, rgba(212,168,67,0.22) 49.3%, rgba(212,168,67,0.22) 49.7%, transparent 50%);
   }
   .section--product::after {
-    background: radial-gradient(ellipse 160% 100% at 20% 0%, transparent 45%, rgba(74,124,89,0.25) 47%, rgba(74,124,89,0.25) 49%, transparent 51%);
+    background: radial-gradient(ellipse 180% 100% at 15% 0%, transparent 49%, rgba(46,94,140,0.2) 49.3%, rgba(46,94,140,0.2) 49.7%, transparent 50%);
   }
 
-  /* Shop curves */
+  /* Shop curves — magenta arc top, red arc bottom */
   .section--shop::before {
-    background: radial-gradient(ellipse 140% 100% at 65% 100%, transparent 45%, rgba(181,56,126,0.3) 47%, rgba(181,56,126,0.3) 49%, transparent 51%);
+    background: radial-gradient(ellipse 160% 100% at 60% 100%, transparent 49%, rgba(181,56,126,0.25) 49.3%, rgba(181,56,126,0.25) 49.7%, transparent 50%);
   }
   .section--shop::after {
-    background: radial-gradient(ellipse 120% 100% at 35% 0%, transparent 45%, rgba(200,53,43,0.28) 47%, rgba(200,53,43,0.28) 49%, transparent 51%);
+    background: radial-gradient(ellipse 140% 100% at 30% 0%, transparent 49%, rgba(200,53,43,0.22) 49.3%, rgba(200,53,43,0.22) 49.7%, transparent 50%);
   }
 
-  /* Partners curves */
+  /* Partners curves — green arc top, blue arc bottom */
   .section--partners::before {
-    background: radial-gradient(ellipse 130% 100% at 45% 100%, transparent 45%, rgba(74,124,89,0.3) 47%, rgba(74,124,89,0.3) 49%, transparent 51%);
+    background: radial-gradient(ellipse 150% 100% at 40% 100%, transparent 49%, rgba(74,124,89,0.25) 49.3%, rgba(74,124,89,0.25) 49.7%, transparent 50%);
   }
   .section--partners::after {
-    background: radial-gradient(ellipse 150% 100% at 75% 0%, transparent 45%, rgba(46,94,140,0.28) 47%, rgba(46,94,140,0.28) 49%, transparent 51%);
+    background: radial-gradient(ellipse 170% 100% at 80% 0%, transparent 49%, rgba(46,94,140,0.22) 49.3%, rgba(46,94,140,0.22) 49.7%, transparent 50%);
   }
 
   /* Contact — no curves (clean form section) */
   .section--contact::before,
   .section--contact::after { display: none; }
 
-  /* Hero gets its own colored accent lines */
+  /* Hero gets its own thin colored accent lines with entrance animation */
   .hero::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -20%;
-    right: -20%;
+    left: -30%;
+    right: -30%;
     bottom: 0;
     z-index: 0;
     pointer-events: none;
+    animation: mobileCurveFadeIn 2.2s 0.3s ease-out both;
     background:
-      radial-gradient(ellipse 160% 40% at 15% 25%, transparent 48%, rgba(200,53,43,0.12) 49%, rgba(200,53,43,0.12) 50%, transparent 51%),
-      radial-gradient(ellipse 140% 35% at 85% 60%, transparent 48%, rgba(46,94,140,0.1) 49%, rgba(46,94,140,0.1) 50%, transparent 51%),
-      radial-gradient(ellipse 180% 45% at 50% 85%, transparent 48%, rgba(74,124,89,0.1) 49%, rgba(74,124,89,0.1) 50%, transparent 51%);
+      radial-gradient(ellipse 200% 50% at 10% 22%, transparent 49%, rgba(200,53,43,0.15) 49.3%, rgba(200,53,43,0.15) 49.7%, transparent 50%),
+      radial-gradient(ellipse 180% 45% at 90% 58%, transparent 49%, rgba(46,94,140,0.12) 49.3%, rgba(46,94,140,0.12) 49.7%, transparent 50%),
+      radial-gradient(ellipse 220% 55% at 50% 88%, transparent 49%, rgba(74,124,89,0.12) 49.3%, rgba(74,124,89,0.12) 49.7%, transparent 50%);
+  }
+
+  /* Section curve entrance animations */
+  .section::before,
+  .section::after {
+    animation: mobileCurveFadeIn 1.2s ease-out both;
+  }
+  .section.is-visible::before,
+  .section.is-visible::after {
+    animation: mobileCurveFadeIn 1s ease-out both;
   }
 
   /* ===== Section backgrounds — semi-transparent for curves to show ===== */
@@ -1107,10 +1118,17 @@ body.is-editor [data-editable].is-changed {
     overflow: hidden;
   }
   .section__label { font-size: 0.625rem; margin-bottom: var(--s-lg); }
-  .section__title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .section__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    text-align: left;
+  }
+  .section__title--center { text-align: center; }
   .section__title--large { font-size: clamp(1.625rem, 6.5vw, 2.25rem); }
-  .section__intro { font-size: 0.9375rem; margin-bottom: var(--s-xl); }
-  .section__body { font-size: 0.9375rem; }
+  .section__intro { font-size: 0.9375rem; margin-bottom: var(--s-xl); text-align: center; }
+  .section__body {
+    font-size: 0.9375rem;
+    max-width: 100%;
+  }
 
   /* ===== Hero — mobile centered, full screen ===== */
   .hero {
@@ -1118,6 +1136,7 @@ body.is-editor [data-editable].is-changed {
     padding: calc(var(--nav-h) + var(--s-xl)) var(--s-md) var(--s-xl);
     overflow: hidden;
   }
+  .hero__content { text-align: center; }
   .hero__eyebrow { font-size: 0.6875rem; margin-bottom: var(--s-sm); }
   .hero__title { font-size: clamp(2rem, 8vw, 3rem); }
   .hero__subtitle { font-size: 0.9375rem; margin-bottom: var(--s-lg); }
@@ -1131,7 +1150,7 @@ body.is-editor [data-editable].is-changed {
   .hero__actions .btn { width: 100%; text-align: center; }
   .hero__scroll { display: none; }
 
-  /* ===== Story — product visual above, text below ===== */
+  /* ===== Story — product visual above, text below, left-aligned ===== */
   .story__grid {
     grid-template-columns: 1fr;
     gap: var(--s-lg);
@@ -1141,7 +1160,7 @@ body.is-editor [data-editable].is-changed {
   .story__product-img { max-width: 220px; }
   .story__text { text-align: left; }
 
-  /* ===== Founders — side-by-side on mobile ===== */
+  /* ===== Founders — side-by-side, NO accent SVGs on photos ===== */
   .founders__grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--s-md);
@@ -1150,6 +1169,8 @@ body.is-editor [data-editable].is-changed {
   }
   .founder { text-align: center; }
   .founder__photo-wrap { width: 100px; height: 100px; }
+  /* Hide the SVG accent curves on founder photos on mobile */
+  .founder__accent { display: none; }
   .founder__name { font-size: 1rem; }
   .founder__role { font-size: 0.6875rem; }
   .founder__desc { font-size: 0.8125rem; max-width: none; }
@@ -1176,15 +1197,11 @@ body.is-editor [data-editable].is-changed {
   }
   .product__pillar {
     padding: var(--s-lg);
-    display: flex;
-    gap: var(--s-md);
-    align-items: flex-start;
   }
   .product__pillar-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 0;
-    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    margin-bottom: var(--s-sm);
   }
   .product__pillar-title { font-size: 1rem; margin-bottom: 0.375rem; }
   .product__pillar-text { font-size: 0.875rem; }
@@ -1231,18 +1248,17 @@ body.is-editor [data-editable].is-changed {
   /* ===== Dark Mode on Mobile ===== */
   body.dark::before {
     background:
-      radial-gradient(ellipse 180% 50% at 0% 15%, transparent 48%, rgba(200,53,43,0.1) 49%, rgba(200,53,43,0.1) 50%, transparent 51%),
-      radial-gradient(ellipse 160% 45% at 100% 30%, transparent 48%, rgba(181,56,126,0.08) 49%, rgba(181,56,126,0.08) 50%, transparent 51%),
-      radial-gradient(ellipse 200% 55% at 10% 50%, transparent 48%, rgba(74,124,89,0.09) 49%, rgba(74,124,89,0.09) 50%, transparent 51%),
-      radial-gradient(ellipse 170% 50% at 90% 65%, transparent 48%, rgba(46,94,140,0.08) 49%, rgba(46,94,140,0.08) 50%, transparent 51%),
-      radial-gradient(ellipse 190% 48% at 5% 80%, transparent 48%, rgba(212,168,67,0.07) 49%, rgba(212,168,67,0.07) 50%, transparent 51%),
-      radial-gradient(ellipse 150% 42% at 95% 92%, transparent 48%, rgba(92,61,46,0.06) 49%, rgba(92,61,46,0.06) 50%, transparent 51%);
+      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.12) 49.4%, rgba(200,53,43,0.12) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 200% 60% at 110% 35%, transparent 49%, rgba(181,56,126,0.1) 49.4%, rgba(181,56,126,0.1) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 250% 75% at -5% 55%, transparent 49%, rgba(74,124,89,0.11) 49.4%, rgba(74,124,89,0.11) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 210% 65% at 105% 72%, transparent 49%, rgba(46,94,140,0.1) 49.4%, rgba(46,94,140,0.1) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 240% 68% at 0% 88%, transparent 49%, rgba(212,168,67,0.09) 49.4%, rgba(212,168,67,0.09) 49.8%, transparent 50.2%);
   }
   body.dark .section::before,
   body.dark .section::after {
-    opacity: 0.2;
+    opacity: 0.6;
   }
-  body.dark .hero::before { opacity: 0.5; }
+  body.dark .hero::before { opacity: 0.7; }
   body.dark .section--story,
   body.dark .section--mission,
   body.dark .section--shop,
