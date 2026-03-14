@@ -547,11 +547,7 @@ body.dark .nav__ctrl-btn--theme .theme-icon--moon { display: block !important; }
 }
 .shop__card:hover .shop__card-img { transform: scale(1.05) rotate(-2deg); }
 
-/* Color tinting via CSS filters */
-.shop__card-img--red { filter: sepia(1) saturate(3) hue-rotate(-10deg) brightness(0.9); }
-.shop__card-img--blue { filter: sepia(1) saturate(2.5) hue-rotate(180deg) brightness(0.85); }
-.shop__card-img--green { filter: sepia(1) saturate(2.5) hue-rotate(90deg) brightness(0.9); }
-.shop__card-img--pink { filter: sepia(1) saturate(2.5) hue-rotate(290deg) brightness(1); }
+/* Product images use real photos — no CSS filters needed */
 
 /* Watchdog / Notify form */
 .shop__notify-form {
