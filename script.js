@@ -366,14 +366,10 @@
   // Section background curves
   // =========================================
   function setupSectionCurves() {
-    // On mobile (<=768px), section SVG curves are hidden via CSS and replaced
-    // with pure CSS gradient curves. Skip all SVG manipulation on mobile.
     var isMobile = window.innerWidth <= 768;
-    if (isMobile) return;
-
-    var sectionBgs = document.querySelectorAll('.section__curves-bg');
     var sectionsWithCurves = document.querySelectorAll('.section');
 
+    // IntersectionObserver for scroll-triggered curve reveal (both mobile & desktop)
     var curveObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -383,9 +379,34 @@
           }
         });
       },
-      { threshold: 0.05 }
+      { threshold: 0.08 }
     );
     sectionsWithCurves.forEach(function (s) { curveObserver.observe(s); });
+
+    if (isMobile) {
+      // Mobile: parallax effect on body::before (global background curves)
+      function updateMobileParallax() {
+        var scrollY = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight;
+        var viewHeight = window.innerHeight;
+        var scrollFraction = scrollY / (docHeight - viewHeight);
+        // Move background up as user scrolls (parallax)
+        var translateY = -scrollFraction * viewHeight * 0.3;
+        document.body.style.setProperty('--mobile-curve-y', translateY + 'px');
+      }
+
+      // Apply transform via a style we can update
+      var style = document.createElement('style');
+      style.textContent = '@media(max-width:768px){body::before{transform:translateY(var(--mobile-curve-y,0px))}}';
+      document.head.appendChild(style);
+
+      window.addEventListener('scroll', updateMobileParallax, { passive: true });
+      updateMobileParallax();
+      return;
+    }
+
+    // Desktop: SVG-based section curves with parallax
+    var sectionBgs = document.querySelectorAll('.section__curves-bg');
 
     function updateSectionCurves() {
       sectionBgs.forEach(function (bg) {

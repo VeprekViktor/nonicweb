@@ -923,43 +923,52 @@ body.is-editor [data-editable].is-changed {
 
   /* ===== MOBILE CURVES — Pure CSS approach =====
      SVG curves don't render properly on mobile.
-     Replace with CSS gradient-based thin crisp lines. */
+     Replace with CSS gradient-based crisp lines + scroll animations. */
 
   /* Hide broken SVG curves entirely */
   .global-curves { display: none !important; }
   .section__curves-bg { display: none !important; }
 
-  /* Entrance animation for mobile curves */
+  /* Entrance animation for curves */
   @keyframes mobileCurveFadeIn {
-    0% { opacity: 0; transform: scale(0.97); }
-    100% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes mobileCurveDrawIn {
+    0% { opacity: 0; clip-path: inset(0 100% 0 0); }
+    100% { opacity: 1; clip-path: inset(0 0% 0 0); }
+  }
+  @keyframes mobileCurveDrawInReverse {
+    0% { opacity: 0; clip-path: inset(0 0 0 100%); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0%); }
   }
 
-  /* Mobile background colored lines — fixed position, THIN crisp lines spread apart */
+  /* Mobile background colored lines — fixed, BOLD & visible, with parallax class */
   body::before {
     content: '';
     position: fixed;
-    top: 0;
+    top: -10%;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 120%;
     z-index: 0;
     pointer-events: none;
-    animation: mobileCurveFadeIn 1.8s ease-out both;
+    will-change: transform;
+    animation: mobileCurveFadeIn 1.5s ease-out both;
     background:
       /* Red — top-left arc */
-      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.22) 49.4%, rgba(200,53,43,0.22) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.45) 49.3%, rgba(200,53,43,0.45) 49.7%, transparent 50%),
       /* Magenta — right side mid */
-      radial-gradient(ellipse 200% 60% at 110% 35%, transparent 49%, rgba(181,56,126,0.18) 49.4%, rgba(181,56,126,0.18) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 200% 60% at 110% 32%, transparent 49%, rgba(181,56,126,0.35) 49.3%, rgba(181,56,126,0.35) 49.7%, transparent 50%),
       /* Green — center-left */
-      radial-gradient(ellipse 250% 75% at -5% 55%, transparent 49%, rgba(74,124,89,0.2) 49.4%, rgba(74,124,89,0.2) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 250% 75% at -5% 52%, transparent 49%, rgba(74,124,89,0.4) 49.3%, rgba(74,124,89,0.4) 49.7%, transparent 50%),
       /* Blue — right-bottom */
-      radial-gradient(ellipse 210% 65% at 105% 72%, transparent 49%, rgba(46,94,140,0.18) 49.4%, rgba(46,94,140,0.18) 49.8%, transparent 50.2%),
+      radial-gradient(ellipse 210% 65% at 105% 70%, transparent 49%, rgba(46,94,140,0.35) 49.3%, rgba(46,94,140,0.35) 49.7%, transparent 50%),
       /* Yellow — bottom-left */
-      radial-gradient(ellipse 240% 68% at 0% 88%, transparent 49%, rgba(212,168,67,0.16) 49.4%, rgba(212,168,67,0.16) 49.8%, transparent 50.2%);
+      radial-gradient(ellipse 240% 68% at 0% 86%, transparent 49%, rgba(212,168,67,0.3) 49.3%, rgba(212,168,67,0.3) 49.7%, transparent 50%);
   }
 
-  /* Section-specific decorative curve arcs via CSS pseudo-elements */
+  /* Section-specific decorative curve arcs — hidden by default, animate on scroll */
   .section::before,
   .section::after {
     content: '';
@@ -969,60 +978,70 @@ body.is-editor [data-editable].is-changed {
     height: 160px;
     pointer-events: none;
     z-index: 0;
+    opacity: 0;
+    transition: none;
   }
 
   .section::before { top: -40px; }
   .section::after { bottom: -40px; }
 
-  /* Story curves — red arc top, green arc bottom */
+  /* When section scrolls into view, draw-in the curves */
+  .section.is-curves-visible::before {
+    animation: mobileCurveDrawIn 1.2s ease-out both;
+  }
+  .section.is-curves-visible::after {
+    animation: mobileCurveDrawInReverse 1.2s 0.2s ease-out both;
+  }
+
+  /* Story curves — BOLD red + green */
   .section--story::before {
-    background: radial-gradient(ellipse 140% 100% at 25% 100%, transparent 49%, rgba(200,53,43,0.3) 49.3%, rgba(200,53,43,0.3) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 140% 100% at 25% 100%, transparent 49%, rgba(200,53,43,0.5) 49.3%, rgba(200,53,43,0.5) 49.6%, transparent 50%);
   }
   .section--story::after {
-    background: radial-gradient(ellipse 160% 100% at 75% 0%, transparent 49%, rgba(74,124,89,0.25) 49.3%, rgba(74,124,89,0.25) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 160% 100% at 75% 0%, transparent 49%, rgba(74,124,89,0.45) 49.3%, rgba(74,124,89,0.45) 49.6%, transparent 50%);
   }
 
   /* Founders — NO section curves (prevent overlap with photos) */
   .section--founders::before,
   .section--founders::after { display: none; }
 
-  /* Mission curves — red arc top, green arc bottom */
+  /* Mission curves — red + green */
   .section--mission::before {
-    background: radial-gradient(ellipse 170% 100% at 35% 100%, transparent 49%, rgba(200,53,43,0.25) 49.3%, rgba(200,53,43,0.25) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 170% 100% at 35% 100%, transparent 49%, rgba(200,53,43,0.45) 49.3%, rgba(200,53,43,0.45) 49.6%, transparent 50%);
   }
   .section--mission::after {
-    background: radial-gradient(ellipse 140% 100% at 80% 0%, transparent 49%, rgba(74,124,89,0.22) 49.3%, rgba(74,124,89,0.22) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 140% 100% at 80% 0%, transparent 49%, rgba(74,124,89,0.4) 49.3%, rgba(74,124,89,0.4) 49.6%, transparent 50%);
   }
 
-  /* Product curves */
+  /* Product curves — yellow + blue */
   .section--product::before {
-    background: radial-gradient(ellipse 150% 100% at 50% 100%, transparent 49%, rgba(212,168,67,0.22) 49.3%, rgba(212,168,67,0.22) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 150% 100% at 50% 100%, transparent 49%, rgba(212,168,67,0.4) 49.3%, rgba(212,168,67,0.4) 49.6%, transparent 50%);
   }
   .section--product::after {
-    background: radial-gradient(ellipse 180% 100% at 15% 0%, transparent 49%, rgba(46,94,140,0.2) 49.3%, rgba(46,94,140,0.2) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 180% 100% at 15% 0%, transparent 49%, rgba(46,94,140,0.38) 49.3%, rgba(46,94,140,0.38) 49.6%, transparent 50%);
   }
 
-  /* Shop curves — magenta arc top, red arc bottom */
+  /* Shop curves — magenta + red */
   .section--shop::before {
-    background: radial-gradient(ellipse 160% 100% at 60% 100%, transparent 49%, rgba(181,56,126,0.25) 49.3%, rgba(181,56,126,0.25) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 160% 100% at 60% 100%, transparent 49%, rgba(181,56,126,0.45) 49.3%, rgba(181,56,126,0.45) 49.6%, transparent 50%);
   }
   .section--shop::after {
-    background: radial-gradient(ellipse 140% 100% at 30% 0%, transparent 49%, rgba(200,53,43,0.22) 49.3%, rgba(200,53,43,0.22) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 140% 100% at 30% 0%, transparent 49%, rgba(200,53,43,0.4) 49.3%, rgba(200,53,43,0.4) 49.6%, transparent 50%);
   }
 
-  /* Partners curves — green arc top, blue arc bottom */
+  /* Partners curves — green + blue */
   .section--partners::before {
-    background: radial-gradient(ellipse 150% 100% at 40% 100%, transparent 49%, rgba(74,124,89,0.25) 49.3%, rgba(74,124,89,0.25) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 150% 100% at 40% 100%, transparent 49%, rgba(74,124,89,0.45) 49.3%, rgba(74,124,89,0.45) 49.6%, transparent 50%);
   }
   .section--partners::after {
-    background: radial-gradient(ellipse 170% 100% at 80% 0%, transparent 49%, rgba(46,94,140,0.22) 49.3%, rgba(46,94,140,0.22) 49.7%, transparent 50%);
+    background: radial-gradient(ellipse 170% 100% at 80% 0%, transparent 49%, rgba(46,94,140,0.4) 49.3%, rgba(46,94,140,0.4) 49.6%, transparent 50%);
   }
 
-  /* Contact — no curves (clean form section) */
+  /* Contact — no curves */
   .section--contact::before,
   .section--contact::after { display: none; }
 
-  /* Hero gets its own thin colored accent lines with entrance animation */
+  /* Hero — bold colored accent lines with delayed entrance */
   .hero::before {
     content: '';
     position: absolute;
@@ -1032,21 +1051,11 @@ body.is-editor [data-editable].is-changed {
     bottom: 0;
     z-index: 0;
     pointer-events: none;
-    animation: mobileCurveFadeIn 2.2s 0.3s ease-out both;
+    animation: mobileCurveFadeIn 2s 0.3s ease-out both;
     background:
-      radial-gradient(ellipse 200% 50% at 10% 22%, transparent 49%, rgba(200,53,43,0.15) 49.3%, rgba(200,53,43,0.15) 49.7%, transparent 50%),
-      radial-gradient(ellipse 180% 45% at 90% 58%, transparent 49%, rgba(46,94,140,0.12) 49.3%, rgba(46,94,140,0.12) 49.7%, transparent 50%),
-      radial-gradient(ellipse 220% 55% at 50% 88%, transparent 49%, rgba(74,124,89,0.12) 49.3%, rgba(74,124,89,0.12) 49.7%, transparent 50%);
-  }
-
-  /* Section curve entrance animations */
-  .section::before,
-  .section::after {
-    animation: mobileCurveFadeIn 1.2s ease-out both;
-  }
-  .section.is-visible::before,
-  .section.is-visible::after {
-    animation: mobileCurveFadeIn 1s ease-out both;
+      radial-gradient(ellipse 200% 50% at 10% 22%, transparent 49%, rgba(200,53,43,0.3) 49.3%, rgba(200,53,43,0.3) 49.6%, transparent 50%),
+      radial-gradient(ellipse 180% 45% at 90% 55%, transparent 49%, rgba(46,94,140,0.25) 49.3%, rgba(46,94,140,0.25) 49.6%, transparent 50%),
+      radial-gradient(ellipse 220% 55% at 50% 85%, transparent 49%, rgba(74,124,89,0.22) 49.3%, rgba(74,124,89,0.22) 49.6%, transparent 50%);
   }
 
   /* ===== Section backgrounds — semi-transparent for curves to show ===== */
@@ -1248,17 +1257,17 @@ body.is-editor [data-editable].is-changed {
   /* ===== Dark Mode on Mobile ===== */
   body.dark::before {
     background:
-      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.12) 49.4%, rgba(200,53,43,0.12) 49.8%, transparent 50.2%),
-      radial-gradient(ellipse 200% 60% at 110% 35%, transparent 49%, rgba(181,56,126,0.1) 49.4%, rgba(181,56,126,0.1) 49.8%, transparent 50.2%),
-      radial-gradient(ellipse 250% 75% at -5% 55%, transparent 49%, rgba(74,124,89,0.11) 49.4%, rgba(74,124,89,0.11) 49.8%, transparent 50.2%),
-      radial-gradient(ellipse 210% 65% at 105% 72%, transparent 49%, rgba(46,94,140,0.1) 49.4%, rgba(46,94,140,0.1) 49.8%, transparent 50.2%),
-      radial-gradient(ellipse 240% 68% at 0% 88%, transparent 49%, rgba(212,168,67,0.09) 49.4%, rgba(212,168,67,0.09) 49.8%, transparent 50.2%);
+      radial-gradient(ellipse 220% 70% at -10% 10%, transparent 49%, rgba(200,53,43,0.3) 49.3%, rgba(200,53,43,0.3) 49.7%, transparent 50%),
+      radial-gradient(ellipse 200% 60% at 110% 32%, transparent 49%, rgba(181,56,126,0.25) 49.3%, rgba(181,56,126,0.25) 49.7%, transparent 50%),
+      radial-gradient(ellipse 250% 75% at -5% 52%, transparent 49%, rgba(74,124,89,0.28) 49.3%, rgba(74,124,89,0.28) 49.7%, transparent 50%),
+      radial-gradient(ellipse 210% 65% at 105% 70%, transparent 49%, rgba(46,94,140,0.25) 49.3%, rgba(46,94,140,0.25) 49.7%, transparent 50%),
+      radial-gradient(ellipse 240% 68% at 0% 86%, transparent 49%, rgba(212,168,67,0.2) 49.3%, rgba(212,168,67,0.2) 49.7%, transparent 50%);
   }
-  body.dark .section::before,
-  body.dark .section::after {
-    opacity: 0.6;
+  body.dark .section.is-curves-visible::before,
+  body.dark .section.is-curves-visible::after {
+    opacity: 0.7;
   }
-  body.dark .hero::before { opacity: 0.7; }
+  body.dark .hero::before { opacity: 0.8; }
   body.dark .section--story,
   body.dark .section--mission,
   body.dark .section--shop,
@@ -1335,8 +1344,7 @@ body.is-editor [data-editable].is-changed {
   /* Adjust section curves on small phones */
   .section::before,
   .section::after {
-    height: 80px;
-    opacity: 0.25;
+    height: 100px;
   }
 }
 
