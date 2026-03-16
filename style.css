@@ -1274,6 +1274,13 @@ body.splash-active .preview-frame {
   }
   .nav__logo-img { height: 28px; }
 
+  /* Mobile nav always has background when scrolled */
+  .nav.is-scrolled {
+    background: var(--c-nav-scrolled);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
   /* Controls — compact, always visible in header */
   .nav__controls {
     margin-left: auto;
@@ -1293,10 +1300,14 @@ body.splash-active .preview-frame {
     display: flex;
     order: 3;
     padding: 6px;
-    z-index: 115;
+    z-index: 125;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   .nav__toggle span { width: 22px; }
+
+  /* Nav must stay above drawer */
+  .nav { z-index: 120; }
 
   /* Mobile drawer */
   .nav__links {
@@ -1309,12 +1320,12 @@ body.splash-active .preview-frame {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: calc(var(--nav-h) + var(--s-xl)) var(--s-lg) var(--s-lg);
+    padding: calc(60px + var(--s-xl)) var(--s-lg) var(--s-lg);
     gap: var(--s-md);
     transform: translateX(100%);
     transition: transform var(--dur) var(--ease);
     box-shadow: -20px 0 60px rgba(0,0,0,0.15);
-    z-index: 110;
+    z-index: 115;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
