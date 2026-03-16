@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoNic — Alternativa, která nahrazuje návyk</title>
-  <meta name="description" content="NoNic je designovaný objekt nové generace. Kompaktní pero jako alternativa vapování a kouření. Bez nikotinu, bez elektroniky, bez kompromisů.">
+  <meta name="description" content="NoNic je kompaktní pero nové generace. Alternativa vapování a kouření. Bez nikotinu, bez elektroniky, bez kompromisů.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Instant scroll-to-top before paint — prevents flash of scrolled content on reload
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  </script>
 </head>
-<body>
+<body class="splash-active curves-waiting" data-page-title="page_title_home">
 
   <!-- Splash / Loading Screen -->
   <div class="splash" id="splash">
-    <svg class="splash__curves" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
-      <path class="splash__curve splash__curve--1" d="M-50,200 C50,80 150,320 250,180 S400,280 450,160" />
-      <path class="splash__curve splash__curve--2" d="M-50,220 C80,100 180,340 280,200 S420,300 450,180" />
-      <path class="splash__curve splash__curve--3" d="M-50,240 C60,120 160,300 260,220 S380,320 450,200" />
-      <path class="splash__curve splash__curve--4" d="M-50,180 C100,60 200,280 300,160 S440,260 450,140" />
-    </svg>
+    <canvas class="splash__canvas" id="splashCanvas"></canvas>
     <div class="splash__logo">
       <img src="logo.png" alt="NoNic" class="splash__logo-img" id="splashLogo">
     </div>
@@ -85,19 +85,14 @@
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#hero" class="nav__logo">
-        <img src="logo.png" alt="NoNic" class="nav__logo-img">
+      <a href="index.html" class="nav__logo">
+        <img src="logo-nonic.svg" alt="NoNic" class="nav__logo-img">
       </a>
       <div class="nav__links" id="navLinks">
-        <a href="#story" class="nav__link" data-i18n="nav_story">Příběh</a>
-        <a href="#founders" class="nav__link" data-i18n="nav_founders">Zakladatelé</a>
-        <a href="#mission" class="nav__link" data-i18n="nav_mission">Proč</a>
-        <a href="#product" class="nav__link" data-i18n="nav_product">Produkt</a>
-        <a href="#shop" class="nav__link" data-i18n="nav_shop">Obchod</a>
-        <a href="#partners" class="nav__link" data-i18n="nav_partners">Spolupráce</a>
-        <a href="#contact" class="nav__link nav__link--cta" data-i18n="nav_contact">Kontakt</a>
+        <a href="index.html" class="nav__link" data-i18n="nav_home">Domů</a>
+        <a href="obchod.html" class="nav__link" data-i18n="nav_shop">Obchod</a>
+        <a href="kontakt.html" class="nav__link nav__link--cta" data-i18n="nav_contact">Kontakt</a>
       </div>
-      <!-- Right-side controls: lang, currency, theme -->
       <div class="nav__controls">
         <button class="nav__ctrl-btn" id="langToggle" title="Language" aria-label="Switch language">
           <span class="nav__ctrl-label" id="langLabel">CZ</span>
@@ -126,10 +121,10 @@
     <div class="hero__content">
       <p class="hero__eyebrow" data-editable="hero-eyebrow" data-i18n="hero_eyebrow">Nová generace alternativy</p>
       <h1 class="hero__title" data-editable="hero-title" data-i18n-html="hero_title">Alternativa,<br>která nahrazuje návyk</h1>
-      <p class="hero__subtitle" data-editable="hero-subtitle" data-i18n-html="hero_subtitle">Designovaný objekt bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.</p>
+      <p class="hero__subtitle" data-editable="hero-subtitle" data-i18n-html="hero_subtitle">Kompaktní pero bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.</p>
       <div class="hero__actions">
-        <a href="#product" class="btn btn--primary" data-i18n="hero_btn_product">Prozkoumat produkt</a>
-        <a href="#story" class="btn btn--secondary" data-i18n="hero_btn_story">Jak vznikl</a>
+        <a href="obchod.html" class="btn btn--primary" data-i18n="hero_btn_shop">Přejít do obchodu</a>
+        <a href="#steps" class="btn btn--secondary" data-i18n="hero_btn_what">Jak to funguje</a>
       </div>
     </div>
     <div class="hero__scroll">
@@ -138,118 +133,63 @@
     </div>
   </section>
 
-  <!-- Story -->
-  <section class="section section--story" id="story">
+  <!-- Steps: How it works — Side-by-side layout -->
+  <section class="section section--steps" id="steps">
     <div class="section__curves-bg" aria-hidden="true">
       <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--red" d="M-100,350 C200,150 500,550 800,300 S1200,500 1540,250" />
-        <path class="curve curve--green" d="M-100,400 C250,200 550,600 850,350 S1250,550 1540,300" />
+        <path class="curve curve--magenta" d="M-100,55 C350,140 750,25 1100,110 S1450,50 1540,80" />
+        <path class="curve curve--yellow" d="M-100,650 C400,590 800,680 1150,610 S1460,660 1540,635" />
       </svg>
     </div>
     <div class="section__inner">
-      <div class="section__label" data-i18n="story_label">01 — Příběh</div>
-      <div class="story__grid">
-        <div class="story__text">
-          <h2 class="section__title" data-editable="story-title" data-i18n-html="story_title">Návyk má svou formu.<br>My jsme jí dali novou.</h2>
-          <p class="section__body" data-editable="story-body-1" data-i18n="story_body_1">
-            Lidé vapují a kouří z různých důvodů. Ale jeden motiv se opakuje — potřeba mít něco v ruce, gesto, návyk. NoNic vznikl jako odpověď na tuhle potřebu. Bez nikotinu, bez elektroniky.
-          </p>
-          <p class="section__body" data-editable="story-body-2" data-i18n="story_body_2">
-            Žádná další náhražka. Promyšlený produkt, který dává každodennímu návyku jinou podobu. Jednoduchou, čistou a bez kompromisů.
-          </p>
-          <p class="section__body" data-editable="story-body-3" data-i18n="story_body_3">
-            Z pozorování trhu a reálné potřeby vznikla značka s vlastním designovým jazykem a jasným směrem.
-          </p>
-        </div>
-        <div class="story__visual">
-          <div class="story__product-scene">
-            <div class="story__product-wrap" id="storyProduct">
-              <img src="product.png" alt="NoNic pen" class="story__product-img">
-            </div>
-            <div class="story__product-shadow"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="section__label" data-i18n="steps_label">Jak to funguje</div>
+      <h2 class="section__title section__title--large" data-i18n="steps_title">Čtyři kroky. Žádné komplikace.</h2>
 
-  <!-- Founders -->
-  <section class="section section--founders" id="founders">
-    <div class="section__curves-bg" aria-hidden="true">
-      <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--magenta" d="M-100,200 C300,400 600,100 900,350 S1300,150 1540,400" />
-        <path class="curve curve--yellow" d="M-100,250 C350,450 650,150 950,400 S1350,200 1540,450" />
-      </svg>
-    </div>
-    <div class="section__inner">
-      <div class="section__label" data-i18n="founders_label">02 — Zakladatelé</div>
-      <h2 class="section__title section__title--center" data-editable="founders-title" data-i18n="founders_title">Tým za produktem</h2>
-      <p class="section__intro" data-editable="founders-intro" data-i18n="founders_intro">Dva lidé. Jasný koncept. Produkt, který má směr od prvního dne.</p>
-      <div class="founders__grid">
-        <div class="founder">
-          <div class="founder__portrait">
-            <div class="founder__photo-wrap">
-              <img src="Matyas.jpg" alt="Matyáš — co-founder NoNic" class="founder__photo">
-              <svg viewBox="0 0 200 200" class="founder__accent">
-                <path class="curve curve--magenta" d="M20,100 C60,20 140,20 180,100 S140,180 100,180" />
-              </svg>
+      <div class="steps-layout">
+        <div class="steps-layout__visual">
+          <svg class="steps-layout__pen" viewBox="910 80 110 680" fill="none" aria-label="NoNic pen">
+            <path class="pen-body" d="M984.35,745.38h-39.02c-13.6,0-24.66-11.06-24.66-24.65v-136.53h88.33v136.53c0,13.59-11.06,24.65-24.65,24.65ZM924.67,588.2v132.53c0,11.39,9.27,20.66,20.66,20.66h39.02c11.39,0,20.66-9.27,20.66-20.66v-132.53h-80.34Z"/>
+            <rect class="pen-detail" x="968.98" y="492.88" width="24.17" height="69.37" rx="1.58" ry="1.58" transform="translate(-132.35 561.21) rotate(-30)"/>
+            <path class="pen-body" d="M990.26,563.34c-.72,0-1.45-.09-2.16-.29-2.14-.57-3.94-1.95-5.05-3.87l-28.37-49.14c-2.29-3.97-.92-9.06,3.04-11.35l9.99-5.77c1.92-1.11,4.16-1.41,6.31-.83,2.14.57,3.94,1.95,5.05,3.87l28.37,49.14c2.29,3.97.93,9.06-3.04,11.35l-9.99,5.77c-1.28.74-2.7,1.12-4.14,1.12ZM971.86,495.8c-.75,0-1.49.2-2.15.58l-9.99,5.77c-2.06,1.19-2.77,3.84-1.58,5.9l28.37,49.14c.58,1,1.51,1.71,2.62,2.01,1.11.3,2.28.14,3.28-.43l9.99-5.77c2.06-1.19,2.77-3.84,1.58-5.9l-28.37-49.14c-.58-1-1.51-1.71-2.62-2.01-.37-.1-.75-.15-1.12-.15Z"/>
+            <path class="pen-body" d="M989.85,482.95h-50.03v-97.68h50.03v97.68ZM943.82,478.95h42.04v-89.68h-42.04v89.68Z"/>
+            <rect class="pen-body" x="933.71" y="404.05" width="62.24" height="4"/>
+            <rect class="pen-body" x="933.71" y="422.76" width="62.24" height="4"/>
+            <rect class="pen-body" x="933.71" y="441.47" width="62.24" height="4"/>
+            <rect class="pen-body" x="933.71" y="460.18" width="62.24" height="4"/>
+            <rect class="pen-fill" x="922.67" y="201.56" width="84.33" height="185.72"/>
+            <path class="pen-body" d="M1008.99,389.29h-88.32v-189.72h88.32v189.72ZM924.67,385.29h80.33v-181.73h-80.33v181.73Z"/>
+            <path class="pen-body" d="M924.67,201.56h-4c0-28.03,8.89-35.01,16.73-41.17,6.09-4.78,10.89-8.56,10.89-22.02v-41.86h16.54v4h-12.55v37.87c0,15.41-6.31,20.37-12.42,25.17-7.47,5.87-15.2,11.94-15.2,38.03Z"/>
+            <path class="pen-body" d="M1009.12,201.56h-4c0-26.09-7.75-32.16-15.24-38.03-6.13-4.8-12.46-9.76-12.46-25.17v-37.86h-12.58v-4h16.58v41.86c0,13.47,4.82,17.24,10.93,22.02,7.86,6.16,16.77,13.14,16.77,41.17Z"/>
+          </svg>
+        </div>
+        <div class="steps-layout__list">
+          <div class="step-item" data-step="1">
+            <span class="step-item__num">01</span>
+            <div class="step-item__content">
+              <h3 class="step-item__title" data-i18n="step_1_title">Odšroubujte</h3>
+              <p class="step-item__text" data-i18n="step_1_text">Spodní část jednoduše odšroubujete.</p>
             </div>
           </div>
-          <h3 class="founder__name" data-editable="founder-1-name">Matyáš</h3>
-          <p class="founder__role" data-editable="founder-1-role" data-i18n="founder_1_role">Vize & strategie</p>
-          <p class="founder__desc" data-editable="founder-1-desc" data-i18n="founder_1_desc">Směr značky, obchodní strategie a positioning. Propojuje koncept s trhem a řídí růst projektu.</p>
-        </div>
-        <div class="founder">
-          <div class="founder__portrait">
-            <div class="founder__photo-wrap">
-              <img src="Viktor.jpg" alt="Viktor — co-founder NoNic" class="founder__photo">
-              <svg viewBox="0 0 200 200" class="founder__accent">
-                <path class="curve curve--blue" d="M20,100 C60,20 140,20 180,100 S140,180 100,180" />
-              </svg>
+          <div class="step-item" data-step="2">
+            <span class="step-item__num">02</span>
+            <div class="step-item__content">
+              <h3 class="step-item__title" data-i18n="step_2_title">Vložte jádro</h3>
+              <p class="step-item__text" data-i18n="step_2_text">Do pera zasunete aroma náplň ve zvolené variantě.</p>
             </div>
           </div>
-          <h3 class="founder__name" data-editable="founder-2-name">Viktor</h3>
-          <p class="founder__role" data-editable="founder-2-role" data-i18n="founder_2_role">Produkt & design</p>
-          <p class="founder__desc" data-editable="founder-2-desc" data-i18n="founder_2_desc">Vizuální identita, produkt a komunikace. Definuje, jak NoNic vypadá, jak se drží a jak mluví.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission -->
-  <section class="section section--mission" id="mission">
-    <div class="section__curves-bg" aria-hidden="true">
-      <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--red" d="M-100,500 C400,300 700,600 1000,350 S1400,550 1540,350" />
-        <path class="curve curve--green" d="M-100,550 C450,350 750,650 1050,400 S1450,600 1540,400" />
-      </svg>
-    </div>
-    <div class="section__inner">
-      <div class="section__label" data-i18n="mission_label">03 — Proč existujeme</div>
-      <div class="mission__layout">
-        <div class="mission__text">
-          <h2 class="section__title" data-editable="mission-title" data-i18n-html="mission_title">Trh plný náhražek.<br>Žádná skutečná alternativa.</h2>
-          <p class="section__body" data-editable="mission-body-1" data-i18n="mission_body_1">
-            Vapování, nikotinové sáčky, e-cigarety. Segment roste, ale nabídka se točí v kruhu — jiná forma stejné závislosti. Chyběl produkt, který řeší návyk z druhé strany. Ne chemicky. Formou.
-          </p>
-          <p class="section__body" data-editable="mission-body-2" data-i18n="mission_body_2">
-            NoNic vznikl z přesvědčení, že většina lidí nehledá další nikotinový produkt. Hledá způsob, jak si zachovat gesto, pocit a každodenní formu — bez toho, co k ní dosud patřilo.
-          </p>
-          <p class="section__body" data-editable="mission-body-3" data-i18n="mission_body_3">
-            Nejsme proti ničemu. Jsme pro jinou možnost. Promyšlenou, současnou a bez zbytečných příslibů.
-          </p>
-        </div>
-        <div class="mission__visual">
-          <div class="mission__card">
-            <blockquote class="mission__quote" data-editable="mission-quote" data-i18n="mission_quote">
-              Nechtěli jsme vytvořit další náhražku. Chtěli jsme vytvořit jinou kategorii.
-            </blockquote>
-            <div class="mission__authors">
-              <span class="mission__author">Matyáš</span>
-              <span class="mission__amp">&</span>
-              <span class="mission__author">Viktor</span>
+          <div class="step-item" data-step="3">
+            <span class="step-item__num">03</span>
+            <div class="step-item__content">
+              <h3 class="step-item__title" data-i18n="step_3_title">Uzavřete</h3>
+              <p class="step-item__text" data-i18n="step_3_text">Obě části znovu spojíte a pero je připravené.</p>
             </div>
-            <p class="mission__role" data-i18n="mission_role">Zakladatelé NoNic</p>
+          </div>
+          <div class="step-item" data-step="4">
+            <span class="step-item__num">04</span>
+            <div class="step-item__content">
+              <h3 class="step-item__title" data-i18n="step_4_title">Nadechněte se</h3>
+              <p class="step-item__text" data-i18n="step_4_text">Pak už jen inhalujete aroma podle potřeby.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -260,68 +200,46 @@
   <section class="section section--product" id="product">
     <div class="section__curves-bg" aria-hidden="true">
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--red" d="M-100,200 C200,400 500,100 800,350 S1200,150 1540,400" />
-        <path class="curve curve--yellow" d="M-100,250 C250,450 550,150 850,400 S1250,200 1540,450" />
-        <path class="curve curve--green" d="M-100,700 C300,500 600,800 900,550 S1300,750 1540,550" />
+        <path class="curve curve--yellow" d="M-100,60 C300,180 700,20 1100,120 S1500,50 1540,100" />
+        <path class="curve curve--green" d="M-100,820 C400,750 800,880 1200,790 S1500,860 1540,830" />
       </svg>
     </div>
     <div class="section__inner">
-      <div class="section__label" data-i18n="product_label">04 — Produkt</div>
+      <div class="section__label" data-i18n="product_label">Produkt</div>
 
       <div class="product__hero">
         <h2 class="section__title section__title--large" data-editable="product-title" data-i18n-html="product_title">Jeden objekt.<br>Nová kategorie.</h2>
         <p class="product__lead" data-editable="product-lead" data-i18n="product_lead">
-          NoNic je kompaktní pero navržené jako alternativa vapování a kouření. Bez nikotinu, bez elektroniky, bez nabíjení. Fyzický produkt, který zachovává formu návyku — a mění jeho obsah.
+          Kompaktní pero bez nikotinu, bez elektroniky, bez nabíjení. Fyzický produkt, který zachovává formu návyku — a mění jeho obsah.
         </p>
       </div>
 
       <div class="product__pillars">
         <div class="product__pillar">
           <div class="product__pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M24,4 L24,38" stroke-linecap="round" stroke-width="2"/>
-              <path d="M20,4 C20,4 22,2 24,2 S28,4 28,4" stroke-linecap="round"/>
-              <path d="M21,38 L24,46 L27,38" stroke-linejoin="round" stroke-width="1.5"/>
-              <ellipse cx="24" cy="8" rx="4" ry="1.5" opacity="0.3"/>
-              <path d="M20,12 L28,12" opacity="0.2" stroke-linecap="round"/>
-              <path d="M21,20 L27,20" opacity="0.15" stroke-linecap="round"/>
-              <circle cx="24" cy="32" r="1" fill="currentColor" stroke="none" opacity="0.4"/>
-            </svg>
+            <img src="nonic_icon_forma.png" alt="" class="product__pillar-icon-img">
           </div>
           <h3 class="product__pillar-title" data-editable="pillar-1-title" data-i18n="pillar_1_title">Forma, která sedne do ruky</h3>
           <p class="product__pillar-text" data-editable="pillar-1-text" data-i18n="pillar_1_text">
-            Gesto. Pohyb. Pocit něčeho mezi prsty. Většina návyků není jen o obsahu — je o formě. NoNic je pero navržené tak, aby přirozeně nahradilo právě tento rozměr. Leží v ruce, funguje intuitivně, nevyžaduje vysvětlování.
+            Pero navržené tak, aby přirozeně nahradilo potřebu držet něco v ruce. Leží v dlani, funguje intuitivně.
           </p>
         </div>
         <div class="product__pillar">
           <div class="product__pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M16,36 C16,36 18,28 24,28 S32,36 32,36" stroke-linecap="round"/>
-              <ellipse cx="24" cy="38" rx="10" ry="3" opacity="0.15"/>
-              <path d="M18,24 C18,18 22,16 22,12" stroke-linecap="round" opacity="0.6"/>
-              <path d="M24,22 C24,16 28,14 28,10" stroke-linecap="round" opacity="0.45"/>
-              <path d="M30,24 C30,18 34,16 34,12" stroke-linecap="round" opacity="0.3"/>
-              <circle cx="24" cy="32" r="5" opacity="0.1" fill="currentColor" stroke="none"/>
-            </svg>
+            <img src="nonic_icon_aroma.png" alt="" class="product__pillar-icon-img">
           </div>
           <h3 class="product__pillar-title" data-editable="pillar-2-title" data-i18n="pillar_2_title">Aromatická kompozice</h3>
           <p class="product__pillar-text" data-editable="pillar-2-text" data-i18n="pillar_2_text">
-            Každé pero obsahuje vybranou aromatickou směs. Jemná, přirozená, bez umělých příchutí. Doplňuje formu o senzorický rozměr — tichý, ale zřetelný. Přesně to, co odlišuje NoNic od obyčejného předmětu.
+            Vybraná aromatická směs bez umělých příchutí. Senzorický rozměr, který odlišuje NoNic od obyčejného předmětu.
           </p>
         </div>
         <div class="product__pillar">
           <div class="product__pillar-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M6,24 C6,24 14,12 24,12 S42,24 42,24" stroke-linecap="round"/>
-              <path d="M6,24 C6,24 14,36 24,36 S42,24 42,24" stroke-linecap="round"/>
-              <circle cx="24" cy="24" r="5"/>
-              <circle cx="24" cy="24" r="2" fill="currentColor" stroke="none"/>
-              <line x1="8" y1="40" x2="40" y2="8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-            </svg>
+            <img src="nonic_icon_diskretni.png" alt="" class="product__pillar-icon-img">
           </div>
           <h3 class="product__pillar-title" data-editable="pillar-3-title" data-i18n="pillar_3_title">Diskrétní a bez omezení</h3>
           <p class="product__pillar-text" data-editable="pillar-3-text" data-i18n="pillar_3_text">
-            Žádná pára, žádné nabíjení, žádné pohledy. NoNic vypadá jako designový objekt — ne jako e-cigareta. Používejte ho v práci, na cestách, mezi lidmi. Kdykoliv a kdekoliv, bez vysvětlování.
+            Žádná pára, žádné nabíjení. Vypadá jako designový objekt. Používejte ho kdekoliv, bez vysvětlování.
           </p>
         </div>
       </div>
@@ -347,177 +265,76 @@
     </div>
   </section>
 
-  <!-- Shop -->
-  <section class="section section--shop" id="shop">
+  <!-- Story -->
+  <section class="section section--story" id="story">
     <div class="section__curves-bg" aria-hidden="true">
       <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--magenta" d="M-100,350 C300,150 600,500 900,250 S1300,450 1540,200" />
-        <path class="curve curve--red" d="M-100,400 C350,200 650,550 950,300 S1350,500 1540,250" />
+        <path class="curve curve--red" d="M-100,80 C300,180 700,30 1100,130 S1400,60 1540,90" />
+        <path class="curve curve--green" d="M-100,630 C350,570 700,670 1050,600 S1400,660 1540,620" />
       </svg>
     </div>
     <div class="section__inner">
-      <div class="section__label" data-i18n="shop_label">05 — Obchod</div>
-      <h2 class="section__title section__title--center" data-editable="shop-title" data-i18n="shop_title">Čtyři barvy. Jeden standard.</h2>
-      <p class="section__intro" data-editable="shop-intro" data-i18n="shop_intro">Vyberte si barvu, která vám odpovídá. Brzy dostupné.</p>
-      <div class="shop__grid">
-        <div class="shop__card" data-color="red">
-          <div class="shop__card-visual">
-            <img src="product.png" alt="NoNic — Red" class="shop__card-img">
-          </div>
-          <div class="shop__card-info">
-            <h3 class="shop__card-name" data-editable="shop-name-1" data-i18n="shop_red">Červená</h3>
-            <div class="shop__card-bottom">
-              <span class="shop__card-price" data-i18n="shop_price">BRZY</span>
-              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="red" data-i18n="shop_notify">Upozornit</button>
-            </div>
-            <div class="shop__notify-form" data-notify="red">
-              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail" data-i18n-placeholder="shop_email_placeholder">
-              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="red" data-i18n="shop_submit">Odeslat</button>
-            </div>
-          </div>
-        </div>
-        <div class="shop__card" data-color="blue">
-          <div class="shop__card-visual">
-            <img src="nonic_blue.png" alt="NoNic — Blue" class="shop__card-img">
-          </div>
-          <div class="shop__card-info">
-            <h3 class="shop__card-name" data-editable="shop-name-2" data-i18n="shop_blue">Modrá</h3>
-            <div class="shop__card-bottom">
-              <span class="shop__card-price" data-i18n="shop_price">BRZY</span>
-              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="blue" data-i18n="shop_notify">Upozornit</button>
-            </div>
-            <div class="shop__notify-form" data-notify="blue">
-              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail" data-i18n-placeholder="shop_email_placeholder">
-              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="blue" data-i18n="shop_submit">Odeslat</button>
-            </div>
-          </div>
-        </div>
-        <div class="shop__card" data-color="green">
-          <div class="shop__card-visual">
-            <img src="nonic_green.png" alt="NoNic — Green" class="shop__card-img">
-          </div>
-          <div class="shop__card-info">
-            <h3 class="shop__card-name" data-editable="shop-name-3" data-i18n="shop_green">Zelená</h3>
-            <div class="shop__card-bottom">
-              <span class="shop__card-price" data-i18n="shop_price">BRZY</span>
-              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="green" data-i18n="shop_notify">Upozornit</button>
-            </div>
-            <div class="shop__notify-form" data-notify="green">
-              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail" data-i18n-placeholder="shop_email_placeholder">
-              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="green" data-i18n="shop_submit">Odeslat</button>
-            </div>
-          </div>
-        </div>
-        <div class="shop__card" data-color="pink">
-          <div class="shop__card-visual">
-            <img src="nonic_pink.png" alt="NoNic — Pink" class="shop__card-img">
-          </div>
-          <div class="shop__card-info">
-            <h3 class="shop__card-name" data-editable="shop-name-4" data-i18n="shop_pink">Růžová</h3>
-            <div class="shop__card-bottom">
-              <span class="shop__card-price" data-i18n="shop_price">BRZY</span>
-              <button class="btn btn--secondary btn--sm shop__notify-btn" data-product="pink" data-i18n="shop_notify">Upozornit</button>
-            </div>
-            <div class="shop__notify-form" data-notify="pink">
-              <input type="email" class="form__input shop__notify-input" placeholder="Váš e-mail" data-i18n-placeholder="shop_email_placeholder">
-              <button class="btn btn--primary btn--sm shop__notify-submit" data-product="pink" data-i18n="shop_submit">Odeslat</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partners / Investors -->
-  <section class="section section--partners" id="partners">
-    <div class="section__curves-bg" aria-hidden="true">
-      <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
-        <path class="curve curve--green" d="M-100,300 C400,500 700,200 1000,400 S1400,250 1540,450" />
-        <path class="curve curve--blue" d="M-100,350 C450,550 750,250 1050,450 S1450,300 1540,500" />
-      </svg>
-    </div>
-    <div class="section__inner">
-      <div class="section__label" data-i18n="partners_label">06 — Spolupráce</div>
-      <div class="partners__grid">
-        <div class="partners__text">
-          <h2 class="section__title" data-editable="partners-title" data-i18n-html="partners_title">Otevřeni spolupráci.<br>Připraveni na scale.</h2>
-          <p class="section__body" data-editable="partners-body" data-i18n="partners_body">
-            NoNic je hotový koncept — produkt, identita, positioning. Hledáme partnery pro distribuci, růst a vstup na nové trhy.
+      <div class="section__label" data-i18n="story_label">Příběh</div>
+      <div class="story__grid">
+        <div class="story__text">
+          <h2 class="section__title" data-editable="story-title" data-i18n-html="story_title">Návyk má svou formu.<br>My jsme jí dali novou.</h2>
+          <p class="section__body" data-editable="story-body-1" data-i18n="story_body_1">
+            Potřeba mít něco v ruce se opakuje u většiny lidí — gesto, pohyb, každodenní forma. NoNic je odpověď na tuto potřebu. Bez nikotinu, bez elektroniky.
           </p>
-          <div class="partners__points">
-            <div class="partners__point">
-              <span class="partners__point-marker"></span>
-              <span data-i18n="partners_point_1">Definovaná značka a vizuální systém</span>
-            </div>
-            <div class="partners__point">
-              <span class="partners__point-marker"></span>
-              <span data-i18n="partners_point_2">Hotový produkt připravený k distribuci</span>
-            </div>
-            <div class="partners__point">
-              <span class="partners__point-marker"></span>
-              <span data-i18n="partners_point_3">Jasný tržní positioning</span>
-            </div>
-            <div class="partners__point">
-              <span class="partners__point-marker"></span>
-              <span data-i18n="partners_point_4">Škálovatelný obchodní model</span>
-            </div>
-          </div>
+          <p class="section__body" data-editable="story-body-2" data-i18n="story_body_2">
+            Promyšlený produkt, který dává návyku novou podobu. Jednoduchou, čistou a bez kompromisů.
+          </p>
+          <p class="section__body" data-editable="story-body-3" data-i18n="story_body_3">
+            Z reálné potřeby vznikla značka s vlastním designovým jazykem a jasným směrem.
+          </p>
         </div>
-        <div class="partners__cta-area">
-          <div class="partners__card">
-            <h3 data-i18n="partners_card_1_title">Investice a distribuce</h3>
-            <p data-i18n="partners_card_1_text">Máte zájem o distribuci, investici nebo strategické partnerství? Pojďme to probrat.</p>
-            <a href="#contact" class="btn btn--primary" data-i18n="partners_card_1_btn">Domluvit schůzku</a>
-          </div>
-          <div class="partners__card partners__card--alt">
-            <h3 data-i18n="partners_card_2_title">Kolaborace a edice</h3>
-            <p data-i18n="partners_card_2_text">Limitované edice, co-brandingy, kreativní projekty. Jsme otevření.</p>
-            <a href="#contact" class="btn btn--secondary" data-i18n="partners_card_2_btn">Napište nám</a>
+        <div class="story__visual">
+          <div class="story__product-scene">
+            <div class="story__product-wrap" id="storyProduct">
+              <img src="product.png" alt="NoNic pen" class="story__product-img">
+            </div>
+            <div class="story__product-shadow"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="section section--contact" id="contact">
+  <!-- Mission / Proč existujeme — moved under Story -->
+  <section class="section section--mission" id="mission">
+    <div class="section__curves-bg" aria-hidden="true">
+      <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" class="section-bg-svg">
+        <path class="curve curve--red" d="M-100,70 C400,160 800,40 1200,120 S1480,60 1540,90" />
+        <path class="curve curve--green" d="M-100,640 C350,580 750,680 1100,610 S1450,660 1540,630" />
+      </svg>
+    </div>
     <div class="section__inner">
-      <div class="contact__grid">
-        <div class="contact__info">
-          <div class="section__label" data-i18n="contact_label">07 — Kontakt</div>
-          <h2 class="section__title" data-editable="contact-title" data-i18n-html="contact_title">Ozvěte se.<br>Odpovídáme.</h2>
-          <p class="section__body" data-editable="contact-body" data-i18n="contact_body">Produkt, spolupráce, distribuce — ať je to cokoliv, jsme tady.</p>
-          <div class="contact__details">
-            <a href="mailto:hello@nonic.cz" class="contact__link">hello@nonic.cz</a>
-          </div>
+      <div class="section__label" data-i18n="mission_label">Proč existujeme</div>
+      <div class="mission__layout">
+        <div class="mission__text">
+          <h2 class="section__title" data-editable="mission-title" data-i18n-html="mission_title">Trh plný náhražek.<br>Žádná skutečná alternativa.</h2>
+          <p class="section__body" data-editable="mission-body-1" data-i18n="mission_body_1">
+            Segment alternativ roste, ale nabídka se točí v kruhu — jiná forma stejné závislosti. Chyběl produkt, který přistupuje k návyku z druhé strany. Ne chemicky. Formou.
+          </p>
+          <p class="section__body" data-editable="mission-body-2" data-i18n="mission_body_2">
+            Většina lidí nehledá další nikotinový produkt. Hledá způsob, jak si zachovat gesto a každodenní formu — bez toho, co k ní dosud patřilo.
+          </p>
+          <p class="section__body" data-editable="mission-body-3" data-i18n="mission_body_3">
+            Nejsme proti ničemu. Jsme pro jinou možnost. Promyšlenou, současnou a bez zbytečných příslibů.
+          </p>
         </div>
-        <div class="contact__form-wrap">
-          <form class="contact__form" id="contactForm">
-            <div class="form__group">
-              <label for="name" class="form__label" data-i18n="form_name">Jméno</label>
-              <input type="text" id="name" name="name" class="form__input" required>
+        <div class="mission__visual">
+          <div class="mission__card">
+            <blockquote class="mission__quote" data-editable="mission-quote" data-i18n="mission_quote">
+              Nechtěli jsme vytvořit další náhražku. Chtěli jsme vytvořit jinou kategorii.
+            </blockquote>
+            <div class="mission__authors">
+              <span class="mission__author">Matyáš</span>
+              <span class="mission__amp">&amp;</span>
+              <span class="mission__author">Viktor</span>
             </div>
-            <div class="form__group">
-              <label for="email" class="form__label" data-i18n="form_email">E-mail</label>
-              <input type="email" id="email" name="email" class="form__input" required>
-            </div>
-            <div class="form__group">
-              <label for="interest" class="form__label" data-i18n="form_interest">Zájem o</label>
-              <select id="interest" name="interest" class="form__input form__select">
-                <option value="" data-i18n="form_select_default">Vyberte...</option>
-                <option value="product" data-i18n="form_select_product">Produkt</option>
-                <option value="partnership" data-i18n="form_select_partnership">Partnerství</option>
-                <option value="investment" data-i18n="form_select_investment">Investice</option>
-                <option value="creative" data-i18n="form_select_creative">Kreativní spolupráce</option>
-                <option value="other" data-i18n="form_select_other">Jiné</option>
-              </select>
-            </div>
-            <div class="form__group">
-              <label for="message" class="form__label" data-i18n="form_message">Zpráva</label>
-              <textarea id="message" name="message" class="form__input form__textarea" rows="4"></textarea>
-            </div>
-            <button type="submit" class="btn btn--primary btn--full" data-i18n="form_submit">Odeslat zprávu</button>
-          </form>
+            <p class="mission__role" data-i18n="mission_role">Zakladatelé NoNic</p>
+          </div>
         </div>
       </div>
     </div>
@@ -539,13 +356,9 @@
           <p class="footer__tagline" data-i18n="footer_tagline">Alternativa, která nahrazuje návyk</p>
         </div>
         <div class="footer__nav">
-          <a href="#story" data-i18n="nav_story">Příběh</a>
-          <a href="#founders" data-i18n="nav_founders">Zakladatelé</a>
-          <a href="#mission" data-i18n="nav_mission">Proč</a>
-          <a href="#product" data-i18n="nav_product">Produkt</a>
-          <a href="#shop" data-i18n="nav_shop">Obchod</a>
-          <a href="#partners" data-i18n="nav_partners">Spolupráce</a>
-          <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+          <a href="kontakt.html" data-i18n="footer_contact">Kontakt</a>
+          <a href="obchodni-podminky.html" data-i18n="footer_terms">Obchodní podmínky</a>
+          <a href="https://instagram.com/nonic.life" target="_blank" rel="noopener" data-i18n="footer_instagram">Instagram</a>
         </div>
         <div class="footer__bottom">
           <p data-i18n="footer_copy">&copy; 2025 NoNic. Všechna práva vyhrazena.</p>
@@ -555,7 +368,6 @@
   </footer>
 
   </div><!-- /.preview-frame -->
-
   <script src="script.js"></script>
 </body>
 </html>

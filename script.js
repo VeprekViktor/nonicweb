@@ -1,6 +1,7 @@
 /* =========================================
    NoNic — Brand Website
-   Interactions, i18n & Animations v3
+   Interactions, i18n & Animations v4
+   Multi-page architecture
    ========================================= */
 
 (function () {
@@ -11,142 +12,228 @@
   // =========================================
   var translations = {
     cs: {
-      nav_story: 'Příběh', nav_founders: 'Zakladatelé', nav_mission: 'Proč',
-      nav_product: 'Produkt', nav_shop: 'Obchod', nav_partners: 'Spolupráce', nav_contact: 'Kontakt',
+      // Navigation
+      nav_home: 'Domů', nav_shop: 'Obchod', nav_contact: 'Kontakt',
+
+      // Hero
       hero_eyebrow: 'Nová generace alternativy',
       hero_title: 'Alternativa,<br>která nahrazuje návyk',
-      hero_subtitle: 'Designovaný objekt bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.',
-      hero_btn_product: 'Prozkoumat produkt', hero_btn_story: 'Jak vznikl', hero_scroll: 'Scroll',
-      story_label: '01 — Příběh',
+      hero_subtitle: 'Kompaktní pero bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.',
+      hero_btn_shop: 'Přejít do obchodu', hero_btn_what: 'Jak to funguje', hero_scroll: 'Scroll',
+
+      // 4 steps (co-je-nonic)
+      steps_label: 'Jak to funguje',
+      steps_title: 'Čtyři kroky. Žádné komplikace.',
+      step_1_title: 'Odšroubujte',
+      step_1_text: 'Spodní část jednoduše odšroubujete.',
+      step_2_title: 'Vložte jádro',
+      step_2_text: 'Do pera zasunete aroma náplň ve zvolené variantě.',
+      step_3_title: 'Uzavřete',
+      step_3_text: 'Obě části znovu spojíte a pero je připravené.',
+      step_4_title: 'Nadechněte se',
+      step_4_text: 'Pak už jen inhalujete aroma podle potřeby.',
+
+      // Story
+      story_label: 'Příběh',
       story_title: 'Návyk má svou formu.<br>My jsme jí dali novou.',
-      story_body_1: 'Lidé vapují a kouří z různých důvodů. Ale jeden motiv se opakuje — potřeba mít něco v ruce, gesto, návyk. NoNic vznikl jako odpověď na tuhle potřebu. Bez nikotinu, bez elektroniky.',
-      story_body_2: 'Žádná další náhražka. Promyšlený produkt, který dává každodennímu návyku jinou podobu. Jednoduchou, čistou a bez kompromisů.',
-      story_body_3: 'Z pozorování trhu a reálné potřeby vznikla značka s vlastním designovým jazykem a jasným směrem.',
-      founders_label: '02 — Zakladatelé', founders_title: 'Tým za produktem',
-      founders_intro: 'Dva lidé. Jasný koncept. Produkt, který má směr od prvního dne.',
-      founder_1_role: 'Vize & strategie',
-      founder_1_desc: 'Směr značky, obchodní strategie a positioning. Propojuje koncept s trhem a řídí růst projektu.',
-      founder_2_role: 'Produkt & design',
-      founder_2_desc: 'Vizuální identita, produkt a komunikace. Definuje, jak NoNic vypadá, jak se drží a jak mluví.',
-      mission_label: '03 — Proč existujeme',
+      story_body_1: 'Potřeba mít něco v ruce se opakuje u většiny lidí — gesto, pohyb, každodenní forma. NoNic je odpověď na tuto potřebu. Bez nikotinu, bez elektroniky.',
+      story_body_2: 'Promyšlený produkt, který dává návyku novou podobu. Jednoduchou, čistou a bez kompromisů.',
+      story_body_3: 'Z reálné potřeby vznikla značka s vlastním designovým jazykem a jasným směrem.',
+
+      // Founders
+      founders_label: 'Zakladatelé', founders_title: 'Kdo za tím stojí',
+      founders_intro: 'Dva lidi, kteří spojili marketing a výrobu, aby vytvořili produkt nové kategorie.',
+      founder_1_role: 'Marketing & strategie',
+      founder_1_desc: 'Zodpovídá za marketing, positioning, product-market fit, budování značky, komunikaci a růst.',
+      founder_2_role: 'Výroba & produkt',
+      founder_2_desc: 'Zodpovídá za výrobu, technickou stránku, produktová řešení a konstrukci.',
+
+      // Mission
+      mission_label: 'Proč existujeme',
       mission_title: 'Trh plný náhražek.<br>Žádná skutečná alternativa.',
-      mission_body_1: 'Vapování, nikotinové sáčky, e-cigarety. Segment roste, ale nabídka se točí v kruhu — jiná forma stejné závislosti. Chyběl produkt, který řeší návyk z druhé strany. Ne chemicky. Formou.',
-      mission_body_2: 'NoNic vznikl z přesvědčení, že většina lidí nehledá další nikotinový produkt. Hledá způsob, jak si zachovat gesto, pocit a každodenní formu — bez toho, co k ní dosud patřilo.',
+      mission_body_1: 'Segment alternativ roste, ale nabídka se točí v kruhu — jiná forma stejné závislosti. Chyběl produkt, který přistupuje k návyku z druhé strany. Ne chemicky. Formou.',
+      mission_body_2: 'Většina lidí nehledá další nikotinový produkt. Hledá způsob, jak si zachovat gesto a každodenní formu — bez toho, co k ní dosud patřilo.',
       mission_body_3: 'Nejsme proti ničemu. Jsme pro jinou možnost. Promyšlenou, současnou a bez zbytečných příslibů.',
       mission_quote: 'Nechtěli jsme vytvořit další náhražku. Chtěli jsme vytvořit jinou kategorii.',
       mission_role: 'Zakladatelé NoNic',
-      product_label: '04 — Produkt',
+
+      // Product
+      product_label: 'Produkt',
       product_title: 'Jeden objekt.<br>Nová kategorie.',
-      product_lead: 'NoNic je kompaktní pero navržené jako alternativa vapování a kouření. Bez nikotinu, bez elektroniky, bez nabíjení. Fyzický produkt, který zachovává formu návyku — a mění jeho obsah.',
+      product_lead: 'Kompaktní pero bez nikotinu, bez elektroniky, bez nabíjení. Fyzický produkt, který zachovává formu návyku — a mění jeho obsah.',
       pillar_1_title: 'Forma, která sedne do ruky',
-      pillar_1_text: 'Gesto. Pohyb. Pocit něčeho mezi prsty. Většina návyků není jen o obsahu — je o formě. NoNic je pero navržené tak, aby přirozeně nahradilo právě tento rozměr. Leží v ruce, funguje intuitivně, nevyžaduje vysvětlování.',
+      pillar_1_text: 'Pero navržené tak, aby přirozeně nahradilo potřebu držet něco v ruce. Leží v dlani, funguje intuitivně.',
       pillar_2_title: 'Aromatická kompozice',
-      pillar_2_text: 'Každé pero obsahuje vybranou aromatickou směs. Jemná, přirozená, bez umělých příchutí. Doplňuje formu o senzorický rozměr — tichý, ale zřetelný. Přesně to, co odlišuje NoNic od obyčejného předmětu.',
+      pillar_2_text: 'Vybraná aromatická směs bez umělých příchutí. Senzorický rozměr, který odlišuje NoNic od obyčejného předmětu.',
       pillar_3_title: 'Diskrétní a bez omezení',
-      pillar_3_text: 'Žádná pára, žádné nabíjení, žádné pohledy. NoNic vypadá jako designový objekt — ne jako e-cigareta. Používejte ho v práci, na cestách, mezi lidmi. Kdykoliv a kdekoliv, bez vysvětlování.',
+      pillar_3_text: 'Žádná pára, žádné nabíjení. Vypadá jako designový objekt. Používejte ho kdekoliv, bez vysvětlování.',
       detail_form_label: 'Forma', detail_form_value: 'Kompaktní pero, intuitivní držení',
       detail_aroma_label: 'Aroma', detail_aroma_value: 'Přírodní aromatická směs',
       detail_comp_label: 'Složení', detail_comp_value: '0 % nikotinu, 0 % elektroniky',
       detail_use_label: 'Použití', detail_use_value: 'Bez omezení, bez nabíjení, bez údržby',
-      shop_label: '05 — Obchod', shop_title: 'Čtyři barvy. Jeden standard.',
-      shop_intro: 'Vyberte si barvu, která vám odpovídá. Brzy dostupné.',
+
+      // Shop
+      shop_label: 'Obchod', shop_title: 'Čtyři barvy. Jeden standard.',
+      shop_intro: 'Vyberte si barvu, která vám odpovídá. Předprodej brzy.',
       shop_red: 'Červená', shop_blue: 'Modrá', shop_green: 'Zelená', shop_pink: 'Růžová',
-      shop_price: 'BRZY',
+      shop_price: 'PŘEDPRODEJ BRZY',
       shop_notify: 'Upozornit', shop_submit: 'Odeslat', shop_email_placeholder: 'Váš e-mail',
-      partners_label: '06 — Spolupráce',
-      partners_title: 'Otevřeni spolupráci.<br>Připraveni na scale.',
-      partners_body: 'NoNic je hotový koncept — produkt, identita, positioning. Hledáme partnery pro distribuci, růst a vstup na nové trhy.',
-      partners_point_1: 'Definovaná značka a vizuální systém',
-      partners_point_2: 'Hotový produkt připravený k distribuci',
-      partners_point_3: 'Jasný tržní positioning',
-      partners_point_4: 'Škálovatelný obchodní model',
-      partners_card_1_title: 'Investice a distribuce',
-      partners_card_1_text: 'Máte zájem o distribuci, investici nebo strategické partnerství? Pojďme to probrat.',
+
+      // Partners
+      partners_label: 'Spolupráce',
+      partners_title: 'Spolupráce',
+      partners_body: 'Máte zájem o spolupráci, partnerství nebo chcete NoNic blíž poznat? Ozvěte se nám a rádi probereme možnosti propojení, distribuce nebo dalšího rozvoje projektu.',
+      partners_card_1_title: 'Distribuce a partnerství',
+      partners_card_1_text: 'Zajímá vás distribuce, partnerství nebo jiná forma spolupráce? Rádi si domluvíme schůzku.',
       partners_card_1_btn: 'Domluvit schůzku',
-      partners_card_2_title: 'Kolaborace a edice',
-      partners_card_2_text: 'Limitované edice, co-brandingy, kreativní projekty. Jsme otevření.',
+      partners_card_2_title: 'Kreativní spolupráce',
+      partners_card_2_text: 'Limitované edice, společné projekty nebo jiné propojení. Jsme otevření návrhům.',
       partners_card_2_btn: 'Napište nám',
-      contact_label: '07 — Kontakt',
-      contact_title: 'Ozvěte se.<br>Odpovídáme.',
-      contact_body: 'Produkt, spolupráce, distribuce — ať je to cokoliv, jsme tady.',
+
+      // Contact
+      contact_label: 'Kontakt',
+      contact_title: 'Ozvěte se nám',
+      contact_body: 'Pro dotazy, spolupráci nebo cokoliv dalšího — napište nám.',
+      contact_email_label: 'E-mail',
       form_name: 'Jméno', form_email: 'E-mail', form_interest: 'Zájem o', form_message: 'Zpráva',
       form_select_default: 'Vyberte...', form_select_product: 'Produkt',
       form_select_partnership: 'Partnerství', form_select_investment: 'Investice',
       form_select_creative: 'Kreativní spolupráce', form_select_other: 'Jiné',
       form_submit: 'Odeslat zprávu', form_sent: 'Odesláno',
+
+      // Terms
+      terms_label: 'Obchodní podmínky',
+      terms_title: 'Obchodní podmínky',
+      terms_placeholder: 'Obsah bude doplněn.',
+
+      // Footer
       footer_tagline: 'Alternativa, která nahrazuje návyk',
       footer_copy: '\u00A9 2025 NoNic. Všechna práva vyhrazena.',
+      footer_contact: 'Kontakt', footer_why: 'Proč existujeme',
+      footer_terms: 'Obchodní podmínky', footer_instagram: 'Instagram',
+
+      // Notify
       notify_success: '\u2713 Budeme vás informovat na ',
-      notify_error: 'Zadejte platný e-mail'
+      notify_error: 'Zadejte platný e-mail',
+
+      // Page titles
+      page_title_home: 'NoNic \u2014 Alternativa, která nahrazuje návyk',
+      page_title_shop: 'Obchod \u2014 NoNic',
+      page_title_contact: 'Kontakt \u2014 NoNic',
+      page_title_why: 'Proč existujeme \u2014 NoNic',
+      page_title_terms: 'Obchodní podmínky \u2014 NoNic'
     },
     en: {
-      nav_story: 'Story', nav_founders: 'Founders', nav_mission: 'Why',
-      nav_product: 'Product', nav_shop: 'Shop', nav_partners: 'Partners', nav_contact: 'Contact',
+      // Navigation
+      nav_home: 'Home', nav_shop: 'Shop', nav_contact: 'Contact',
+
+      // Hero
       hero_eyebrow: 'A new generation alternative',
       hero_title: 'The alternative<br>that replaces the habit',
-      hero_subtitle: 'A designed object with no nicotine, no electronics, no compromises.<br>Different form. Same feeling.',
-      hero_btn_product: 'Explore the product', hero_btn_story: 'How it started', hero_scroll: 'Scroll',
-      story_label: '01 — Story',
+      hero_subtitle: 'A compact pen with no nicotine, no electronics, no compromises.<br>Different form. Same feeling.',
+      hero_btn_shop: 'Go to shop', hero_btn_what: 'How it works', hero_scroll: 'Scroll',
+
+      // 4 steps (co-je-nonic)
+      steps_label: 'How it works',
+      steps_title: 'Four steps. No complications.',
+      step_1_title: 'Unscrew',
+      step_1_text: 'Simply unscrew the bottom part.',
+      step_2_title: 'Insert the core',
+      step_2_text: 'Slide in the aroma refill in your chosen variant.',
+      step_3_title: 'Close',
+      step_3_text: 'Reconnect both parts and the pen is ready.',
+      step_4_title: 'Inhale',
+      step_4_text: 'Then simply inhale the aroma as needed.',
+
+      // Story
+      story_label: 'Story',
       story_title: 'Habits have a form.<br>We gave them a new one.',
-      story_body_1: 'People vape and smoke for many reasons. But one motive keeps repeating — the need to hold something, a gesture, a habit. NoNic was born as an answer to this need. No nicotine, no electronics.',
-      story_body_2: 'Not another substitute. A thoughtful product that gives everyday habits a new shape. Simple, clean, and without compromise.',
-      story_body_3: 'From market observation and real demand, a brand with its own design language and clear direction was born.',
-      founders_label: '02 — Founders', founders_title: 'The team behind the product',
-      founders_intro: 'Two people. A clear concept. A product with direction from day one.',
-      founder_1_role: 'Vision & Strategy',
-      founder_1_desc: 'Brand direction, business strategy and positioning. Connects the concept with the market and drives growth.',
-      founder_2_role: 'Product & Design',
-      founder_2_desc: 'Visual identity, product and communication. Defines how NoNic looks, feels and speaks.',
-      mission_label: '03 — Why we exist',
+      story_body_1: 'The need to hold something repeats across most people \u2014 a gesture, a movement, an everyday form. NoNic is the answer to this need. No nicotine, no electronics.',
+      story_body_2: 'A thoughtful product that gives everyday habits a new shape. Simple, clean, and without compromise.',
+      story_body_3: 'From real demand, a brand with its own design language and clear direction was born.',
+
+      // Founders
+      founders_label: 'Founders', founders_title: 'Who\u2019s behind it',
+      founders_intro: 'Two people who combined marketing and production to create a new product category.',
+      founder_1_role: 'Marketing & Strategy',
+      founder_1_desc: 'Responsible for marketing, positioning, product-market fit, brand building, communication and growth.',
+      founder_2_role: 'Production & Product',
+      founder_2_desc: 'Responsible for production, technical side, product solutions and construction.',
+
+      // Mission
+      mission_label: 'Why we exist',
       mission_title: 'A market full of substitutes.<br>No real alternative.',
-      mission_body_1: 'Vaping, nicotine pouches, e-cigarettes. The segment is growing, but the offer goes in circles — a different form of the same addiction. There was no product solving the habit from the other side. Not chemically. Through form.',
-      mission_body_2: 'NoNic was born from the belief that most people are not looking for another nicotine product. They are looking for a way to keep the gesture, the feeling, the everyday form — without what used to come with it.',
+      mission_body_1: 'The alternatives segment is growing, but the offer goes in circles \u2014 a different form of the same dependency. No product was solving the habit from the other side. Not chemically. Through form.',
+      mission_body_2: 'Most people are not looking for another nicotine product. They want to keep the gesture and everyday form \u2014 without what used to come with it.',
       mission_body_3: 'We are not against anything. We are for a different option. Thoughtful, contemporary, and without empty promises.',
       mission_quote: 'We didn\u2019t want to create another substitute. We wanted to create a different category.',
       mission_role: 'NoNic Founders',
-      product_label: '04 — Product',
+
+      // Product
+      product_label: 'Product',
       product_title: 'One object.<br>A new category.',
-      product_lead: 'NoNic is a compact pen designed as an alternative to vaping and smoking. No nicotine, no electronics, no charging. A physical product that preserves the form of the habit — and changes its content.',
+      product_lead: 'A compact pen with no nicotine, no electronics, no charging. A physical product that preserves the form of the habit \u2014 and changes its content.',
       pillar_1_title: 'A form that fits in your hand',
-      pillar_1_text: 'Gesture. Movement. The feeling of something between your fingers. Most habits are not just about content — they are about form. NoNic is a pen designed to naturally replace exactly this dimension. It sits in your hand, works intuitively, needs no explanation.',
+      pillar_1_text: 'A pen designed to naturally replace the need to hold something. It sits in your hand and works intuitively.',
       pillar_2_title: 'Aromatic composition',
-      pillar_2_text: 'Each pen contains a selected aromatic blend. Subtle, natural, no artificial flavors. It adds a sensory dimension to the form — quiet but distinct. Exactly what sets NoNic apart from an ordinary object.',
+      pillar_2_text: 'A selected aromatic blend with no artificial flavors. The sensory dimension that sets NoNic apart from an ordinary object.',
       pillar_3_title: 'Discreet and unrestricted',
-      pillar_3_text: 'No vapor, no charging, no stares. NoNic looks like a design object — not an e-cigarette. Use it at work, on the go, among people. Anytime and anywhere, without explanation.',
+      pillar_3_text: 'No vapor, no charging. Looks like a design object. Use it anywhere, without explanation.',
       detail_form_label: 'Form', detail_form_value: 'Compact pen, intuitive grip',
       detail_aroma_label: 'Aroma', detail_aroma_value: 'Natural aromatic blend',
       detail_comp_label: 'Composition', detail_comp_value: '0% nicotine, 0% electronics',
       detail_use_label: 'Usage', detail_use_value: 'No limits, no charging, no maintenance',
-      shop_label: '05 — Shop', shop_title: 'Four colors. One standard.',
-      shop_intro: 'Choose the color that suits you. Coming soon.',
+
+      // Shop
+      shop_label: 'Shop', shop_title: 'Four colors. One standard.',
+      shop_intro: 'Choose the color that suits you. Pre-sale coming soon.',
       shop_red: 'Red', shop_blue: 'Blue', shop_green: 'Green', shop_pink: 'Pink',
-      shop_price: 'SOON',
+      shop_price: 'PRE-SALE SOON',
       shop_notify: 'Notify me', shop_submit: 'Submit', shop_email_placeholder: 'Your e-mail',
-      partners_label: '06 — Partners',
-      partners_title: 'Open to collaboration.<br>Ready to scale.',
-      partners_body: 'NoNic is a complete concept — product, identity, positioning. We are looking for partners for distribution, growth, and entry into new markets.',
-      partners_point_1: 'Defined brand and visual system',
-      partners_point_2: 'Finished product ready for distribution',
-      partners_point_3: 'Clear market positioning',
-      partners_point_4: 'Scalable business model',
-      partners_card_1_title: 'Investment & Distribution',
-      partners_card_1_text: 'Interested in distribution, investment, or strategic partnership? Let\u2019s talk.',
+
+      // Partners
+      partners_label: 'Collaboration',
+      partners_title: 'Collaboration',
+      partners_body: 'Interested in collaboration, partnership, or want to learn more about NoNic? Get in touch and we\u2019ll be happy to discuss distribution, partnership, or further development.',
+      partners_card_1_title: 'Distribution & Partnership',
+      partners_card_1_text: 'Interested in distribution, partnership, or another form of collaboration? Let\u2019s schedule a meeting.',
       partners_card_1_btn: 'Schedule a meeting',
-      partners_card_2_title: 'Collaborations & Editions',
-      partners_card_2_text: 'Limited editions, co-brandings, creative projects. We are open.',
+      partners_card_2_title: 'Creative Collaboration',
+      partners_card_2_text: 'Limited editions, joint projects, or other connections. We are open to proposals.',
       partners_card_2_btn: 'Write to us',
-      contact_label: '07 — Contact',
-      contact_title: 'Get in touch.<br>We respond.',
-      contact_body: 'Product, partnership, distribution — whatever it is, we are here.',
+
+      // Contact
+      contact_label: 'Contact',
+      contact_title: 'Get in touch',
+      contact_body: 'Questions, partnerships, or anything else \u2014 write to us.',
+      contact_email_label: 'E-mail',
       form_name: 'Name', form_email: 'E-mail', form_interest: 'Interest', form_message: 'Message',
       form_select_default: 'Select...', form_select_product: 'Product',
       form_select_partnership: 'Partnership', form_select_investment: 'Investment',
       form_select_creative: 'Creative collaboration', form_select_other: 'Other',
       form_submit: 'Send message', form_sent: 'Sent',
+
+      // Terms
+      terms_label: 'Terms & Conditions',
+      terms_title: 'Terms & Conditions',
+      terms_placeholder: 'Content coming soon.',
+
+      // Footer
       footer_tagline: 'The alternative that replaces the habit',
       footer_copy: '\u00A9 2025 NoNic. All rights reserved.',
+      footer_contact: 'Contact', footer_why: 'Why we exist',
+      footer_terms: 'Terms & Conditions', footer_instagram: 'Instagram',
+
+      // Notify
       notify_success: '\u2713 We will notify you at ',
-      notify_error: 'Enter a valid e-mail'
+      notify_error: 'Enter a valid e-mail',
+
+      // Page titles
+      page_title_home: 'NoNic \u2014 The alternative that replaces the habit',
+      page_title_shop: 'Shop \u2014 NoNic',
+      page_title_contact: 'Contact \u2014 NoNic',
+      page_title_why: 'Why we exist \u2014 NoNic',
+      page_title_terms: 'Terms & Conditions \u2014 NoNic'
     }
   };
 
@@ -188,10 +275,9 @@
     var label = document.getElementById('langLabel');
     if (label) label.textContent = lang === 'cs' ? 'CZ' : 'EN';
 
-    // Update page title
-    document.title = lang === 'cs'
-      ? 'NoNic — Alternativa, která nahrazuje návyk'
-      : 'NoNic — The alternative that replaces the habit';
+    // Update page title based on data-page-title attribute
+    var titleKey = document.body.getAttribute('data-page-title') || 'page_title_home';
+    if (t[titleKey]) document.title = t[titleKey];
   }
 
   // =========================================
@@ -229,46 +315,72 @@
   }
 
   // =========================================
-  // Navigation
+  // Navigation (multi-page safe)
   // =========================================
-  var nav = document.getElementById('nav');
-  var navToggle = document.getElementById('navToggle');
-  var navLinks = document.getElementById('navLinks');
+  function setupNavigation() {
+    var nav = document.getElementById('nav');
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (!nav || !navToggle || !navLinks) return;
 
-  function handleNavScroll() {
-    if (window.scrollY > 60) {
-      nav.classList.add('is-scrolled');
-    } else {
-      nav.classList.remove('is-scrolled');
+    // Scroll-based nav appearance
+    function handleNavScroll() {
+      if (window.scrollY > 60) {
+        nav.classList.add('is-scrolled');
+      } else {
+        nav.classList.remove('is-scrolled');
+      }
     }
-  }
-  window.addEventListener('scroll', handleNavScroll, { passive: true });
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
 
-  navToggle.addEventListener('click', function () {
-    navToggle.classList.toggle('is-active');
-    navLinks.classList.toggle('is-open');
-    document.body.style.overflow = navLinks.classList.contains('is-open') ? 'hidden' : '';
-  });
-
-  navLinks.querySelectorAll('.nav__link').forEach(function (link) {
-    link.addEventListener('click', function () {
-      navToggle.classList.remove('is-active');
-      navLinks.classList.remove('is-open');
-      document.body.style.overflow = '';
+    // Mobile hamburger toggle
+    navToggle.addEventListener('click', function () {
+      navToggle.classList.toggle('is-active');
+      navLinks.classList.toggle('is-open');
+      document.body.style.overflow = navLinks.classList.contains('is-open') ? 'hidden' : '';
     });
-  });
 
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        var top = target.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: top, behavior: 'smooth' });
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('.nav__link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navToggle.classList.remove('is-active');
+        navLinks.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Smooth scroll for same-page #anchor links only
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        var href = this.getAttribute('href');
+        if (!href || href === '#' || href.length <= 1) return;
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  // =========================================
+  // Active nav link highlight (multi-page)
+  // =========================================
+  function setupActiveNav() {
+    // Highlight nav link matching current page URL
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    if (currentPage === '') currentPage = 'index.html';
+
+    document.querySelectorAll('.nav__link').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href) return;
+      var linkPage = href.split('/').pop().split('#')[0].split('?')[0];
+      if (linkPage === currentPage) {
+        link.classList.add('is-active');
       }
     });
-  });
+  }
 
   // =========================================
   // Reveal on scroll
@@ -279,10 +391,13 @@
       '.story__product-scene, .founder, .mission__card, .mission__text, ' +
       '.product__pillar, .product__detail, ' +
       '.product__hero, .product__lead, ' +
-      '.shop__card, .partners__point, .partners__card, ' +
-      '.contact__form, .contact__info, .hero__eyebrow, .hero__title, ' +
-      '.hero__subtitle, .hero__actions'
+      '.shop__card, .partners__point, .partners__card, .partners__text, .partners__cta-area, ' +
+      '.contact__form, .contact__info, .contact__channels, .contact__form-side, ' +
+      '.hero__eyebrow, .hero__title, .hero__subtitle, .hero__actions, ' +
+      '.steps-layout__visual, .home-teaser__content'
     );
+
+    if (!revealElements.length) return;
 
     revealElements.forEach(function (el) { el.classList.add('reveal'); });
 
@@ -327,7 +442,6 @@
   }
 
   function setupGlobalCurves() {
-    // Skip on mobile — global SVG curves are hidden, CSS handles background curves
     if (window.innerWidth <= 768) return;
 
     var globalSvg = document.querySelector('.global-curves__svg');
@@ -342,7 +456,7 @@
 
     function updateCurves() {
       var scrollY = window.scrollY;
-      var scrollFraction = scrollY / (pageHeight - viewHeight);
+      var scrollFraction = scrollY / (pageHeight - viewHeight || 1);
       var svgTranslateY = -scrollFraction * (pageHeight * 0.6);
       globalSvg.style.transform = 'translateY(' + svgTranslateY + 'px)';
       time += 0.008;
@@ -369,9 +483,10 @@
   // =========================================
   function setupSectionCurves() {
     var isMobile = window.innerWidth <= 768;
-    var sectionsWithCurves = document.querySelectorAll('.section');
 
-    // IntersectionObserver for scroll-triggered curve reveal (both mobile & desktop)
+    var sectionsWithCurves = document.querySelectorAll('.section');
+    if (!sectionsWithCurves.length) return;
+
     var curveObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -381,56 +496,48 @@
           }
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0.25, rootMargin: '0px 0px -60px 0px' }
     );
     sectionsWithCurves.forEach(function (s) { curveObserver.observe(s); });
 
     if (isMobile) {
-      // Mobile: parallax effect on body::before (global background curves)
       function updateMobileParallax() {
         var scrollY = window.scrollY;
         var docHeight = document.documentElement.scrollHeight;
         var viewHeight = window.innerHeight;
-        var scrollFraction = scrollY / (docHeight - viewHeight);
-        // Move background up as user scrolls (parallax)
+        var scrollFraction = scrollY / (docHeight - viewHeight || 1);
         var translateY = -scrollFraction * viewHeight * 0.3;
         document.body.style.setProperty('--mobile-curve-y', translateY + 'px');
       }
-
-      // Apply transform via a style we can update
       var style = document.createElement('style');
       style.textContent = '@media(max-width:768px){body::before{transform:translateY(var(--mobile-curve-y,0px))}}';
       document.head.appendChild(style);
-
       window.addEventListener('scroll', updateMobileParallax, { passive: true });
       updateMobileParallax();
       return;
     }
 
-    // Desktop: SVG-based section curves with parallax
     var sectionBgs = document.querySelectorAll('.section__curves-bg');
+    if (!sectionBgs.length) return;
 
-    function updateSectionCurves() {
+    function updateSectionParallax() {
+      var vh = window.innerHeight;
       sectionBgs.forEach(function (bg) {
-        var rect = bg.getBoundingClientRect();
-        var vh = window.innerHeight;
-        if (rect.top < vh && rect.bottom > 0) {
-          var progress = (vh - rect.top) / (vh + rect.height);
-          var offsetY = (progress - 0.5) * 40;
-          var svg = bg.querySelector('.section-bg-svg');
-          if (svg) { svg.style.transform = 'translateY(' + offsetY + 'px) scale(1.05)'; }
-        }
+        var rect = bg.parentElement.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) return;
+        var center = rect.top + rect.height / 2;
+        var offset = (center - vh / 2) * 0.04;
+        bg.style.transform = 'translateY(' + offset + 'px)';
       });
+      requestAnimationFrame(updateSectionParallax);
     }
-    window.addEventListener('scroll', updateSectionCurves, { passive: true });
-    updateSectionCurves();
+    requestAnimationFrame(updateSectionParallax);
   }
 
   // =========================================
   // Product scroll rotation
   // =========================================
   function setupProductRotation() {
-    // Skip 3D rotation on mobile for better performance
     if (window.innerWidth <= 768) return;
 
     var productWrap = document.getElementById('storyProduct');
@@ -464,15 +571,41 @@
   // =========================================
   // Contact form feedback
   // =========================================
-  var contactForm = document.getElementById('contactForm');
-  if (contactForm) {
+  function setupContactForm() {
+    var contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = contactForm.querySelector('.btn');
       var t = translations[currentLang];
-      btn.textContent = t.form_sent;
+      var action = contactForm.getAttribute('action');
+      var formData = new FormData(contactForm);
+
+      btn.textContent = t.form_sent || 'Odesláno';
       btn.style.background = '#4A7C59';
       btn.disabled = true;
+
+      // Send data via fetch to Formspree (or configured endpoint)
+      // If action still contains YOUR_FORM_ID, skip actual send (not configured yet)
+      if (action && action.indexOf('YOUR_FORM_ID') === -1) {
+        fetch(action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        }).then(function (response) {
+          if (!response.ok) {
+            console.warn('Form submission error:', response.status);
+          }
+        }).catch(function (err) {
+          console.warn('Form submission failed:', err);
+        });
+      } else {
+        // Backend not configured yet — log data for debugging
+        console.log('[NoNic] Contact form data (not sent — configure Formspree endpoint):');
+        formData.forEach(function(value, key) { console.log('  ' + key + ':', value); });
+      }
+
       setTimeout(function () {
         btn.textContent = t.form_submit;
         btn.style.background = '';
@@ -483,30 +616,7 @@
   }
 
   // =========================================
-  // Active nav link highlight
-  // =========================================
-  function setupActiveNav() {
-    var sections = document.querySelectorAll('.section[id], .hero[id]');
-    var navLinksAll = document.querySelectorAll('.nav__link[href^="#"]');
-    function update() {
-      var scrollY = window.scrollY + 120;
-      sections.forEach(function (section) {
-        var top = section.offsetTop;
-        var height = section.offsetHeight;
-        var id = section.getAttribute('id');
-        if (scrollY >= top && scrollY < top + height) {
-          navLinksAll.forEach(function (link) {
-            link.style.color = '';
-            if (link.getAttribute('href') === '#' + id) { link.style.color = 'var(--c-black)'; }
-          });
-        }
-      });
-    }
-    window.addEventListener('scroll', update, { passive: true });
-  }
-
-  // =========================================
-  // Dark Mode Toggle (now in nav)
+  // Dark Mode Toggle
   // =========================================
   function setupDarkMode() {
     var toggle = document.getElementById('themeToggle');
@@ -556,7 +666,6 @@
   // Device Preview Switcher
   // =========================================
   function setupPreviewBar() {
-    // Preview bar only shows when ?mobile is in URL
     var params = new URLSearchParams(window.location.search);
     if (!params.has('mobile')) return;
 
@@ -662,6 +771,7 @@
   // =========================================
   function setupShopNotify() {
     var notifyBtns = document.querySelectorAll('.shop__notify-btn');
+    if (!notifyBtns.length) return;
 
     notifyBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -677,6 +787,9 @@
         }
       });
     });
+
+    // Watchdog/notify endpoint — replace YOUR_WATCHDOG_ID with your Formspree form ID
+    var watchdogEndpoint = 'https://formspree.io/f/xlgpplqb';
 
     document.querySelectorAll('.shop__notify-submit').forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -695,48 +808,204 @@
         }
 
         form.innerHTML = '<p class="shop__notify-success">' + t.notify_success + email + '</p>';
+
+        // Save to localStorage as backup
         var stored = JSON.parse(localStorage.getItem('nonic-watchdog') || '{}');
         stored[product] = email;
         localStorage.setItem('nonic-watchdog', JSON.stringify(stored));
+
+        // Send to Formspree (or configured endpoint)
+        if (watchdogEndpoint.indexOf('YOUR_WATCHDOG_ID') === -1) {
+          fetch(watchdogEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ email: email, product: product, _subject: 'NoNic Watchdog — ' + product })
+          }).catch(function (err) {
+            console.warn('Watchdog submit failed:', err);
+          });
+        } else {
+          console.log('[NoNic] Watchdog signup (not sent — configure Formspree endpoint):');
+          console.log('  product:', product, '| email:', email);
+        }
       });
     });
   }
 
   // =========================================
-  // Splash Screen
+  // Splash Screen — Snake-like individual curves
   // =========================================
   function setupSplash() {
     var splash = document.getElementById('splash');
     if (!splash) return;
 
-    // Always run splash on every page load
-    document.body.classList.add('splash-active');
-
-    // Scroll to top immediately
-    window.scrollTo(0, 0);
-
-    // Dark mode logo swap for splash
-    var splashLogo = document.getElementById('splashLogo');
-    if (splashLogo && document.body.classList.contains('dark')) {
-      splashLogo.src = 'logo-white.png';
+    // Only play splash on first load / hard reload — not on "Domů" navigation
+    var splashPlayed = sessionStorage.getItem('nonic-splash-played');
+    if (splashPlayed) {
+      // Skip splash entirely — clean up immediately
+      splash.remove();
+      document.body.classList.remove('splash-active', 'curves-waiting');
+      document.body.classList.add('curves-entering');
+      setupGlobalCurves();
+      setupSectionCurves();
+      return;
     }
 
-    // Timeline: curves sweep in/out (2.8s) + logo fades out (at 2.2s)
-    // At 3s, start fading splash and revealing content
+    // Mark splash as played for this session
+    sessionStorage.setItem('nonic-splash-played', '1');
+
+    var canvas = document.getElementById('splashCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    window.scrollTo(0, 0);
+
+    var splashLogo = document.getElementById('splashLogo');
+    var isDark = document.body.classList.contains('dark');
+    if (splashLogo && isDark) splashLogo.src = 'logo-white.png';
+
+    var dpr = window.devicePixelRatio || 1;
+    function sizeCanvas() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    sizeCanvas();
+
+    var W = window.innerWidth;
+    var H = window.innerHeight;
+
+    var colors = [
+      'rgba(200, 53, 43, A)',
+      'rgba(74, 124, 89, A)',
+      'rgba(46, 94, 140, A)',
+      'rgba(181, 56, 126, A)',
+      'rgba(212, 168, 67, A)'
+    ];
+
+    var stringDefs = [
+      { yRatio: 0.16, amp: 18, freq: 1.2, phase: 0,    speed: 0.42, delay: 0,    lw: 2.6, hasLoop: false },
+      { yRatio: 0.33, amp: 24, freq: 1.8, phase: 0.8,  speed: 0.38, delay: 0.12, lw: 2.0, hasLoop: true, loopAt: 0.45, loopSize: 22 },
+      { yRatio: 0.52, amp: 14, freq: 0.8, phase: 2.1,  speed: 0.44, delay: 0.25, lw: 2.4, hasLoop: false },
+      { yRatio: 0.68, amp: 20, freq: 2.2, phase: 1.4,  speed: 0.36, delay: 0.08, lw: 1.8, hasLoop: true, loopAt: 0.6, loopSize: 16 },
+      { yRatio: 0.84, amp: 16, freq: 1.0, phase: 3.5,  speed: 0.40, delay: 0.18, lw: 2.2, hasLoop: false }
+    ];
+
+    var TOTAL_DUR = 4.2;
+    var startTime = null;
+    var animId = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function drawString(def, colorStr, t) {
+      var rawT = t;
+      if (rawT <= 0) return;
+      if (rawT > 1) rawT = 1;
+
+      var headProgress = easeInOutCubic(Math.min(rawT / 0.85, 1));
+      var headX = -0.2 * W + headProgress * 1.5 * W;
+
+      var tailDelay = 0.25;
+      var tailT = Math.max(0, (rawT - tailDelay) / (1 - tailDelay));
+      var tailProgress = easeInOutCubic(Math.min(tailT, 1));
+      var tailX = -0.2 * W + tailProgress * 1.5 * W;
+
+      var alpha = 1;
+      if (rawT < 0.15) alpha = rawT / 0.15;
+      if (rawT > 0.8) alpha = 1 - (rawT - 0.8) / 0.2;
+      alpha = Math.max(0, Math.min(1, alpha)) * 0.7;
+
+      var color = colorStr.replace('A', alpha.toFixed(3));
+
+      var baseY = def.yRatio * H;
+      var amp = def.amp * (H / 900);
+      var freq = def.freq;
+      var phase = def.phase;
+      var waveShift = rawT * 2.5;
+
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = def.lw;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      var started = false;
+      var steps = 200;
+      for (var i = 0; i <= steps; i++) {
+        var frac = i / steps;
+        var x = tailX + frac * (headX - tailX);
+
+        if (x < -50 || x > W + 50) continue;
+
+        var xNorm = x / W;
+        var y = baseY + Math.sin(xNorm * Math.PI * 2 * freq + phase + waveShift) * amp;
+        y += Math.sin(xNorm * Math.PI * 5.3 + phase * 2 + waveShift * 0.7) * (amp * 0.15);
+
+        if (def.hasLoop) {
+          var loopCenter = def.loopAt;
+          var dist = Math.abs(xNorm - loopCenter);
+          if (dist < 0.08) {
+            var loopT = 1 - dist / 0.08;
+            var loopAngle = loopT * Math.PI * 2;
+            y += Math.sin(loopAngle) * def.loopSize * (H / 900);
+            x += Math.cos(loopAngle) * def.loopSize * 0.4 * (W / 1600);
+          }
+        }
+
+        if (!started) {
+          ctx.moveTo(x, y);
+          started = true;
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+    }
+
+    function animate(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = (timestamp - startTime) / 1000;
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(dpr, dpr);
+
+      W = window.innerWidth;
+      H = window.innerHeight;
+
+      for (var i = 0; i < stringDefs.length; i++) {
+        var def = stringDefs[i];
+        var localT = (elapsed - def.delay) / (TOTAL_DUR - def.delay);
+        drawString(def, colors[i], localT);
+      }
+
+      if (elapsed < TOTAL_DUR) {
+        animId = requestAnimationFrame(animate);
+      }
+    }
+
+    animId = requestAnimationFrame(animate);
+
     setTimeout(function () {
+      if (animId) cancelAnimationFrame(animId);
       splash.classList.add('is-fading');
       document.body.classList.remove('splash-active');
       document.body.classList.add('splash-exiting');
-
-      // Ensure scroll is at top when content appears
       window.scrollTo(0, 0);
 
-      // Remove splash from DOM after fade-out completes
       setTimeout(function () {
         splash.remove();
         document.body.classList.remove('splash-exiting');
-      }, 600);
-    }, 3000);
+      }, 700);
+
+      setTimeout(function () {
+        document.body.classList.remove('curves-waiting');
+        document.body.classList.add('curves-entering');
+        setupGlobalCurves();
+        setupSectionCurves();
+      }, 1200);
+    }, (TOTAL_DUR + 0.1) * 1000);
   }
 
   // =========================================
@@ -745,16 +1014,24 @@
   document.addEventListener('DOMContentLoaded', function () {
     setupDarkMode();
     setupDarkModeLogo();
+    setupNavigation();
     setupSplash();
     setupReveal();
-    setupGlobalCurves();
-    setupSectionCurves();
+    // Global & section curves are started AFTER splash finishes (inside setupSplash)
+    // If no splash element exists, clean up classes and start immediately
+    if (!document.getElementById('splash')) {
+      document.body.classList.remove('splash-active', 'curves-waiting');
+      document.body.classList.add('curves-entering');
+      setupGlobalCurves();
+      setupSectionCurves();
+    }
     setupProductRotation();
     setupActiveNav();
     setupLanguageToggle();
     setupCurrencyToggle();
     setupPreviewBar();
     setupEditorMode();
+    setupContactForm();
     setupShopNotify();
   });
 })();
