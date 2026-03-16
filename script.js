@@ -48,6 +48,16 @@
       founder_2_role: 'Výroba & produkt',
       founder_2_desc: 'Zodpovídá za výrobu, technickou stránku, produktová řešení a konstrukci.',
 
+      // Development
+      dev_label: 'Kde jsme teď',
+      dev_title: 'Projekt ve vývoji.<br>Ne na papíře — v praxi.',
+      dev_body_1: 'NoNic není hotový produkt s velkým týmem za zády. Jsme dva studenti, kteří na tom pracují každý den — od konstrukce pera přes design až po obchodní strategii.',
+      dev_body_2: 'Prošli jsme ICOK Akcelerátorem, vyhráli pitching show na Business Campu a postupně dotahujeme produkt do podoby, která dává smysl. Žádné zkratky, žádné sliby, které nemůžeme splnit.',
+      dev_body_3: 'Oba máme kolem sebe lidi, kterým tahle závislost komplikuje život. To je osobní důvod, proč na tom děláme. Chceme nabídnout něco, co zatím na trhu chybí. Reálně, ne jen jako nápad.',
+      dev_hl_1: 'ICOK Akcelerátor — absolventi',
+      dev_hl_2: 'Business Camp — výhra v pitching show',
+      dev_hl_3: 'Aktivní vývoj produktu a značky',
+
       // Mission
       mission_label: 'Proč existujeme',
       mission_title: 'Trh plný náhražek.<br>Žádná skutečná alternativa.',
@@ -159,6 +169,16 @@
       founder_1_desc: 'Responsible for marketing, positioning, product-market fit, brand building, communication and growth.',
       founder_2_role: 'Production & Product',
       founder_2_desc: 'Responsible for production, technical side, product solutions and construction.',
+
+      // Development
+      dev_label: 'Where we are now',
+      dev_title: 'A project in development.<br>Not on paper — in practice.',
+      dev_body_1: 'NoNic is not a finished product with a big team behind it. We are two students working on it every day — from pen construction to design and business strategy.',
+      dev_body_2: 'We completed the ICOK Accelerator, won the pitching show at Business Camp, and are gradually shaping the product into something that makes sense. No shortcuts, no promises we can\u2019t keep.',
+      dev_body_3: 'We both have people around us whose lives are complicated by this addiction. That\u2019s not a manifesto — it\u2019s a personal reason why we do this. We want to offer something the market is missing. For real, not just as an idea.',
+      dev_hl_1: 'ICOK Accelerator — graduates',
+      dev_hl_2: 'Business Camp — pitching show winners',
+      dev_hl_3: 'Active product and brand development',
 
       // Mission
       mission_label: 'Why we exist',
@@ -349,6 +369,17 @@
       });
     });
 
+    // Close drawer when clicking outside (overlay area)
+    document.addEventListener('click', function (e) {
+      if (navLinks.classList.contains('is-open') &&
+          !navLinks.contains(e.target) &&
+          !navToggle.contains(e.target)) {
+        navToggle.classList.remove('is-active');
+        navLinks.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    });
+
     // Smooth scroll for same-page #anchor links only
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
@@ -394,7 +425,8 @@
       '.shop__card, .partners__point, .partners__card, .partners__text, .partners__cta-area, ' +
       '.contact__form, .contact__info, .contact__channels, .contact__form-side, ' +
       '.hero__eyebrow, .hero__title, .hero__subtitle, .hero__actions, ' +
-      '.steps-layout__visual, .home-teaser__content'
+      '.steps-layout__visual, .home-teaser__content, ' +
+      '.dev__text, .dev__visual, .dev__highlights'
     );
 
     if (!revealElements.length) return;
