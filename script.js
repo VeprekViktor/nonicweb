@@ -19,7 +19,7 @@
       hero_eyebrow: 'Nová generace alternativy',
       hero_title: 'Alternativa,<br>která nahrazuje návyk',
       hero_subtitle: 'Kompaktní pero bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.',
-      hero_btn_shop: 'Přejít do obchodu', hero_btn_what: 'Jak to funguje', hero_scroll: 'Scroll',
+      hero_btn_shop: 'Přejít do obchodu', hero_btn_who: 'Kdo jsme?', hero_scroll: 'Scroll',
 
       // 4 steps (co-je-nonic)
       steps_label: 'Jak to funguje',
@@ -141,7 +141,7 @@
       hero_eyebrow: 'A new generation alternative',
       hero_title: 'The alternative<br>that replaces the habit',
       hero_subtitle: 'A compact pen with no nicotine, no electronics, no compromises.<br>Different form. Same feeling.',
-      hero_btn_shop: 'Go to shop', hero_btn_what: 'How it works', hero_scroll: 'Scroll',
+      hero_btn_shop: 'Go to shop', hero_btn_who: 'Who are we?', hero_scroll: 'Scroll',
 
       // 4 steps (co-je-nonic)
       steps_label: 'How it works',
