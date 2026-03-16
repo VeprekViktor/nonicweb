@@ -1,0 +1,8 @@
+# Redirect old Shopify URLs to homepage
+/blogs/*    /   301
+/collections/*  /obchod.html  301
+/products/*     /obchod.html  301
+/pages/*    /   301
+
+# Catch-all: any unknown path → homepage
+/*    /index.html   200
