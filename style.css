@@ -250,10 +250,18 @@ body.curves-entering .section__curves-bg {
   transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .nav.is-scrolled {
+  background: none;
+}
+.nav.is-scrolled::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: var(--c-nav-scrolled);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  z-index: -1;
+  pointer-events: none;
 }
 .nav__inner {
   max-width: var(--max-w-wide);
@@ -263,6 +271,8 @@ body.curves-entering .section__curves-bg {
   display: flex;
   align-items: center;
   gap: var(--s-lg);
+  position: relative;
+  z-index: 2;
 }
 .nav__logo { display: flex; align-items: center; flex-shrink: 0; }
 .nav__logo-img { height: 40px; width: auto; display: block; }
@@ -715,7 +725,7 @@ body.dark select, body.dark .btn, body.dark .nav__toggle, body.dark .nav__ctrl-b
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='26' viewBox='0 0 22 26'%3E%3Cpath d='M2,1 L2,21 L8,16 L13,24 L16.5,22 L11.5,14.5 L19,13 Z' fill='%23C8352B' stroke='%23F0EDE8' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 2 1, pointer;
 }
 body.dark .gc.is-drawn { opacity: 0.25; }
-body.dark .nav.is-scrolled { box-shadow: 0 1px 0 rgba(255,255,255,0.04); }
+body.dark .nav.is-scrolled::after { box-shadow: 0 1px 0 rgba(255,255,255,0.04); }
 body.dark .founder__photo { filter: grayscale(1) brightness(0.9); }
 body.dark .founder:hover .founder__photo { filter: grayscale(0.3) brightness(0.95); }
 body.dark .contact__link { border-bottom-color: var(--c-black); }
@@ -1268,21 +1278,32 @@ body.splash-active .preview-frame {
     height: 60px;
     --nav-h: 60px;
     z-index: 1000;
-    /* Prevent backdrop-filter from breaking stacking context */
-    transform: none !important;
   }
   .nav__inner {
     padding: 0 var(--s-md);
     gap: 0.5rem;
+    position: relative;
+    z-index: 2;
   }
   .nav__logo-img { height: 28px; }
 
-  /* Mobile nav always has background when scrolled */
+  /* Mobile nav scrolled — use ::after for blur so it doesn't create stacking context */
   .nav.is-scrolled {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  .nav.is-scrolled::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    z-index: 1;
+    pointer-events: none;
   }
 
   /* Controls — compact, always visible in header */
@@ -1577,7 +1598,7 @@ body.splash-active .preview-frame {
   body.dark .nav__link { border-bottom-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
   body.dark .nav__link:hover, body.dark .nav__link:active { color: #fff; }
   body.dark .nav__link.is-active { color: #fff; border-left-color: #fff; }
-  body.dark .nav.is-scrolled { background: rgba(18,18,18,0.92); }
+  body.dark .nav.is-scrolled::after { background: rgba(18,18,18,0.92); }
   body.dark .hero { background: transparent; }
 }
 
