@@ -245,7 +245,7 @@ body.curves-entering .section__curves-bg {
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 1000;
   height: var(--nav-h);
   transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
@@ -326,7 +326,7 @@ body.dark .nav__ctrl-btn:hover {
 body.dark .nav__ctrl-btn--theme .theme-icon--sun { display: none !important; }
 body.dark .nav__ctrl-btn--theme .theme-icon--moon { display: block !important; }
 
-.nav__toggle { display: none; flex-direction: column; gap: 6px; padding: 8px; z-index: 110; }
+.nav__toggle { display: none; flex-direction: column; gap: 6px; padding: 8px; z-index: 1010; }
 .nav__toggle span { display: block; width: 24px; height: 2px; background: var(--c-black); transition: transform var(--dur) var(--ease); }
 .nav__toggle.is-active span:first-child { transform: translateY(4px) rotate(45deg); }
 .nav__toggle.is-active span:last-child { transform: translateY(-4px) rotate(-45deg); }
@@ -1267,6 +1267,9 @@ body.splash-active .preview-frame {
   .nav {
     height: 60px;
     --nav-h: 60px;
+    z-index: 1000;
+    /* Prevent backdrop-filter from breaking stacking context */
+    transform: none !important;
   }
   .nav__inner {
     padding: 0 var(--s-md);
@@ -1276,9 +1279,10 @@ body.splash-active .preview-frame {
 
   /* Mobile nav always has background when scrolled */
   .nav.is-scrolled {
-    background: var(--c-nav-scrolled);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
   }
 
   /* Controls — compact, always visible in header */
@@ -1295,55 +1299,89 @@ body.splash-active .preview-frame {
   }
   .nav__ctrl-label { font-size: 0.625rem; }
 
-  /* Hamburger toggle */
+  /* Hamburger toggle — must be clickable at all times */
   .nav__toggle {
     display: flex;
     order: 3;
-    padding: 6px;
-    z-index: 125;
+    padding: 10px;
+    z-index: 1010;
     position: relative;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    cursor: pointer;
+    background: none;
+    border: none;
   }
   .nav__toggle span { width: 22px; }
 
-  /* Nav must stay above drawer */
-  .nav { z-index: 120; }
-
-  /* Mobile drawer */
+  /* ===== Mobile drawer — premium redesign ===== */
   .nav__links {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(280px, 80vw);
-    background: var(--c-bg);
+    width: min(300px, 82vw);
+    background: #FFFFFF;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
-    padding: calc(60px + var(--s-xl)) var(--s-lg) var(--s-lg);
-    gap: var(--s-md);
+    padding: calc(60px + 2.5rem) 1.75rem 2rem;
+    gap: 0;
     transform: translateX(100%);
-    transition: transform var(--dur) var(--ease);
-    box-shadow: -20px 0 60px rgba(0,0,0,0.15);
-    z-index: 115;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.08);
+    z-index: 1005;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   .nav__links.is-open { transform: translateX(0); }
 
-  /* Mobile nav links */
+  /* Mobile nav links — clean, spacious */
   .nav__link {
-    font-size: 1.125rem;
-    padding: 0.5rem 0;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--c-gray-700);
+    padding: 0.875rem 0;
     width: 100%;
     display: block;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+  }
+  .nav__link:last-of-type:not(.nav__link--cta) {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
   }
   .nav__link::after { display: none; }
+  .nav__link:hover,
+  .nav__link:active {
+    color: var(--c-black);
+  }
+
+  /* Active nav link in mobile — subtle left accent */
+  .nav__link.is-active {
+    color: var(--c-black);
+    font-weight: 600;
+    border-left: 3px solid var(--c-black);
+    padding-left: 0.75rem;
+  }
+
+  /* CTA in mobile drawer — becomes a full-width button at bottom */
   .nav__link--cta {
-    margin-top: var(--s-sm);
+    margin-top: 1.5rem;
     text-align: center;
-    width: auto;
-    display: inline-flex;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    border-radius: 100px;
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+  }
+  .nav__link--cta.is-active {
+    border-left: none;
+    padding-left: 1.5rem;
   }
 
   /* Overlay behind drawer */
@@ -1354,10 +1392,10 @@ body.splash-active .preview-frame {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.2);
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--dur) var(--ease);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
   }
   .nav__links.is-open::before {
@@ -1533,9 +1571,13 @@ body.splash-active .preview-frame {
   body.dark .nav__controls .nav__ctrl-btn { color: var(--c-gray-500); }
   body.dark .mission__card { background: rgba(35,35,35,0.8); }
   body.dark .partners__card { background: rgba(35,35,35,0.8); }
-  body.dark .nav__links { background: #1A1A1A; }
-  body.dark .nav__links::before { background: rgba(0,0,0,0.5); }
+  body.dark .nav__links { background: #1E1E1E; }
+  body.dark .nav__links::before { background: rgba(0,0,0,0.4); }
   body.dark .nav__toggle span { background: var(--c-black); }
+  body.dark .nav__link { border-bottom-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
+  body.dark .nav__link:hover, body.dark .nav__link:active { color: #fff; }
+  body.dark .nav__link.is-active { color: #fff; border-left-color: #fff; }
+  body.dark .nav.is-scrolled { background: rgba(18,18,18,0.92); }
   body.dark .hero { background: transparent; }
 }
 
@@ -1622,7 +1664,7 @@ body.splash-active .preview-frame {
 }
 
 /* =========================================
-   Multi-page — Active nav link
+   Multi-page — Active nav link (desktop)
    ========================================= */
 .nav__link.is-active {
   color: var(--c-black);
@@ -1630,6 +1672,7 @@ body.splash-active .preview-frame {
 .nav__link.is-active::after {
   width: 100%;
 }
+/* CTA on desktop keeps its normal look even when active */
 .nav__link--cta.is-active {
   color: #FFFFFF;
 }
