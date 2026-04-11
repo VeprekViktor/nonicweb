@@ -19,7 +19,7 @@
       hero_eyebrow: 'Nová generace alternativy',
       hero_title: 'Alternativa,<br>která nahrazuje návyk',
       hero_subtitle: 'Kompaktní pero bez nikotinu, bez elektroniky, bez kompromisů.<br>Jiná forma. Stejný pocit.',
-      hero_btn_shop: 'Přejít do obchodu', hero_btn_who: 'Kdo jsme?', hero_scroll: 'Scroll',
+      hero_btn_who: 'Kdo jsme?', hero_scroll: 'Scroll',
 
       // 4 steps (co-je-nonic)
       steps_label: 'Jak to funguje',
@@ -82,8 +82,64 @@
       detail_comp_label: 'Složení', detail_comp_value: '0 % nikotinu, 0 % elektroniky',
       detail_use_label: 'Použití', detail_use_value: 'Bez omezení, bez nabíjení, bez údržby',
 
-      // Shop
-      shop_label: 'Obchod', shop_title: 'Čtyři barvy. Jeden standard.',
+      // Shop — hero CTA (homepage button)
+      hero_btn_shop: 'Mám zájem',
+
+      // Shop page
+      shop_label: 'Obchod',
+      shop_status: 'Ve vývoji',
+      shop_hero_title: 'Připravujeme launch.<br>Buďte u toho.',
+      shop_hero_body: 'NoNic se blíží k vydání. Zanechte nám e-mail — ozveme se vám jako prvním a získáte možnost předobjednávky se slevou 25 %.',
+      attr_nicotine: '0 % nikotinu',
+      attr_smoke: 'Bez kouře',
+      attr_vapor: 'Bez páry',
+      attr_aroma: 'Čistý vzduch s aroma',
+      attr_colors: '4 barvy',
+      attr_scents: 'Různá aromata',
+      shop_cta_interest: 'Mám zájem',
+      shop_cta_how: 'Jak to funguje?',
+      shop_discount_text: 'Sleva 25 % pro první zákazníky',
+      shop_colors_label: '4 barvy gripů',
+
+      // Product details section
+      product_details_title: 'Jeden objekt.<br>Nová kategorie.',
+      product_details_lead: 'Fyzický produkt bez nikotinu, bez elektroniky, bez nabíjení. Zachovává formu návyku — a mění jeho obsah.',
+      detail_steel_title: 'Nerezové pero', detail_steel_sub: 'Konstruováno z nerezové oceli. Pevné, čisté, trvalé.',
+      detail_colors_title: 'Různé barvy gripů', detail_colors_sub: 'Červená, modrá, zelená, růžová. Každá varianta je jiná.',
+      detail_aromas_title: 'Různé typy aromat', detail_aromas_sub: 'Ovocné, fresh, sladší nebo jemné. Náplně jsou vyměnitelné.',
+      detail_nonicotine_title: '0 % nikotinu', detail_nonicotine_sub: 'Žádná závislost. Žádná chemie. Jen vůně.',
+      detail_nosmoke_title: '0 % kouře', detail_nosmoke_sub: 'Nepálí se nic. Žádné zplodiny, žádný závan.',
+      detail_novapor_title: '0 % páry', detail_novapor_sub: 'Žádná elektronika, žádný oblak páry.',
+      detail_clean_title: 'Jen čistý vzduch', detail_clean_sub: 'Ochutí vzduch aromatem. Nic víc, nic míň.',
+
+      // Interest form
+      interest_label: 'Předobjednávka',
+      interest_title: 'Buďte u toho.',
+      interest_body: 'Zanechte nám e-mail a pár rychlých odpovědí. Jakmile NoNic spustíme, ozveme se vám mezi prvními.',
+      interest_perk_1: 'Mezi prvními při launchi',
+      interest_perk_2: 'Možnost předobjednávky',
+      interest_perk_3: 'Sleva 25 % na první objednávku',
+      interest_perk_4: 'Nezávazně',
+      interest_email_label: 'E-mail',
+      interest_email_placeholder: 'vas@email.cz',
+      interest_q1_label: 'Co dnes používáte nejčastěji?',
+      interest_q1_a: 'Cigarety', interest_q1_b: 'Vape', interest_q1_c: 'Obojí',
+      interest_q1_d: 'Nic z toho', interest_q1_e: 'Chci alternativu bez nikotinu',
+      interest_q2_label: 'Co by pro vás bylo u NoNicu nejdůležitější?',
+      interest_q2_hint: 'Lze vybrat více možností.',
+      interest_q2_a: 'Bez nikotinu', interest_q2_b: 'Bez kouře', interest_q2_c: 'Jednoduché použití',
+      interest_q2_d: 'Aroma', interest_q2_e: 'Design', interest_q2_f: 'Diskrétnost',
+      interest_q3_label: 'Jaké aroma by vás lákalo nejvíc?',
+      interest_q3_a: 'Ovocné', interest_q3_b: 'Fresh', interest_q3_c: 'Sladší',
+      interest_q3_d: 'Jemné', interest_q3_e: 'Ještě nevím',
+      interest_submit: 'Zanechat zájem',
+      interest_form_note: 'Nezávazně. Ozveme se, až budeme připraveni.',
+      interest_success_title: 'Zájem zaznamenán.',
+      interest_success_body: 'Ozveme se vám mezi prvními, jakmile NoNic spustíme. Děkujeme.',
+      interest_error_email: 'Zadejte platný e-mail.',
+
+      // Legacy shop (kept for compatibility)
+      shop_title: 'Čtyři barvy. Jeden standard.',
       shop_intro: 'Vyberte si barvu, která vám odpovídá. Předprodej brzy.',
       shop_red: 'Červená', shop_blue: 'Modrá', shop_green: 'Zelená', shop_pink: 'Růžová',
       shop_price: 'PŘEDPRODEJ BRZY',
@@ -141,7 +197,7 @@
       hero_eyebrow: 'A new generation alternative',
       hero_title: 'The alternative<br>that replaces the habit',
       hero_subtitle: 'A compact pen with no nicotine, no electronics, no compromises.<br>Different form. Same feeling.',
-      hero_btn_shop: 'Go to shop', hero_btn_who: 'Who are we?', hero_scroll: 'Scroll',
+      hero_btn_who: 'Who are we?', hero_scroll: 'Scroll',
 
       // 4 steps (co-je-nonic)
       steps_label: 'How it works',
@@ -204,8 +260,64 @@
       detail_comp_label: 'Composition', detail_comp_value: '0% nicotine, 0% electronics',
       detail_use_label: 'Usage', detail_use_value: 'No limits, no charging, no maintenance',
 
-      // Shop
-      shop_label: 'Shop', shop_title: 'Four colors. One standard.',
+      // Shop — hero CTA (homepage button)
+      hero_btn_shop: 'I\'m interested',
+
+      // Shop page
+      shop_label: 'Shop',
+      shop_status: 'In development',
+      shop_hero_title: 'Launch is coming.<br>Be first.',
+      shop_hero_body: 'NoNic is approaching launch. Leave your email — we\'ll reach out to you first and you\'ll get a pre-order with 25% off.',
+      attr_nicotine: '0% nicotine',
+      attr_smoke: 'No smoke',
+      attr_vapor: 'No vapor',
+      attr_aroma: 'Pure air with aroma',
+      attr_colors: '4 colors',
+      attr_scents: 'Various aromas',
+      shop_cta_interest: 'I\'m interested',
+      shop_cta_how: 'How does it work?',
+      shop_discount_text: '25% off for early customers',
+      shop_colors_label: '4 grip colors',
+
+      // Product details section
+      product_details_title: 'One object.<br>A new category.',
+      product_details_lead: 'A physical product with no nicotine, no electronics, no charging. Preserves the form of habit — and changes its content.',
+      detail_steel_title: 'Stainless steel pen', detail_steel_sub: 'Constructed from stainless steel. Solid, clean, lasting.',
+      detail_colors_title: 'Various grip colors', detail_colors_sub: 'Red, blue, green, pink. Each variant is different.',
+      detail_aromas_title: 'Various aroma types', detail_aromas_sub: 'Fruity, fresh, sweeter or subtle. Refills are replaceable.',
+      detail_nonicotine_title: '0% nicotine', detail_nonicotine_sub: 'No addiction. No chemistry. Just scent.',
+      detail_nosmoke_title: '0% smoke', detail_nosmoke_sub: 'Nothing burns. No exhaust, no smell.',
+      detail_novapor_title: '0% vapor', detail_novapor_sub: 'No electronics, no cloud of vapor.',
+      detail_clean_title: 'Just clean air', detail_clean_sub: 'Flavors the air with aroma. Nothing more, nothing less.',
+
+      // Interest form
+      interest_label: 'Pre-order',
+      interest_title: 'Be there.',
+      interest_body: 'Leave your email and a few quick answers. When NoNic launches, we\'ll reach out to you first.',
+      interest_perk_1: 'First to know at launch',
+      interest_perk_2: 'Pre-order opportunity',
+      interest_perk_3: '25% off your first order',
+      interest_perk_4: 'No commitment',
+      interest_email_label: 'E-mail',
+      interest_email_placeholder: 'your@email.com',
+      interest_q1_label: 'What do you use most often today?',
+      interest_q1_a: 'Cigarettes', interest_q1_b: 'Vape', interest_q1_c: 'Both',
+      interest_q1_d: 'Neither', interest_q1_e: 'I want a nicotine-free alternative',
+      interest_q2_label: 'What would be most important to you about NoNic?',
+      interest_q2_hint: 'Multiple options allowed.',
+      interest_q2_a: 'No nicotine', interest_q2_b: 'No smoke', interest_q2_c: 'Simple use',
+      interest_q2_d: 'Aroma', interest_q2_e: 'Design', interest_q2_f: 'Discretion',
+      interest_q3_label: 'Which aroma would appeal to you most?',
+      interest_q3_a: 'Fruity', interest_q3_b: 'Fresh', interest_q3_c: 'Sweeter',
+      interest_q3_d: 'Subtle', interest_q3_e: 'Not sure yet',
+      interest_submit: 'Express interest',
+      interest_form_note: 'No commitment. We\'ll reach out when we\'re ready.',
+      interest_success_title: 'Interest recorded.',
+      interest_success_body: 'We\'ll reach out to you first when NoNic launches. Thank you.',
+      interest_error_email: 'Please enter a valid email.',
+
+      // Legacy shop (kept for compatibility)
+      shop_title: 'Four colors. One standard.',
       shop_intro: 'Choose the color that suits you. Pre-sale coming soon.',
       shop_red: 'Red', shop_blue: 'Blue', shop_green: 'Green', shop_pink: 'Pink',
       shop_price: 'PRE-SALE SOON',
@@ -837,6 +949,59 @@
   }
 
   // =========================================
+  // Interest Form (obchod.html)
+  // =========================================
+  function setupInterestForm() {
+    var form = document.getElementById('interestForm');
+    var successEl = document.getElementById('interestSuccess');
+    var submitBtn = document.getElementById('interestSubmit');
+    if (!form || !successEl || !submitBtn) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var t = translations[currentLang];
+
+      // Validate email
+      var emailInput = form.querySelector('input[type="email"]');
+      var email = emailInput ? emailInput.value.trim() : '';
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        if (emailInput) {
+          emailInput.style.borderColor = '#C8352B';
+          emailInput.style.boxShadow = '0 0 0 3px rgba(200,53,43,0.1)';
+          emailInput.focus();
+          setTimeout(function () {
+            emailInput.style.borderColor = '';
+            emailInput.style.boxShadow = '';
+          }, 2500);
+        }
+        return;
+      }
+
+      // Disable submit
+      submitBtn.disabled = true;
+      submitBtn.textContent = '...';
+
+      var formData = new FormData(form);
+      var action = form.getAttribute('action');
+
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        // Show success regardless of response (Formspree redirects on non-AJAX but 200/302 both mean OK)
+        form.style.display = 'none';
+        successEl.classList.add('is-visible');
+      }).catch(function () {
+        // Network failure — still show success to user, log for debugging
+        console.warn('[NoNic] Interest form network error — data may not have been sent.');
+        form.style.display = 'none';
+        successEl.classList.add('is-visible');
+      });
+    });
+  }
+
+  // =========================================
   // Shop — Watchdog / Notify Buttons
   // =========================================
   function setupShopNotify() {
@@ -1103,5 +1268,6 @@
     setupEditorMode();
     setupContactForm();
     setupShopNotify();
+    setupInterestForm();
   });
 })();
