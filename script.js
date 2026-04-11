@@ -94,23 +94,23 @@
       attr_smoke: 'Bez kouře',
       attr_vapor: 'Bez páry',
       attr_aroma: 'Čistý vzduch s aroma',
-      attr_colors: '4 barvy',
+      attr_colors: '6 barev',
       attr_scents: 'Různá aromata',
       shop_cta_interest: 'Mám zájem',
       shop_cta_how: 'Jak to funguje?',
       shop_discount_text: 'Sleva 25 % pro první zákazníky',
-      shop_colors_label: '4 barvy gripů',
+      shop_colors_label: '6 barev gripů',
 
       // Product details section
       product_details_title: 'Jeden objekt.<br>Nová kategorie.',
       product_details_lead: 'Fyzický produkt bez nikotinu, bez elektroniky, bez nabíjení. Zachovává formu návyku — a mění jeho obsah.',
       detail_steel_title: 'Nerezové pero', detail_steel_sub: 'Konstruováno z nerezové oceli. Pevné, čisté, trvalé.',
-      detail_colors_title: 'Různé barvy gripů', detail_colors_sub: 'Červená, modrá, zelená, růžová. Každá varianta je jiná.',
+      detail_colors_title: 'Různé barvy gripů', detail_colors_sub: 'Červená, magenta, hnědá, zelená, modrá, černá. Každá varianta je jiná.',
       detail_aromas_title: 'Různé typy aromat', detail_aromas_sub: 'Ovocné, fresh, sladší nebo jemné. Náplně jsou vyměnitelné.',
       detail_nonicotine_title: '0 % nikotinu', detail_nonicotine_sub: 'Žádná závislost. Žádná chemie. Jen vůně.',
       detail_nosmoke_title: '0 % kouře', detail_nosmoke_sub: 'Nepálí se nic. Žádné zplodiny, žádný závan.',
       detail_novapor_title: '0 % páry', detail_novapor_sub: 'Žádná elektronika, žádný oblak páry.',
-      detail_clean_title: 'Jen čistý vzduch', detail_clean_sub: 'Ochutí vzduch aromatem. Nic víc, nic míň.',
+      detail_clean_title: 'Jen čistý vzduch', detail_clean_sub: 'Ochucený vzduch aromatem. Nic víc, nic míň.',
 
       // Interest form
       interest_label: 'Předobjednávka',
@@ -132,7 +132,7 @@
       interest_q3_label: 'Jaké aroma by vás lákalo nejvíc?',
       interest_q3_a: 'Ovocné', interest_q3_b: 'Fresh', interest_q3_c: 'Sladší',
       interest_q3_d: 'Jemné', interest_q3_e: 'Ještě nevím',
-      interest_submit: 'Zanechat zájem',
+      interest_submit: 'Odeslat',
       interest_form_note: 'Nezávazně. Ozveme se, až budeme připraveni.',
       interest_success_title: 'Zájem zaznamenán.',
       interest_success_body: 'Ozveme se vám mezi prvními, jakmile NoNic spustíme. Děkujeme.',
@@ -272,23 +272,23 @@
       attr_smoke: 'No smoke',
       attr_vapor: 'No vapor',
       attr_aroma: 'Pure air with aroma',
-      attr_colors: '4 colors',
+      attr_colors: '6 colors',
       attr_scents: 'Various aromas',
       shop_cta_interest: 'I\'m interested',
       shop_cta_how: 'How does it work?',
       shop_discount_text: '25% off for early customers',
-      shop_colors_label: '4 grip colors',
+      shop_colors_label: '6 grip colors',
 
       // Product details section
       product_details_title: 'One object.<br>A new category.',
       product_details_lead: 'A physical product with no nicotine, no electronics, no charging. Preserves the form of habit — and changes its content.',
       detail_steel_title: 'Stainless steel pen', detail_steel_sub: 'Constructed from stainless steel. Solid, clean, lasting.',
-      detail_colors_title: 'Various grip colors', detail_colors_sub: 'Red, blue, green, pink. Each variant is different.',
+      detail_colors_title: 'Various grip colors', detail_colors_sub: 'Red, magenta, brown, green, blue, black. Each variant is different.',
       detail_aromas_title: 'Various aroma types', detail_aromas_sub: 'Fruity, fresh, sweeter or subtle. Refills are replaceable.',
       detail_nonicotine_title: '0% nicotine', detail_nonicotine_sub: 'No addiction. No chemistry. Just scent.',
       detail_nosmoke_title: '0% smoke', detail_nosmoke_sub: 'Nothing burns. No exhaust, no smell.',
       detail_novapor_title: '0% vapor', detail_novapor_sub: 'No electronics, no cloud of vapor.',
-      detail_clean_title: 'Just clean air', detail_clean_sub: 'Flavors the air with aroma. Nothing more, nothing less.',
+      detail_clean_title: 'Just clean air', detail_clean_sub: 'Flavored air with aroma. Nothing more, nothing less.',
 
       // Interest form
       interest_label: 'Pre-order',
@@ -310,7 +310,7 @@
       interest_q3_label: 'Which aroma would appeal to you most?',
       interest_q3_a: 'Fruity', interest_q3_b: 'Fresh', interest_q3_c: 'Sweeter',
       interest_q3_d: 'Subtle', interest_q3_e: 'Not sure yet',
-      interest_submit: 'Express interest',
+      interest_submit: 'Send',
       interest_form_note: 'No commitment. We\'ll reach out when we\'re ready.',
       interest_success_title: 'Interest recorded.',
       interest_success_body: 'We\'ll reach out to you first when NoNic launches. Thank you.',
@@ -949,6 +949,37 @@
   }
 
   // =========================================
+  // Color Switcher (obchod.html)
+  // =========================================
+  function setupColorSwitcher() {
+    var switcher = document.getElementById('colorSwitcher');
+    var penImg = document.getElementById('penColorImg');
+    if (!switcher || !penImg) return;
+
+    switcher.addEventListener('click', function (e) {
+      var btn = e.target.closest('.color-swatch');
+      if (!btn) return;
+
+      var penFile = btn.getAttribute('data-pen');
+      if (!penFile) return;
+
+      // Update active state
+      switcher.querySelectorAll('.color-swatch').forEach(function (s) {
+        s.classList.remove('is-active');
+      });
+      btn.classList.add('is-active');
+
+      // Fade transition
+      penImg.style.transition = 'opacity 0.15s ease';
+      penImg.style.opacity = '0';
+      setTimeout(function () {
+        penImg.src = penFile;
+        penImg.style.opacity = '1';
+      }, 150);
+    });
+  }
+
+  // =========================================
   // Interest Form (obchod.html)
   // =========================================
   function setupInterestForm() {
@@ -1269,5 +1300,6 @@
     setupContactForm();
     setupShopNotify();
     setupInterestForm();
+    setupColorSwitcher();
   });
 })();
